@@ -1,0 +1,15 @@
+/node_modules
+.gitignore
+.git
+Dockerfile
+docker-compose
+config/keys
+
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+
+.DS_Store
+npm-debug.log
