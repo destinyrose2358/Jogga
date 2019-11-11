@@ -3,7 +3,8 @@ import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
-  DirectionsRenderer
+  DirectionsRenderer,
+  MapControl
 } from "react-google-maps";
 import { usePosition } from "../util/usePosition";
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
@@ -14,21 +15,27 @@ const Map = (props) => {
 
   const { lat, lng } = usePosition();
 
-  const NewMap = withGoogleMap(props => (
+  const NewMap = withGoogleMap(props => {
+    console.log(props);
+    return (
     <GoogleMap 
       defaultCenter={{ lat, lng }}
-      defaultZoom={13}
+      defaultZoom={15}
+      options={{
+        streetViewControl: false,
+        mapTypeControl: false
+      }}
     >
       <DirectionsRenderer
         directions={directions}
       />
     </GoogleMap>
-  ));
+  )});
 
   return (
     <div>
       <NewMap
-        containerElement={<div style={{ height: "500px", width: "500px" }} />}
+        containerElement={<div style={{ height: "100vh", width: "100vw" }} />}
         mapElement={<div style={{ height: "100%" }} />}
       />
     </div>
