@@ -10,10 +10,10 @@ import {} from '../stylesheets/reset.scss';
 import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
 import Dashboard from './Dashboard';
+import GoogleMap from './Map';
 
 const App = () => (
   <div>
-    <Nav />
     <h1>Auth Services Yo</h1>
     <Switch>
       <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
@@ -21,6 +21,7 @@ const App = () => (
       <AuthRoute path='/login' component={Login} routeType='auth' />
       <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
       <AuthRoute path='/dashboard' component={Dashboard} routeType='protected' />
+      <AuthRoute path="/routes/new" component={GoogleMap} routeType="prot" />
       <AuthRoute path='/' component={Landing} routeType='auth' />
       <Redirect to='/' />
     </Switch>
