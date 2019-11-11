@@ -14,7 +14,6 @@ import GoogleMap from './Map';
 
 const App = () => (
   <div>
-    <h1>Auth Services Yo</h1>
     <Switch>
       <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
       <AuthRoute path='/register' component={Register} routeType='auth' />
