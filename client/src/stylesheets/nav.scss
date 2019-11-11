@@ -1,0 +1,77 @@
+.nav-container {
+  border-bottom: solid 1px #e6e6eb;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    max-width: 1248px;
+    height: 55px;
+    min-height: 55px;
+    padding: 0px 16px;
+    background: white;
+    margin: 0px auto;
+  
+    .branding {
+      width: 101px;
+      height: 20px;
+      background-image: url('../images/Branding.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  
+    .session-btn {
+      box-sizing: border-box;
+      font-weight: 700;
+      text-align: center;
+      line-height: 16px;
+      padding: 6px 16px;
+      border: 1px solid;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+      will-change: background-color, color, border-color;
+      
+      &.login-large {
+        color: #2d2d32;
+        height: 30px;
+        min-height: 30px;
+        background: white;
+        border-color: #ccccd1;
+
+        &:hover {
+          background: #e6e6eb;
+        }
+      }
+
+      &.register {
+        color: white;
+        font-size: 12px;
+        height: 28px;
+        min-height: 28px;
+        background: #fc4c02;
+        border-color: #fc4c02;
+
+        &:hover {
+          background: #e34402;
+          border-color: #e34402;
+        }
+      }
+  
+      &.login {
+        color: #2d2d32;
+        font-size: 12px;
+        height: 28px;
+        min-height: 28px;
+        background: white;
+        border-color: #ccccd1;
+
+        &:hover {
+          background: #e6e6eb;
+        }
+      }
+    }
+  }
+}
