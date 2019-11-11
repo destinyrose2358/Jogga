@@ -1,0 +1,109 @@
+.landing-container {
+  height: 60vh;
+
+  .landing-txt {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2em;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .main-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+
+    .landing-image {
+      width: 100%;
+      min-width: 373px;
+      max-width: 468px;
+      height: 100%;
+      min-height: 400px;
+      max-height: 500px;
+      background-image: url('../images/LandingImage.png');
+      background-size: contain;
+      background-position: top right;
+      background-repeat: no-repeat;
+      margin-right: 48px;
+    }
+  
+    .session-nav-container {
+      width: 100%;
+      min-width: 245px;
+      max-width: 360px;
+      margin-left: 48px;
+  
+      .demo-login-btn {
+        padding: 16px 50px;
+        margin-top: 16px;
+      }
+  
+      .session-btn {
+        position: relative;
+        color: #2d2d32;
+        background: white;
+        text-align: center;
+        padding: 16px 50px;
+        border: 1px solid #ccccd1;
+        margin-top: 16px;
+        cursor: pointer;
+        transition: background-color 0.1s ease, border-color 0.1s ease;
+        will-change: background-color, border-color;
+  
+        &:hover {
+          color: currentColor;
+          background: #f5f5fa;
+          border-color: #99999e;
+          text-decoration: none;
+        }
+      }
+    
+      .divider {
+        box-sizing: border-box;
+        font-size: 12px;
+        text-align: center;
+        height: 1px;
+        border-top: 1px solid #ccccd1;
+        margin: 24px 0px;
+    
+        .divider-text {
+          box-sizing: border-box;
+          display: inline-block;
+          font-size: 12px;
+          text-align: center;
+          padding: 0 12px;
+          background: white;
+          transform: translateY(-60%);
+        }
+      }
+    
+      .svg-email {
+        position: absolute;
+        left: 16px;
+        height: 24px;
+        fill: none;
+        stroke: #717171;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    
+      .disclaimer {
+        color: #606065;
+        font-size: 12px;
+        line-height: 1.71em;
+        text-align: center;
+        margin: 12px 0px 20px;
+      }
+    
+      .login {
+        color: #606065;
+        font-size: 12px;
+        line-height: 1.71em;
+        text-align: center;
+        margin: 12px 0px 20px;
+      }
+    }
+  }
+}
