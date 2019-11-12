@@ -11,6 +11,7 @@ import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
 import Dashboard from './Dashboard';
 import RouteBuilder from './RouteBuilder/RouteBuilder';
+import "../stylesheets/main.scss";
 
 const App = () => (
   <div>

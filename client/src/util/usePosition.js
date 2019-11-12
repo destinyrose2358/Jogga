@@ -1,4 +1,4 @@
-const usePosition = () => {
+const usePosition = (setState) => {
 
   const geolocation = navigator.geolocation;
 
@@ -9,7 +9,7 @@ const usePosition = () => {
     return { lat: coords.latitude, lng: coords.longitude };
   });
 
-  
+
 };
 
 export default usePosition;

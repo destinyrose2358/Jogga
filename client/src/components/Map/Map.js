@@ -4,14 +4,9 @@ import {
   DirectionsRenderer,
   Marker
 } from "react-google-maps";
+import DynamicMarkers from "./DynamicMarkers";
 
-const Markers = ({ positions }) => {
-  return positions.map((position, idx) => {
-    return <Marker key={idx} position={position} />
-  });
-};
-
-const Map = ({ positions, center, addPosition }) => {
+const Map = ({ positions, center, addPosition, removePosition, selectPosition, selectedIdx, directions }) => {
   return (
     <GoogleMap
       center={center}
@@ -101,7 +96,13 @@ const Map = ({ positions, center, addPosition }) => {
         ]
       }}
     >
-      <Markers positions={positions}/>
+      <DirectionsRenderer directions={directions} />
+      <DynamicMarkers
+        positions={positions}
+        removePosition={removePosition}
+        selectPosition={selectPosition}
+        selectedIdx={selectedIdx}  
+      />
     </GoogleMap>
   )
 };
