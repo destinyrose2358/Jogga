@@ -8,7 +8,7 @@ import Login from './Login';
 import Nav from './Nav';
 import Landing from './Landing';
 import ResetStylesheet from '../stylesheets/reset.scss';
-
+import UploadImage from './UploadImage';
 const App = () => (
   <div>
     <Nav />
@@ -16,6 +16,7 @@ const App = () => (
     <Switch>
       <AuthRoute path='/register' component={Register} routeType='auth' />
       <AuthRoute path='/login' component={Login} routeType='auth' />
+      <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
       <AuthRoute path='/' component={Landing} routeType='auth' />
       <Redirect to='/' />
     </Switch>

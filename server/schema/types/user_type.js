@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const mongoose = require('mongoose');
 const GraphQLDate = require('graphql-date');
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean } = graphql;
+const { s3 } = require("../../services/aws");
 
 const UserType = new GraphQLObjectType({
   name: 'UserType',
@@ -12,7 +13,20 @@ const UserType = new GraphQLObjectType({
     token: { type: GraphQLString },
     loggedIn: { type: GraphQLBoolean },
     gender: { type: GraphQLString }, 
-    birthDate: { type: GraphQLDate }
+    birthDate: { type: GraphQLDate }, 
+    profile_img: { 
+      type: GraphQLString,
+      resolve(parentValue) {
+        let imageUrl;
+        if (parentValue.profile_img) {
+          imageUrl = s3.getSignedUrl('getObject', {
+            Bucket: "jogga",
+            Key: parentValue.profile_img
+          });
+        }
+        return imageUrl || parentValue.profile_img;
+      }
+     }
   })
 });
 
