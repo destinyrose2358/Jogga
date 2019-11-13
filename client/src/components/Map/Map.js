@@ -96,7 +96,13 @@ const Map = ({ positions, center, addPosition, removePosition, selectPosition, s
         ]
       }}
     >
-      <DirectionsRenderer directions={directions} />
+      <DirectionsRenderer
+        directions={directions}
+        options={{
+          suppressMarkers: true,
+          preserveViewport: true
+        }}
+      />
       <DynamicMarkers
         positions={positions}
         removePosition={removePosition}

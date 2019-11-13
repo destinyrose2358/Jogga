@@ -40,24 +40,47 @@ class MapOverlay extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (this.state.positions !== prevState.positions) {
+    if (this.state.positions.length !== prevState.positions.length) {
       const directionsService = new window.google.maps.DirectionsService();
 
       const { positions } = this.state;
 
       const origin = positions[0];
       const destination = positions[positions.length - 1];
+      const waypoints = positions.slice(1, positions.length - 1).map(position => {
+        return {
+          location: position,
+          stopover: false
+        };
+      })
 
       directionsService.route(
         {
-          origin: origin,
-          destination: destination,
-          travelMode: window.google.maps.TravelMode.DRIVING
+          origin,
+          destination,
+          waypoints: waypoints,
+          travelMode: window.google.maps.TravelMode.WALKING
         },
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK) {
+            const positionsData = result.routes[0].legs[0];
+            const startPoint = {
+              lat: positionsData.start_location.lat(),
+              lng: positionsData.start_location.lng()
+            };
+            const newWayPoints = positionsData.via_waypoints.map(newWayPoint => {
+              return {
+                lat: newWayPoint.lat(),
+                lng: newWayPoint.lng()
+              };
+            });
+            const endPoint = {
+              lat: positionsData.end_location.lat(),
+              lng: positionsData.end_location.lng()
+            };
             this.setState({
-              directions: result
+              directions: result,
+              positions: [startPoint, ...newWayPoints, endPoint]
             });
           } else {
             console.error(`error fetching directions ${result}`);
@@ -69,11 +92,17 @@ class MapOverlay extends React.Component {
 
   addPosition() {
     return (e) => {
-      let newPosition = { lat: e.latLng.lat(), lng: e.latLng.lng()};
-      this.setState(prevState => ({
-        positions: [...prevState.positions, newPosition],
-        selectedIdx: null
-      }));
+      if (this.state.positions.length < 26) {
+        let newPosition = { lat: e.latLng.lat(), lng: e.latLng.lng()};
+        this.setState(prevState => ({
+          positions: [...prevState.positions, newPosition],
+          selectedIdx: null
+        }));
+      } else {
+        this.setState({
+          message: "You have used the max number of positions"
+        })
+      }
     }
   }
 
@@ -83,7 +112,8 @@ class MapOverlay extends React.Component {
       newPositions.splice(index, 1);
       return {
         positions: newPositions,
-        selectedIdx: null
+        selectedIdx: null,
+        message: newPositions.length < 26 ? "" : "You have used the max number of positions"
       }
     });
   }

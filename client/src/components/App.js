@@ -15,6 +15,7 @@ import "../stylesheets/main.scss";
 
 const App = () => (
   <div>
+    <Nav />
     <Switch>
       <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
       <AuthRoute path='/register' component={Register} routeType='auth' />
