@@ -59,46 +59,55 @@ const client = new ApolloClient({
   onError: ({ networkError, graphQLErrors }) => {
     console.log('graphQLErrors', graphQLErrors);
     console.log('networkError', networkError);
-  }
+  },
+  resolvers: {}
 });
+
+const renderApp = () => {
+  const Root = () => {
+    return (
+      <ApolloProvider client={client}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </ApolloProvider>
+    );
+  };
+
+  ReactDOM.render(<Root />, document.getElementById('root'));
+}
 
 const token = localStorage.getItem('auth-token');
-
-cache.writeData({
-  data: {
-    isLoggedIn: Boolean(token),
-    currentUser: null
-  }
-});
 
 if (token) {
   client
     .mutate({ mutation: VERIFY_USER, variables: { token } })
     .then(({ data }) => {
+      if (!data.verifyUser.loggedIn) {
+        localStorage.removeItem('auth-token');
+      }
       cache.writeData({
         data: {
           isLoggedIn: data.verifyUser.loggedIn,
           currentUser: {
-            _id: data.verifyUser._id
+            _id: data.verifyUser._id,
+            name: data.verifyUser.name,
+            email: data.verifyUser.email,
+            birthDate: data.verifyUser.birthDate,
+            gender: data.verifyUser.gender,
+            profile_img: data.verifyUser.profile_img,
+            __typename: 'UserType'
           }
         }
       });
+      renderApp();
     });
+} else {
+  cache.writeData({
+    data: {
+      isLoggedIn: Boolean(token),
+      currentUser: null
+    }
+  });
+  renderApp();
 }
-
-const Root = () => {
-  return (
-    <ApolloProvider client={client}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </ApolloProvider>
-  );
-};
-
-ReactDOM.render(<Root />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();

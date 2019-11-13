@@ -78,11 +78,15 @@ const verifyUser = async data => {
     const decoded = jwt.verify(token, keys.secretOrKey);
     const { _id } = decoded;
 
-    const loggedIn = await User.findById(_id).then(user => {
-      return user ? true : false;
+    const [loggedIn, user] = await User.findById(_id).then(user => {
+      return user ? [true, user] : [false, null];
     });
 
-    return { loggedIn };
+    if (user) {
+      return { loggedIn, ...user._doc, password: null };
+    } else {
+      return { loggedIn };
+    }
   } catch (err) {
     return { loggedIn: false };
   }
@@ -90,17 +94,18 @@ const verifyUser = async data => {
 
 const updateUserInfo = async data => {
   try {
-    const { errors, isValid } = validateUserInfo(data);
+    // const { errors, isValid } = validateUserInfo(data);
 
-    if (!isValid) {
-      throw new Error(errors);
-    }
+    // if (!isValid) {
+    //   throw new Error(errors);
+    // }
 
-    const { _id, birthDate, name, gender } = data;
+    const { _id, birthDate, firstName, lastName, gender } = data;
 
     return User.findByIdAndUpdate(_id, {
       birthDate: new Date(birthDate),
-      name,
+      firstName,
+      lastName,
       gender
     }).then(user => user);
 

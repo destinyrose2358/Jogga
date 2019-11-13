@@ -35,3 +35,14 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const COMPLETE_USER = gql`
+  mutation CompleteUser($_id: ID!, $gender: String!, $birthDate: Date!, $firstName: String!, $lastName: String!) {
+    updateUserInfo(_id: $_id, gender: $gender, birthDate: $birthDate, firstName: $firstName, lastName: $lastName) {
+      _id
+      gender 
+      birthDate
+      firstName
+      lastName
+    }
+  }`;

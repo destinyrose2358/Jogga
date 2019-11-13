@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import { REGISTER_USER } from '../graphql/mutations';
 import DemoLogin from './DemoLogin';
 import SessionFormStylesheet from '../stylesheets/session_form.scss';
+import CompleteUser from "./CompleteUser";
 
 class Register extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class Register extends React.Component {
           onCompleted={data => {
             const { token } = data.register;
             localStorage.setItem('auth-token', token);
+            this.props.history.push("/onboarding")
           }}
           update={(cache, data) => this.updateCache(cache, data)}
         >

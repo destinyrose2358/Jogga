@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
 import '../App.css';
 import AuthRoute from '../util/route_util';
 import Register from './Register';
@@ -9,11 +8,13 @@ import Nav from './Nav';
 import Landing from './Landing';
 import ResetStylesheet from '../stylesheets/reset.scss';
 import UploadImage from './UploadImage';
+import CompleteUser from './CompleteUser'
 const App = () => (
   <div>
     <Nav />
     <h1>Auth Services Yo</h1>
     <Switch>
+      <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
       <AuthRoute path='/register' component={Register} routeType='auth' />
       <AuthRoute path='/login' component={Login} routeType='auth' />
       <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
