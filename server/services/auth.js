@@ -109,4 +109,34 @@ const updateUserInfo = async data => {
   }
 }
 
-module.exports = { register, logout, login, verifyUser, updateUserInfo };
+const fetchCurrentUser = async data => {
+  try {
+    const { token } = data;
+
+    const decoded = jwt.verify(token, keys.secretOrKey);
+    const { _id } = decoded;
+
+    const user = await User.findById(_id).then(user => (
+      {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+        birthDate: user.birthDate
+      }
+    ));
+
+    return user;
+  } catch (err) {
+    return null;
+  }
+};
+
+module.exports = { register, logout, login, verifyUser, updateUserInfo }; module.exports = {
+  register,
+  logout,
+  login,
+  verifyUser,
+  updateUserInfo,
+  fetchCurrentUser
+};
