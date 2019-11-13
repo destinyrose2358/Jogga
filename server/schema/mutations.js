@@ -76,8 +76,9 @@ const mutation = new GraphQLObjectType({
       type: UserType,
       args: {
         _id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        birthDate: { type: GraphQLString },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+        birthDate: { type: GraphQLDate },
         gender: {
           type: GraphQLString,
           enum: ["male", "female", "other"]
