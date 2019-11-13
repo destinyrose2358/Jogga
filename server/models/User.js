@@ -15,6 +15,9 @@ const UserSchema = new Schema({
     min: 8,
     max: 32
   },
+  profile_img: {
+    type: String, 
+  },
   birthDate: {
     type: Date
   },
