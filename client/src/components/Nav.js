@@ -2,8 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { ApolloConsumer } from 'react-apollo';
-
-import { IS_LOGGED_IN } from '../graphql/queries';
+import { IS_LOGGED_IN, CURRENT_USER } from '../graphql/queries';
 import NavStylesheet from '../stylesheets/nav.scss';
 
 const Nav = props => {
@@ -20,6 +19,7 @@ const Nav = props => {
                     onClick={e => {
                       e.preventDefault();
                       localStorage.removeItem('auth-token');
+                      client.writeQuery({ query: CURRENT_USER, data: {}})
                       client.writeData({ data: { isLoggedIn: false } });
                       props.history.push('/');
                     }}
