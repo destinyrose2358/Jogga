@@ -26,10 +26,6 @@ if (process.env.NODE_ENV === 'production') {
   uri = 'http://jogga.herokuapp.com/graphql'
 }
 
-const httpLink = createHttpLink({
-  uri
-});
-
 const uploadLink = createUploadLink({
   uri,
   headers: {

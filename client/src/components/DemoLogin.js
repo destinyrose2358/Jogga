@@ -1,52 +1,40 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
+import { useMutation } from '@apollo/react-hooks';
 
 import { LOGIN_USER } from '../graphql/mutations';
 import svgs from './svgs/svgs';
 import DemoLoginStylesheet from '../stylesheets/demo_login.scss';
 
-const DemoLogin = props => {
+export default props => {
+  const [demoLogin] = useMutation(LOGIN_USER,
+    {
+      update(cache, { data }) {
+        cache.writeData({ data: { isLoggedIn: data.login.loggedIn } })
+      },
+      onCompleted( data ) {
+        localStorage.setItem('auth-token', data.login);
+      }
+    }
+  );
 
   const demoUser = (
     props.user === 'demo1' ? {
       designation: 'demo-one',
-      email: '',
-      password: ''
+      email: 'bob@builder.com',
+      password: 'hunter12'
     } : {
       designation: 'demo-two',
-      email: '',
-      password: ''
+      email: 'pleasehelpmeimburning@gmail.fire',
+      password: 'imnotokay'
     }
   );
 
-  const updateCache = (cache, { data }) => (
-    cache.writeData({
-      data: { isLoggedIn: data.login.loggedIn }
-    })
-  );
-
-  return (<Mutation
-    mutation={LOGIN_USER}
-    onCompleted={data => {
-      const { token } = data.login;
-      localStorage.setItem('auth-token', token);
-    }}
-    update={(cache, data) => updateCache(cache, data)}
-  >
-    {loginUser => (
-      <div className={`demo-login-btn ${demoUser.designation} no-select`}
-        onClick={e => loginUser({
-          variables: {
-            email: demoUser.email,
-            password: demoUser.password
-          }
-        })}
-      >
-        {svgs.user}
-        Demo User {demoUser.designation === 'demo-one' ? 1 : 2}
-      </div>
-    )}
-  </Mutation>);
+  return (<div className={`demo-login-btn ${demoUser.designation} no-select`}
+    onClick={() => demoLogin({ variables: {
+      email: demoUser.email,
+      password: demoUser.password
+    }})}>
+    {svgs.user}
+    Demo User {demoUser.designation === 'demo-one' ? 1 : 2}
+  </div>);
 }
-
-export default DemoLogin;

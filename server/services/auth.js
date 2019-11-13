@@ -112,7 +112,7 @@ const updateUserInfo = async data => {
   } catch (err) {
     throw err;
   }
-}
+};
 
 const fetchCurrentUser = async data => {
   try {
@@ -137,7 +137,7 @@ const fetchCurrentUser = async data => {
   }
 };
 
-module.exports = { register, logout, login, verifyUser, updateUserInfo }; module.exports = {
+module.exports = {
   register,
   logout,
   login,
