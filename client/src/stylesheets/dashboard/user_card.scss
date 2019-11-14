@@ -19,6 +19,7 @@
         font-size: 22px;
         font-weight: 700;
         line-height: 28px;
+        word-break: break-word;
         margin: 12px 0px 16px;
         text-decoration: none;
         transition: color 0.15s ease;
@@ -71,14 +72,14 @@
           width: 33%;
           text-decoration: none;
   
-          .label {
+          [class^=label] {
             color: #606065;
             font-size: 12px;
             font-weight: 400;
             line-height: 1.2;
           }
   
-          .count {
+          [class^=count] {
             color: #242428;
             font-size: 20px;
             font-weight: 400;
@@ -86,8 +87,28 @@
           }
   
           &:hover {
-            .count {
+            [class^=count] {
               color: #005b83;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 1000px) {
+        .user-stats {
+          align-items: center;
+          flex-direction: column;
+
+          .stat-item {
+            display: flex;
+            align-items: center;
+
+            .label-1, .label-2 {
+              margin-right: 7px;
+            }
+
+            .label-3, .count-3 {
+              margin-right: 12px;
             }
           }
         }
