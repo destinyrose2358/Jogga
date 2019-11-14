@@ -39,7 +39,7 @@ export default props => {
       },
       onCompleted(data) {
         localStorage.setItem('auth-token', data.register.token);
-        this.props.history.push("/onboarding")
+        props.history.push("/onboarding")
       }
     });
     
