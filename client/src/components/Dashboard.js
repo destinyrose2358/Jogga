@@ -7,7 +7,14 @@ import svgs from './svgs/svgs';
 import {} from '../stylesheets/dashboard.scss';
 
 export default props => {
-  const { data: { currentUser } } = useQuery(CURRENT_USER);
+  const { loading, data } = useQuery(CURRENT_USER);
+
+  if (loading) {
+    return null
+  }
+  console.log(data);
+
+  const currentUser = data.currentUser;
 
   return (<div className='dashboard-container'>
     <div className='column-side'>

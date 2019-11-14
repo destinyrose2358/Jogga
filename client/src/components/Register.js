@@ -12,7 +12,30 @@ export default props => {
   const[registerUser] = useMutation(REGISTER_USER,
     {
       update(cache, { data }) {
-        cache.writeData({ data: { isLoggedIn: data.register.loggedIn } })
+        const {
+          _id,
+          firstName,
+          lastName,
+          email,
+          birthDate,
+          gender,
+          profile_img,
+          __typename
+        } = data.register
+        cache.writeData({
+          data: {
+            isLoggedIn: data.register.loggedIn, currentUser: {
+              _id,
+              firstName,
+              lastName,
+              email,
+              birthDate,
+              gender,
+              profile_img,
+              __typename
+            }
+          }
+        })
       },
       onCompleted(data) {
         localStorage.setItem('auth-token', data.register.token);

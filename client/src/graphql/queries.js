@@ -8,7 +8,7 @@ export const IS_LOGGED_IN = gql`
 
 export const CURRENT_USER = gql`
   query currentUser {
-    currentUser {
+    currentUser @client {
       _id
       firstName
       lastName 
