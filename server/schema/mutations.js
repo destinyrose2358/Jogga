@@ -69,15 +69,18 @@ const mutation = new GraphQLObjectType({
         profile_img: { type: GraphQLUpload }
       }, 
       async resolve(_, args) {
+        console.log("start")
         const updateObj = {};
         if(args.profile_img) {
           const key = await singleUpload(args.profile_img);
+          console.log("received key");
           updateObj.profile_img = key
           return User.findOneAndUpdate(
             { _id: args._id },
             { $set: updateObj },
             { new: true },
             (err, user) => {
+              console.log(user)
               return user;
             }
           )
