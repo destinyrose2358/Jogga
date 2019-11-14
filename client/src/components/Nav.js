@@ -15,13 +15,13 @@ export default withRouter(props => {
   const userProfile = (<div className='nav-dropdown-container'
     onMouseEnter={() => setUserProfileHover(true)}
     onMouseLeave={() => setUserProfileHover(false)}>
-    <Link className='user-profile nav-item' to='/athletes/profile'>
+    <Link className='user-profile nav-item' to='athletes/profile'>
       {svgs.user}
       {svgs.arrowDown}
     </Link>
     <div className='nav-dropdown'
       hidden={!userProfileHover}>
-      <Link className='option-container' to='/athletes/profile'>
+      <Link className='option-container' to='athletes/profile'>
         My Profile
       </Link>
       <Link className='option-container' to='/settings/profile'>

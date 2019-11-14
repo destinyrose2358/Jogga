@@ -12,6 +12,7 @@ import Dashboard from './dashboard/Dashboard';
 import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
 import RouteBuilder from './RouteBuilder/RouteBuilder';
+import Profile from './Profile'
 import {} from '../stylesheets/reset.scss';
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
     <div className='app-container'>
       <Switch>
         <AuthRoute exact path="/routes/new" component={() => null} routeType="prot" />
+        <AuthRoute path='/athletes/:id' component={Profile} routeType="protected" />
         <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
         <AuthRoute path='/register' component={Register} routeType='auth' />
         <AuthRoute path='/login' component={Login} routeType='auth' />
