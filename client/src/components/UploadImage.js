@@ -19,7 +19,6 @@ class UploadImage extends React.Component {
     return (<div>
       <Mutation mutation={UPDATE_USER}>
         {(updateUser, data) => {
-          console.log(data);
           return (
             <div>
               <form onSubmit={e => {

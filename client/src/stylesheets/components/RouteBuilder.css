@@ -1,0 +1,9 @@
+div.map-marker-menu {
+  position: relative;
+  background: white;
+  z-index: 1000;
+  padding: 20px;
+}
+div.map-marker-menu a {
+  padding: 20px;
+}

@@ -76,4 +76,37 @@ export const COMPLETE_USER = gql`
       firstName
       lastName
     }
-  }`;
+  }
+`;
+
+export const CREATE_ROUTE = gql`
+  mutation CreateRoute(
+    $token: String!,
+    $name: String!,
+    $description: String,
+    $isPrivate: Boolean!,
+    $positions: [PositionInputType!]
+  ) {
+    createRoute(
+      token: $token,
+      name: $name,
+      description: $description,
+      isPrivate: $isPrivate,
+      positions: $positions
+    ) {
+      _id
+      name
+      description
+      isPrivate
+      positions {
+        lat
+        lng
+      }
+      author {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
