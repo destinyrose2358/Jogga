@@ -6,9 +6,11 @@ import Register from './Register';
 import Login from './Login';
 import Nav from './Nav';
 import Landing from './Landing';
-import ResetStylesheet from '../stylesheets/reset.scss';
+import {} from '../stylesheets/reset.scss';
 import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
+import Dashboard from './Dashboard';
+
 const App = () => (
   <div>
     <Nav />
@@ -18,6 +20,7 @@ const App = () => (
       <AuthRoute path='/register' component={Register} routeType='auth' />
       <AuthRoute path='/login' component={Login} routeType='auth' />
       <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
+      <AuthRoute path='/dashboard' component={Dashboard} routeType='protected' />
       <AuthRoute path='/' component={Landing} routeType='auth' />
       <Redirect to='/' />
     </Switch>

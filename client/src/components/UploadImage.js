@@ -18,13 +18,13 @@ class UploadImage extends React.Component {
   render() {
     return (<div>
       <Mutation mutation={UPDATE_USER}>
-        {(updateUserImg, data) => {
+        {(updateUser, data) => {
           console.log(data);
           return (
             <div>
               <form onSubmit={e => {
                 e.preventDefault();
-                updateUserImg({
+                updateUser({
                   variables: {
                     _id: "5dc5e6ef7d2d4b039e6b9fca",
                     profile_img: this.state.image

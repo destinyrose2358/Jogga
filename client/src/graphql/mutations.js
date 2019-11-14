@@ -3,6 +3,13 @@ import gql from 'graphql-tag';
 export const LOGIN_USER = gql`
   mutation LoginUser($email: String!, $password: String!) {
     login(email: $email, password: $password) {
+      _id
+      firstName
+      lastName
+      email
+      birthDate
+      gender
+      profile_img
       token
       loggedIn
     }
@@ -12,6 +19,13 @@ export const LOGIN_USER = gql`
 export const REGISTER_USER = gql`
   mutation RegisterUser($email: String!, $password: String!) {
     register(email: $email, password: $password) {
+      _id
+      firstName
+      lastName
+      email
+      birthDate
+      gender
+      profile_img
       token
       loggedIn
     }
@@ -22,15 +36,32 @@ export const VERIFY_USER = gql`
   mutation VerifyUser($token: String!) {
     verifyUser(token: $token) {
       _id
+      firstName
+      lastName
+      email
+      birthDate
+      gender
+      profile_img
       loggedIn
     }
   }
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($_id: ID!, $profile_img: Upload!) {
-    updateUserImg(_id: $_id, profile_img: $profile_img) {
+  mutation UpdateUser($_id: ID!,
+    $name: String,
+    $birthDate: String,
+    $gender: String,
+    $profile_img: Upload) {
+    updateUser(_id: $_id,
+      name: $name,
+      birthDate: $birthDate,
+      gender: $gender
+      profile_img: $profile_img) {
       _id
+      name
+      birthDate
+      gender
       profile_img
     }
   }

@@ -49,7 +49,7 @@ const mutation = new GraphQLObjectType({
         return AuthService.verifyUser(args);
       }
     },
-    updateUserImg: {
+    updateUser: {
       type: UserType,
       args: {
         _id: { type: GraphQLID }, 
@@ -81,20 +81,12 @@ const mutation = new GraphQLObjectType({
         birthDate: { type: GraphQLDate },
         gender: {
           type: GraphQLString,
-          enum: ["male", "female", "other"]
-        }
-      },
-      resolve(_, args) {
-        return AuthService.updateUserInfo(args);
-      }
-    },
-    fetchCurrentUser: {
-      type: UserType,
-      args: {
-        token: { type: GraphQLString }
-      },
-      resolve(_, args) {
-        return AuthService.fetchCurrentUser(args);
+          enum: ['male', 'female', 'other']
+        },
+        profile_img: { type: GraphQLUpload }
+      }, 
+      async resolve(_, args) {
+        return AuthService.updateUser(args);
       }
     }
 	}

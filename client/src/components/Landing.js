@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import DemoLogin from './DemoLogin';
 import svgs from './svgs/svgs';
-import LandingStylesheet from '../stylesheets/landing.scss';
+import {} from '../stylesheets/landing.scss';
 
 const Landing = props => {
 

@@ -12,15 +12,16 @@
     padding: 0px 16px;
     background: white;
     margin: 0px auto;
-  
+
     .branding {
       width: 101px;
       height: 20px;
       background-image: url('../images/Branding.png');
       background-size: cover;
       background-repeat: no-repeat;
+      margin-right: 12px;
     }
-  
+
     .session-btn {
       box-sizing: border-box;
       font-weight: 700;
@@ -33,7 +34,7 @@
       cursor: pointer;
       transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
       will-change: background-color, color, border-color;
-      
+    
       &.login-large {
         color: #2d2d32;
         height: 30px;
@@ -70,6 +71,116 @@
 
         &:hover {
           background: #e6e6eb;
+        }
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      color: #494950;
+      line-height: 55px;
+      text-align: center;
+      height: 100%;
+      padding: 0px 12px;
+      text-decoration: none;
+      transition: color 0.15s ease;
+
+      .svg-arrow-down {
+        height: 8px;
+        margin-left: 6px;
+      }
+
+      &.selected {
+        color: #2d2d32;
+      }
+      
+      &:hover {
+        color: #fc4c02;
+      }
+    }
+
+    .nav-dropdown-container {
+      position: relative;
+      height: 100%;
+      border: 1px solid transparent;
+
+      &:hover {
+        border-left-color: #ccccd1;
+        border-right-color: #ccccd1;
+
+        .nav-item {
+          color: #fc4c02;
+          border-bottom: 1px solid white;
+        }
+
+        .upload {
+          .svg-plus {
+            color: white;
+            background: #fc4c02;
+          }
+        }
+      }
+
+      .nav-dropdown {
+        position: absolute;
+        top: 55px;
+        right: -1px;
+        left: unset;
+        box-sizing: border-box;
+        min-width: 160px;
+        background: white;
+        border: 1px solid #ccccd1;
+        z-index: 9;
+
+        .option-container {
+          display: block;
+          color: #2d2d32;
+          line-height: 18px;
+          text-align: left;
+          padding: 14px 12px;
+          text-decoration: none;
+          cursor: pointer;
+
+          &:hover {
+            background: #e6e6eb;
+          }
+        }
+      }
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .svg-user {
+        height: 20px;
+        padding: 6px;
+        background: #dfdfe8;
+        border-radius: 50%;
+      }
+
+      .upload {
+        .svg-plus {
+          color: #fc4c02;
+          height: 12px;
+          padding: 3px;
+          border: 1px solid #fc4c02;
+          border-radius: 50%;
+        }
+
+        &:hover {
+          .svg-plus {
+            color: white;
+            background: #fc4c02;
+          }
         }
       }
     }

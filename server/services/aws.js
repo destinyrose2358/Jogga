@@ -1,12 +1,5 @@
 const graphQL = require('graphql');
 const AWS = require('aws-sdk');
-const keys = require('../../config/keys');
-
-// const AWSConfig = AWS.config.update({
-//   secretAccessKey: keys.AWSSecretKey,
-//   accessKeyId: keys.AWSAccessKeyId,
-//   region: keys.AWSRegion
-// });
 
 if (process.env.NODE_ENV !== "production") {
   AWS.config.loadFromPath("./credentials.json");

@@ -1,82 +1,80 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 
 import { REGISTER_USER } from '../graphql/mutations';
 import DemoLogin from './DemoLogin';
-import SessionFormStylesheet from '../stylesheets/session_form.scss';
 import CompleteUser from "./CompleteUser";
+import {} from '../stylesheets/session_form.scss';
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      password: ''
-    };
-  }
-
-  update(field) {
-    return e => this.setState({ [field]: e.target.value });
-  }
-
-  updateCache(cache, { data }) {
-    cache.writeData({
-      data: { isLoggedIn: data.register.loggedIn }
+export default props => {
+  const[email, setEmail] = useState('');
+  const[password, setPassword] = useState('');
+  const[registerUser] = useMutation(REGISTER_USER,
+    {
+      update(cache, { data }) {
+        const {
+          _id,
+          firstName,
+          lastName,
+          email,
+          birthDate,
+          gender,
+          profile_img,
+          __typename
+        } = data.register
+        cache.writeData({
+          data: {
+            isLoggedIn: data.register.loggedIn, currentUser: {
+              _id,
+              firstName,
+              lastName,
+              email,
+              birthDate,
+              gender,
+              profile_img,
+              __typename
+            }
+          }
+        })
+      },
+      onCompleted(data) {
+        localStorage.setItem('auth-token', data.register.token);
+        this.props.history.push("/onboarding")
+      }
     });
-  }
-
-  render() {
-    return (<div className='session-form-container'>
-      <div className='form-title'>
-        Join Jogga today, it's Free.
+    
+  return (<div className='session-form-container'>
+    <div className='form-title'>
+      Join Jogga today, it's Free.
+    </div>
+    <div className='signup-form'>
+      <DemoLogin user='demo1' />
+      <DemoLogin user='demo2' />
+      <div className='or-text'>
+        or sign up with your email address
       </div>
-      <div className='signup-form'>
-        <DemoLogin user='demo1' />
-        <DemoLogin user='demo2' />
-        <div className='or-text'>
-          or sign up with your email address
-        </div>
-        <Mutation
-          mutation={REGISTER_USER}
-          onCompleted={data => {
-            const { token } = data.register;
-            localStorage.setItem('auth-token', token);
-            this.props.history.push("/onboarding")
-          }}
-          update={(cache, data) => this.updateCache(cache, data)}
-        >
-          {registerUser => <form
-            onSubmit={e => {
-              e.preventDefault();
-              registerUser({
-                variables: {
-                  email: this.state.email,
-                  password: this.state.password
-                }
-              });
-            }}
-          >
-            <input
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder='Email'
-            />
-            <input
-              value={this.state.password}
-              onChange={this.update('password')}
-              type='password'
-              placeholder='Password'
-            />
-            <button type='submit'>Register</button>
-          </form>}
-        </Mutation>
-        <div className='disclaimer'>
-          By signing up for Jogga, you agree to jog regularly.
-        </div>
+      <form onSubmit={e => {
+        e.preventDefault();
+        registerUser({ variables: {
+          email: email,
+          password: password
+        }});
+      }}>
+        <input type='text'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder='Email'
+        />
+        <input type='password'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder='Password'
+        />
+        <button type='submit'>Register</button>
+      </form>
+      <div className='disclaimer'>
+        By signing up for Jogga, you agree to jog regularly.
       </div>
-    </div>);
-  }
+    </div>
+  </div>);
 }
-
-export default Register;
