@@ -1,9 +1,85 @@
-div.map-marker-menu {
-  position: relative;
+.route-builder-container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: 
+    "controls"
+    "map";
+  position: absolute;
+  top: 0;
+}
+
+.route-builder-map {
+  grid-area: map;
+}
+  
+.route-builder-container > :last-child {
+  grid-area: controls;
   background: white;
-  z-index: 1000;
-  padding: 20px;
-  & a {
-    padding: 20px;
+  & > :first-child {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+      "logo . exit"
+      ". travel modal";
+    & .exit {
+      grid-area: exit;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 10px;
+    }
+    
+  }
+}
+
+.travel-mode {
+  grid-area: travel;
+  display: flex;
+  justify-content: flex-end;
+  background: lightgray;
+  & > :last-child {
+    border-top-right-radius: 5px;
+  }
+  & > :first-child {
+    border-top-left-radius: 5px;
+  }
+  & button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+    & svg {
+      width: 30px;
+      height: 30px;
+    }
+    &.selected {
+      background: gray;
+    }
+  }
+}
+
+.route-builder-form {
+  position: absolute;
+  background: white;
+  width: 600px;
+  height: 50%;
+  max-height: 450px;
+  min-height: 375px;
+  transform: translate(-50%);
+  left: 50%;
+  top: 8%;
+  overflow: auto;
+  & header {
+    padding: 10px 20px;
+    font-size: 20px;
+    background: #ddd;
+    & h1 {
+      margin: 0px;
+    }
   }
 }
