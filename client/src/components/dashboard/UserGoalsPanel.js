@@ -59,17 +59,14 @@ export default props => {
     <g transform='translate(0, 14)'>
       <rect className='progress-bar' />
       <rect className='progress-marker'
-
-        x={(dayInYear / 366) * 248}/>
+        x={`${(dayInYear / 366) * 100}%`} />
     </g>
     <text className='progress-txt'
-      x={(dayInYear / 366) * 248}
+      x={`${(dayInYear / 366) * 100}%`}
       y='42'>
       TODAY
     </text>
   </svg>);
-
-  const barWidth = () => document.getElementById('progress-bar').offsetWidth;
 
   return (<div className='tab-panel'>
     <div className='weekly-goals'>
@@ -110,5 +107,5 @@ export default props => {
         {svgs.arrowRight}
       </Link>
     </div>
-  </div>)
+  </div>);
 }
