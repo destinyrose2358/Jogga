@@ -157,11 +157,17 @@ class MapOverlay extends React.Component {
   }
 
   render() {
+    let saveDisabled = (this.state.positions.length > 1) ? "" : "disabled";
     return (
       <>
         <div>
           <aside className="exit">
             <Link to="/routes/created">Exit Builder</Link>
+          </aside>
+          <aside className="logo">
+            <div className="branding" />
+            <h2>ROUTE BUILDER</h2>
+            <div className="branding small" />
           </aside>
           <aside className="travel-mode">
             <button
@@ -179,20 +185,24 @@ class MapOverlay extends React.Component {
                 this.setTravelMode("BICYCLING");
               }}
             >
-
+              { svgs.bike }
               ride
             </button>
           </aside>
+          <aside className="save-div">
+            <button
+              className="save"
+              disabled={ saveDisabled }
+              onClick={e => {
+                this.setState({
+                  modalOpen: true
+                });
+              }}
+            >
+              Save
+            </button>
+          </aside>
           
-          <button
-            onClick={e => {
-              this.setState({
-                modalOpen: true
-              });
-            }}
-          >
-            Save
-          </button>
 
           {this.state.modalOpen && (
             <>

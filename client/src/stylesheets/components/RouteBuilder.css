@@ -12,27 +12,52 @@
 }
 .route-builder-container > :last-child {
   grid-area: controls;
-  background: white;
+  background: #ddd;
 }
 .route-builder-container > :last-child > :first-child {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "logo . exit" ". travel modal";
+  grid-template-areas: "logo logo exit" ". travel modal";
 }
 .route-builder-container > :last-child > :first-child .exit {
   grid-area: exit;
+  background: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-right: 10px;
+  border-bottom: 1px solid #bbb;
+}
+.route-builder-container > :last-child > :first-child .logo {
+  grid-area: logo;
+  background: white;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #bbb;
+}
+.route-builder-container > :last-child > :first-child .logo .branding {
+  width: 101px;
+  height: 20px;
+  background-image: url("../../images/Branding.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0px 12px;
+}
+.route-builder-container > :last-child > :first-child .logo .branding.small {
+  width: 50px;
+  height: 10px;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+.route-builder-container > :last-child > :first-child .logo h2 {
+  margin: 0;
 }
 .travel-mode {
   grid-area: travel;
   display: flex;
   justify-content: flex-end;
-  background: lightgray;
 }
 .travel-mode > :last-child {
   border-top-right-radius: 5px;
@@ -50,8 +75,35 @@
   width: 30px;
   height: 30px;
 }
+.travel-mode button:hover {
+  background: #bbb;
+  color: #555;
+}
 .travel-mode button.selected {
   background: gray;
+  color: #ccc;
+}
+button.save,
+input[type="submit"].save {
+  background: #f35500;
+  width: 75px;
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+}
+button.save:hover,
+input[type="submit"].save:hover {
+  background: #e24400;
+}
+button.save:disabled,
+input[type="submit"].save:disabled {
+  background: #f79366;
+}
+.save-div {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  grid-area: modal;
 }
 .route-builder-form {
   position: absolute;
@@ -64,12 +116,77 @@
   left: 50%;
   top: 8%;
   overflow: auto;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr) 2fr 1fr 0.75fr;
+  grid-gap: 10px;
+  grid-template-areas: "header" "subtitle" "name" "description" "privacy" "controls";
+  padding-bottom: 20px;
 }
 .route-builder-form header {
   padding: 10px 20px;
   font-size: 20px;
   background: #ddd;
+  grid-area: header;
 }
 .route-builder-form header h1 {
   margin: 0px;
+}
+.route-builder-form p {
+  grid-area: subtitle;
+  padding: 0px 20px;
+}
+.route-builder-form .route-name {
+  grid-area: name;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.route-builder-form .route-name input {
+  height: 100%;
+  margin-top: 10px;
+}
+.route-builder-form .route-description {
+  grid-area: description;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.route-builder-form .route-description textarea {
+  height: 100%;
+  margin-top: 10px;
+}
+.route-builder-form .route-privacy {
+  grid-area: privacy;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.route-builder-form .route-controls {
+  grid-area: controls;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.route-builder-form .route-controls button {
+  padding: 0 20px;
+  height: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-weight: 700;
+}
+.route-builder-form .route-controls button.route-cancel {
+  margin-right: 5px;
+  background: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+.route-builder-form .route-controls button.route-cancel:hover {
+  background: #eee;
+}
+.route-builder-form .route-controls button.route-save {
+  background: #333;
+  color: white;
+}
+.route-builder-form .route-controls button.route-save:hover {
+  background: #45444d;
 }
