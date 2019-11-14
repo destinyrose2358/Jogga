@@ -4,7 +4,7 @@ import {
   withGoogleMap
 } from "react-google-maps";
 import Map from "./Map";
-import usePosition from "../../util/usePosition";
+import RouteBuilderForm from "./RouteBuilderForm";
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
 class MapOverlay extends React.Component {
@@ -15,12 +15,14 @@ class MapOverlay extends React.Component {
       positions: [],
       center: { lat: 37.799280, lng: -122.401140 },
       selectedIdx: null,
-      directions: {}
+      directions: {},
+      modalOpen: false
     };
 
     this.addPosition = this.addPosition.bind(this);
     this.removePosition = this.removePosition.bind(this);
     this.selectPosition = this.selectPosition.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   findLocation() {
@@ -41,6 +43,7 @@ class MapOverlay extends React.Component {
 
   componentDidUpdate(_, prevState) {
     if (this.state.positions.length !== prevState.positions.length) {
+
       const directionsService = new window.google.maps.DirectionsService();
 
       const { positions } = this.state;
@@ -78,12 +81,20 @@ class MapOverlay extends React.Component {
               lat: positionsData.end_location.lat(),
               lng: positionsData.end_location.lng()
             };
-            this.setState({
-              directions: result,
-              positions: [startPoint, ...newWayPoints, endPoint]
-            });
+            if ((startPoint.lat !== endPoint.lat) || (startPoint.lng !== endPoint.lng)) {
+              this.setState({
+                directions: result,
+                positions: [startPoint, ...newWayPoints, endPoint]
+              });
+            } else {
+              this.setState({
+                directions: result,
+                positions: [startPoint, ...newWayPoints]
+              });
+            }
+            
           } else {
-            console.error(`error fetching directions ${result}`);
+            console.error(`error fetching directions`, result);
           }
         }
       );
@@ -125,17 +136,53 @@ class MapOverlay extends React.Component {
     })
   }
 
+  closeModal() {
+    this.setState(prevState => ({
+      modalOpen: false
+    }))
+  }
+
   render() {
     return (
-      <Map
-        center={this.state.center}
-        positions={this.state.positions}
-        addPosition={this.addPosition()}
-        removePosition={this.removePosition}
-        selectedIdx={this.state.selectedIdx}
-        selectPosition={this.selectPosition}
-        directions={this.state.directions}
-      />
+      <div className="route-builder">
+        <nav>
+          <button
+            onClick={e => {
+              this.setState({
+                modalOpen: true
+              });
+            }}
+          >
+            Save
+          </button>
+          { this.state.modalOpen && (
+            <>
+              <div
+                className="modal"
+                onClick={e => {
+                  this.setState({
+                    modalOpen: false
+                  })
+                }}
+              >
+              </div>
+              <RouteBuilderForm
+                closeModal={ this.closeModal }
+                positions={this.state.positions}
+              />
+            </>
+          )}
+        </nav>
+        <Map
+          center={this.state.center}
+          positions={this.state.positions}
+          addPosition={this.addPosition()}
+          removePosition={this.removePosition}
+          selectedIdx={this.state.selectedIdx}
+          selectPosition={this.selectPosition}
+          directions={this.state.directions}
+        />
+      </div>
     )
   }
 }

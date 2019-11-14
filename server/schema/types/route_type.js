@@ -9,7 +9,7 @@ const {
   GraphQLList
 } = graphql;
 const User = mongoose.model("User");
-
+const PositionType = require("./position_type");
 
 const RouteType = new GraphQLObjectType({
   name: "RouteType",
@@ -26,7 +26,7 @@ const RouteType = new GraphQLObjectType({
           .catch(err => null);
       }
     },
-    positions: { type: GraphQLList },
+    positions: { type: GraphQLList(PositionType) },
     date: { type: GraphQLDate }
   })
 });
