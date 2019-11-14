@@ -104,7 +104,8 @@ export const CREATE_ROUTE = gql`
       }
       author {
         _id
-        name
+        firstName
+        lastName
       }
     }
   }
