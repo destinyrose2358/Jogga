@@ -24,28 +24,28 @@ export default props => {
           to={`/athletes/${currentUser._id}/follows?type=following`}>
           <div className='label'>
             Following
-                </div>
+          </div>
           <div className='count'>
             0
-                </div>
+          </div>
         </Link>
         <Link className='stat-item'
           to={`/athletes/${currentUser._id}/follows?type=followers`}>
           <div className='label'>
             Followers
-                </div>
+          </div>
           <div className='count'>
             0
-                </div>
+          </div>
         </Link>
         <Link className='stat-item'
           to='/athletes/training'>
           <div className='label'>
             Activities
-                </div>
+          </div>
           <div className='count'>
             0
-                </div>
+          </div>
         </Link>
       </div>
     </div>
@@ -54,7 +54,7 @@ export default props => {
         to='/upload'>
         <div className='upload-text'>
           Add an Activity.
-              </div>
+        </div>
         {svgs.arrowRight}
       </Link>
     </div>

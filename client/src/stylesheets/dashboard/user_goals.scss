@@ -1,5 +1,182 @@
 .dashboard-container {
-  .svg-shoe {
+  .user-goals {
+    border-radius: 4px;
+    margin-top: 24px;
+
+    .tabs-index {
+      display: flex;
+      justify-content: space-between;
+      padding: 0px;
+      cursor: pointer;
+
+      .tab {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 20px 9px;
+        border-radius: 4px 4px 0px 0px;
+        transition: background-color 0.1s ease;
+
+        [class^=svg] {
+          width: 24px;
+          height: 24px;
+        }
+  
+        &:hover, &.active {
+          background: white;
+          padding-bottom: 10px;
+        }
+      }
+    }
+
+    .tab-panel {
+      background: white;
+
+      .goal-txt {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-bottom: 9px;
+      }
+
+      .weekly-goals {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+
+        .week-stat {
+          color: #79d7bd;
+          font-size: 20px;
+        }
+
+        .week-chart {
+          display: flex;
+          justify-content: space-around;
+          align-items: flex-end;
+          width: 100%;
+
+          .week-tracker {
+            display: flex;
+            justify-content: space-between;
+            width: 114px;
+            min-width: 114px;
     
+            .day {
+              text-align: center;
+    
+              .bar {
+                width: 11px;
+                height: 2px;
+                background: #e6e6eb;
+              }
+
+              &.today {
+                .bar {
+                  background: #79d7bd
+                }
+              }
+    
+              .label {
+                font-size: 8px;
+              }
+            }
+          }
+  
+          .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #e6e6eb;
+            border-radius: 50%;
+  
+            [class^=svg-] {
+              color: #d2d2d2;
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+
+        .day-stat {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 16px;
+
+          .time, .distance {
+            margin: 0px 16px;
+          }
+
+          .divider {
+            width: 1px;
+            height: 24px;
+            background: #e6e6eb;
+          }
+        }
+      }
+
+      .yearly-goals {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 16px;
+        border-top: 1px solid #e6e6eb;
+
+        .svg-year-tracker {
+
+          .progress-bar {
+            width: 248px;
+            height: 10px;
+            fill: #e6e6eb;
+            shape-rendering: crispEdges;
+          }
+          
+          .progress-marker {
+            width: 1px;
+            height: 15px;
+            fill: #2d2d32;
+          }
+
+          text {
+            color: #2d2d32;
+            font-size: 8px;
+            text-anchor: middle;
+          }
+        }
+      }
+
+      .goals-footer {
+        padding: 16px;
+        border-top: 1px solid #e6e6eb;
+        
+        .goals-link {
+          color: #242428;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+    
+          .svg-arrow-right {
+            opacity: 0.66;
+            color: #7c7c7f;
+            height: 20px;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+          }
+    
+          &:hover {
+            .goals-text {
+              color: #005b83;
+            }
+
+            .svg-arrow-right {
+              opacity: 1;
+              transform: translateX(5px);
+            }
+          }
+        }
+      }
+    }
   }
 }
