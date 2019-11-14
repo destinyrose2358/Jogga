@@ -9,8 +9,8 @@
     "dev-debug": "concurrently \"npm run server:debug\" \"npm run client\"",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
-    "server": "nodemon index.js",
-    "server:debug": "nodemon --inspect index.js"
+    "server": "nodemon index.js --ignore client",
+    "server:debug": "nodemon --inspect index.js --ignore client"
   },
   "repository": {
     "type": "git",

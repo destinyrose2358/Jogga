@@ -77,7 +77,8 @@ if (token) {
           isLoggedIn: data.verifyUser.loggedIn,
           currentUser: {
             _id: data.verifyUser._id,
-            name: data.verifyUser.name,
+            firstName: data.verifyUser.firstName,
+            lastName: data.verifyUser.lastName,
             email: data.verifyUser.email,
             birthDate: data.verifyUser.birthDate,
             gender: data.verifyUser.gender,
