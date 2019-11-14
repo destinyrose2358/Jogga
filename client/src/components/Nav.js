@@ -11,17 +11,20 @@ export default withRouter(props => {
   const client = useApolloClient();
   const [userProfileHover, setUserProfileHover] = useState(false);
   const [uploadHover, setUploadHover] = useState(false);
-
+  const { loading, data:{currentUser} } = useQuery(CURRENT_USER);
+  if (loading) {
+    return null
+  }
   const userProfile = (<div className='nav-dropdown-container'
     onMouseEnter={() => setUserProfileHover(true)}
     onMouseLeave={() => setUserProfileHover(false)}>
-    <Link className='user-profile nav-item' to='/athletes/profile'>
+    <Link className='user-profile nav-item' to={`athletes/${currentUser._id}`}>
       {svgs.user}
       {svgs.arrowDown}
     </Link>
     <div className='nav-dropdown'
       hidden={!userProfileHover}>
-      <Link className='option-container' to='/athletes/profile'>
+      <Link className='option-container' to={`athletes/${currentUser._id}`}>
         My Profile
       </Link>
       <Link className='option-container' to='/settings/profile'>
