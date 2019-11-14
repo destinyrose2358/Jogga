@@ -16,16 +16,17 @@ import {} from '../stylesheets/reset.scss';
 
 const App = () => (
   <div>
-    <Nav />
+    <Nav />      
+    <AuthRoute exact path="/routes/new" component={RouteBuilder} routeType="prot" />
     <div className='app-container'>
       <Switch>
+        <AuthRoute exact path="/routes/new" component={() => null} routeType="prot" />
         <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
         <AuthRoute path='/register' component={Register} routeType='auth' />
         <AuthRoute path='/login' component={Login} routeType='auth' />
         <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
         <AuthRoute path='/dashboard' component={Dashboard} routeType='protected' />
-        <AuthRoute path="/routes/new" component={RouteBuilder} routeType="prot" />
-        <AuthRoute path='/' component={Landing} routeType='auth' />
+        <AuthRoute path='/' exact component={Landing} routeType='auth' />
         <Redirect to='/' />
       </Switch>
     </div>

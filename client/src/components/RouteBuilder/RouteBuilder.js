@@ -4,7 +4,7 @@ import "../../stylesheets/components/RouteBuilder.scss";
 
 const RouteBuilder = () => {
   return (
-    <div>
+    <div className="route-builder">
       <RouteBuilderMap />
     </div>
   )

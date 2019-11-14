@@ -1,0 +1,55 @@
+.app-container {
+  max-width: 1248px;
+  padding-bottom: 0px 16px 24px;
+  margin: 30px auto 80px;
+}
+body {
+  color: #2d2d32;
+  background: #f5f5fa;
+  font-family: "MaisonNeue", "Segoe UI", "Helvetica Neue", -apple-system,
+    system-ui, BlinkMacSystemFont, Roboto, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  font-weight: inherit;
+  line-height: 1.45;
+  fill: currentColor;
+}
+a {
+  color: #007fb6;
+  text-decoration: none;
+  background: transparent;
+}
+a:hover {
+  color: #005b83;
+  text-decoration: underline;
+}
+li {
+  list-style: none;
+}
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.no-select:active {
+  outline: none;
+}
+*::-moz-focus-inner {
+  outline: none;
+  border: 0;
+}
+button,
+input[type="submit"] {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+}
+button:focus,
+input[type="submit"]:focus {
+  outline: none;
+}

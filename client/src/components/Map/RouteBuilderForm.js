@@ -38,6 +38,7 @@ export default class RouteBuilderForm extends React.Component {
         {createRoute => (
           <>
             <form
+              className="route-builder-form"
               onSubmit={e => {
                 e.preventDefault();
                 createRoute({
@@ -51,24 +52,30 @@ export default class RouteBuilderForm extends React.Component {
                 });
               }}
             >
+              <header>
+                <h1>Save</h1>
+              </header>
+              <p>Enter a name and description for your new route. Then, on the next page, you'll be able to see, and edit your route.</p>
+              <label for="route-name">Route Name (required)</label>
               <input
+                id="route-name"
                 type="text"
                 value={name}
                 onChange={this.update("name")}
-                placeholder="Name"
               />
+              <label for="route-description">Description</label>
               <textarea
                 value={description}
                 onChange={this.update("description")}
-                placeholder="Description"
+                id="route-description"
               />
               <label>
-                Private?
                 <input
                   type="checkbox"
                   value=""
                   onChange={this.togglePrivate}
                 />
+                Private?
               </label>
               
               <input type="submit" value="Save" />
