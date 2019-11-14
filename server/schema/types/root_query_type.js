@@ -34,9 +34,7 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(require("./route_type")),
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_, args) {
-        return Route.findBy({ author: args._id })
-          .then(routes => routes)
-          .catch(err => null);
+        return Route.findBy({ author: args._id });
       }
     }
   })

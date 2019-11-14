@@ -1,12 +1,25 @@
 const graphql = require("graphql");
 const GraphQLDate = require("graphql-date");
-const { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLID } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLFloat,
+  GraphQLList,
+  GraphQLID,
+  GraphQLBoolean
+} = graphql;
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { GraphQLUpload } = require("graphql-upload");
+const Route = mongoose.model("route");
+
 const UserType = require("./types/user_type");
+const RouteType = require("./types/route_type");
+const PositionInputType = require("./types/position_input_type");
+
 const AuthService = require("../services/auth");
 const { singleUpload } = require('../services/aws');
+const RouteService = require("../services/routes");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -87,6 +100,20 @@ const mutation = new GraphQLObjectType({
       }, 
       async resolve(_, args) {
         return AuthService.updateUser(args);
+      }
+    },
+    createRoute: {
+      type: RouteType,
+      args: {
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        isPrivate: { type: GraphQLBoolean },
+        token: { type: GraphQLString },
+        positions: { type: new GraphQLList(PositionInputType) }
+      },
+      resolve(_, args) {
+        console.log(args);
+        return RouteService.createRoute(args);
       }
     }
 	}
