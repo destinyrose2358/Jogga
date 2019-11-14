@@ -1,17 +1,19 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
+
 import '../App.css';
 import AuthRoute from '../util/route_util';
-import Register from './Register';
-import Login from './Login';
+
 import Nav from './Nav';
 import Landing from './Landing';
-import {} from '../stylesheets/reset.scss';
+import Login from './Login';
+import Register from './Register';
+import Dashboard from './dashboard/Dashboard';
 import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
 import Dashboard from './Dashboard';
 import RouteBuilder from './RouteBuilder/RouteBuilder';
-import "../stylesheets/main.scss";
+import {} from '../stylesheets/reset.scss';
 
 const App = () => (
   <div>

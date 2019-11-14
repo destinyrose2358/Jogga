@@ -1,0 +1,17 @@
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+
+  [class^='column-'] {
+    box-sizing: border-box;
+    padding: 0px 16px;
+  }
+
+  .column-side {
+    width: 25%;
+  }
+
+  .column-middle {
+    width: 50%;
+  }
+}

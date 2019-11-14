@@ -1,5 +1,12 @@
+.app-container {
+  max-width: 1248px;
+  padding-bottom: 0px 16px 24px;
+  margin: 30px auto 80px;
+}
+
 body {
   color: #2d2d32;
+  background: #f5f5fa;
   font-family: "MaisonNeue", "Segoe UI", "Helvetica Neue", -apple-system, system-ui, BlinkMacSystemFont, Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   font-weight: inherit;
