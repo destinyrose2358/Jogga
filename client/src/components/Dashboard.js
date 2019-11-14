@@ -12,7 +12,6 @@ export default props => {
   if (loading) {
     return null
   }
-  console.log(data);
 
   const currentUser = data.currentUser;
 

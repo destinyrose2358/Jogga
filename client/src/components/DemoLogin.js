@@ -9,7 +9,6 @@ export default props => {
   const [demoLogin] = useMutation(LOGIN_USER,
     {
       update(cache, { data }) {
-        console.log(data);
         const { 
           _id,
           firstName,
