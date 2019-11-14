@@ -22,28 +22,28 @@ export default props => {
       <div className='user-stats'>
         <Link className='stat-item'
           to={`/athletes/${currentUser._id}/follows?type=following`}>
-          <div className='label'>
+          <div className='label-1'>
             Following
           </div>
-          <div className='count'>
+          <div className='count-1'>
             0
           </div>
         </Link>
         <Link className='stat-item'
           to={`/athletes/${currentUser._id}/follows?type=followers`}>
-          <div className='label'>
+          <div className='label-2'>
             Followers
           </div>
-          <div className='count'>
+          <div className='count-2'>
             0
           </div>
         </Link>
         <Link className='stat-item'
           to='/athletes/training'>
-          <div className='label'>
+          <div className='label-3'>
             Activities
           </div>
-          <div className='count'>
+          <div className='count-3'>
             0
           </div>
         </Link>
