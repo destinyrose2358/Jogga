@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { LOGIN_USER } from '../graphql/mutations';
 import svgs from './svgs/svgs';
-import DemoLoginStylesheet from '../stylesheets/demo_login.scss';
+import {} from '../stylesheets/demo_login.scss';
 
 export default props => {
   const [demoLogin] = useMutation(LOGIN_USER,
@@ -12,7 +12,7 @@ export default props => {
         cache.writeData({ data: { isLoggedIn: data.login.loggedIn } })
       },
       onCompleted( data ) {
-        localStorage.setItem('auth-token', data.login);
+        localStorage.setItem('auth-token', data.login.token);
       }
     }
   );

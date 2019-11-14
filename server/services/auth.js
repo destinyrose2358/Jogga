@@ -92,7 +92,7 @@ const verifyUser = async data => {
   }
 };
 
-const updateUserInfo = async data => {
+const updateUser = async data => {
   try {
     // const { errors, isValid } = validateUserInfo(data);
 
@@ -109,39 +109,37 @@ const updateUserInfo = async data => {
       gender
     }).then(user => user);
 
-  } catch (err) {
+  } catch(err) {
     throw err;
   }
 };
+    
+// const updateUserData = async data => {
+//   const updateObj = {};
 
-const fetchCurrentUser = async data => {
-  try {
-    const { token } = data;
+//   const { _id, firstName, lastName, birthDate, gender, profile_img } = data;
 
-    const decoded = jwt.verify(token, keys.secretOrKey);
-    const { _id } = decoded;
+//   if (name) updateObj.name = name;
+//   if (birthDate) updateObj.birthDate = new Date(birthDate);
+//   if (gender) updateObj.gender = gender;
+//   if (profile_img) {
+//     const key = await singleUpload(profile_img);
+//     console.log(key)
+//     updateObj.profile_img = key
+//   }
 
-    const user = await User.findById(_id).then(user => (
-      {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        gender: user.gender,
-        birthDate: user.birthDate
-      }
-    ));
-
-    return user;
-  } catch (err) {
-    return null;
-  }
-};
+//   return User.findOneAndUpdate(
+//     { _id: _id },
+//     { $set: updateObj },
+//     { new: true },
+//     (err, user) => user
+//   )
+// };
 
 module.exports = {
   register,
   logout,
   login,
   verifyUser,
-  updateUserInfo,
-  fetchCurrentUser
+  updateUser
 };

@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const expressGraphQL = require('express-graphql');
-const cors = require('cors');
-const db = require('../config/keys').mongoURI;
-const models = require('./models/index');
-const schema = require('./schema/schema');
 const { graphqlUploadExpress } = require('graphql-upload')
-const { typeDefs, resolvers } = require('./services/aws');
+const cors = require('cors');
+
+const db = require('../config/keys').mongoURI;
+require('./models/index');
+const schema = require('./schema/schema');
 
 const app = express();
 

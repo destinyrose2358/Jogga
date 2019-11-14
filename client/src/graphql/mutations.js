@@ -22,15 +22,31 @@ export const VERIFY_USER = gql`
   mutation VerifyUser($token: String!) {
     verifyUser(token: $token) {
       _id
+      name
+      email
+      birthDate
+      gender
+      profile_img
       loggedIn
     }
   }
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($_id: ID!, $profile_img: Upload!) {
-    updateUserImg(_id: $_id, profile_img: $profile_img) {
+  mutation UpdateUser($_id: ID!,
+    $name: String,
+    $birthDate: String,
+    $gender: String,
+    $profile_img: Upload) {
+    updateUser(_id: $_id,
+      name: $name,
+      birthDate: $birthDate,
+      gender: $gender
+      profile_img: $profile_img) {
       _id
+      name
+      birthDate
+      gender
       profile_img
     }
   }

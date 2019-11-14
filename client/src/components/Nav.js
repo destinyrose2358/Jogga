@@ -4,7 +4,7 @@ import { useQuery, useApolloClient } from '@apollo/react-hooks';
 
 import { IS_LOGGED_IN } from '../graphql/queries';
 import svgs from './svgs/svgs';
-import NavStylesheet from '../stylesheets/nav.scss';
+import {} from '../stylesheets/nav.scss';
 
 export default withRouter(props => {
   const { data } = useQuery(IS_LOGGED_IN);
@@ -56,11 +56,6 @@ export default withRouter(props => {
 
   const sessionButton = () => {
     switch(props.location.pathname) {
-      case '/':
-        return (<div className='session-btn login-large no-select'
-          onClick={() => props.history.push('/login')}>
-          Log In
-        </div>);
       case '/login':
         return (<div className='session-btn register no-select'
           onClick={() => props.history.push('/register')}>
@@ -68,6 +63,11 @@ export default withRouter(props => {
         </div>);
       case '/register':
         return (<div className='session-btn login no-select'
+          onClick={() => props.history.push('/login')}>
+          Log In
+        </div>);
+      default:
+        return (<div className='session-btn login-large no-select'
           onClick={() => props.history.push('/login')}>
           Log In
         </div>);
