@@ -1,6 +1,7 @@
 import React from "react";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import { UPDATE_USER } from '../graphql/mutations';
+import { CURRENT_USER } from '../graphql/queries';
 // import { FETCH_CURRENT_USER } from '../../../server/schema/mutations';
 
 class UploadImage extends React.Component {
@@ -16,6 +17,11 @@ class UploadImage extends React.Component {
   }
 
   render() {
+    return (<Query query={CURRENT_USER}>
+      {({ loading, error, data }) => {
+        if (loading) return null;
+        if (error) return error.message;
+        const currentUser = data.currentUser
     return (<div>
       <Mutation mutation={UPDATE_USER}>
         {(updateUser, data) => {
@@ -23,9 +29,11 @@ class UploadImage extends React.Component {
             <div>
               <form onSubmit={e => {
                 e.preventDefault();
+                console.log(this.state.image)
+                console.log(currentUser._id)
                 updateUser({
                   variables: {
-                    _id: "5dc5e6ef7d2d4b039e6b9fca",
+                    _id: currentUser._id,
                     profile_img: this.state.image
                   }
                 })
@@ -49,8 +57,9 @@ class UploadImage extends React.Component {
         }}
       </Mutation>
     </div>
-
     );
+      }}
+    </Query>)
   }
 }
 
