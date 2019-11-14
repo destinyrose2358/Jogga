@@ -23,7 +23,6 @@ export default props => {
 
   const dayInWeek = now.getDay();
   const dayClass = day => ('day ' + (dayInWeek === day ? ' today' : ''))
-  const yearClass = year => ('')
 
   const weekTracker = (<div className='week-tracker'>
     <div className={dayClass(1)}>
@@ -56,12 +55,11 @@ export default props => {
     </div>
   </div>);
 
-  const yearTracker = (<svg className='svg-year-tracker'
-    width='248'
-    height='50'>
+  const yearTracker = (<svg className='svg-year-tracker'>
     <g transform='translate(0, 14)'>
       <rect className='progress-bar' />
       <rect className='progress-marker'
+
         x={(dayInYear / 366) * 248}/>
     </g>
     <text className='progress-txt'
@@ -70,6 +68,8 @@ export default props => {
       TODAY
     </text>
   </svg>);
+
+  const barWidth = () => document.getElementById('progress-bar').offsetWidth;
 
   return (<div className='tab-panel'>
     <div className='weekly-goals'>
