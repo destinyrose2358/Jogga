@@ -3,17 +3,13 @@ import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import ApolloClient from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
 import { createUploadLink } from 'apollo-upload-client';
-import { RetryLink } from "apollo-link-retry";
 import { ApolloProvider } from 'react-apollo';
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 
 import './index.css';
 import App from './components/App';
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
 import { VERIFY_USER } from './graphql/mutations';
 
 const cache = new InMemoryCache({
@@ -25,10 +21,6 @@ let uri = 'http://localhost:5000/graphql';
 if (process.env.NODE_ENV === 'production') {
   uri = 'http://jogga.herokuapp.com/graphql'
 }
-
-const httpLink = createHttpLink({
-  uri
-});
 
 const uploadLink = createUploadLink({
   uri,
@@ -46,12 +38,6 @@ const authLink = setContext((_, { headers }) => {
     }
   };
 });
-
-const errorLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message));
-});
-
-
 
 const client = new ApolloClient({
   link: authLink.concat(uploadLink),
@@ -91,7 +77,8 @@ if (token) {
           isLoggedIn: data.verifyUser.loggedIn,
           currentUser: {
             _id: data.verifyUser._id,
-            name: data.verifyUser.name,
+            firstName: data.verifyUser.firstName,
+            lastName: data.verifyUser.lastName,
             email: data.verifyUser.email,
             birthDate: data.verifyUser.birthDate,
             gender: data.verifyUser.gender,

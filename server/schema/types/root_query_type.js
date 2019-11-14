@@ -25,6 +25,7 @@ const RootQueryType = new GraphQLObjectType({
       type: UserType, 
       async resolve(_, args, ctx) {
         const user = await AuthServices.verifyUser(ctx);
+        console.log(user);
         return user;
       }
     }
