@@ -11,7 +11,6 @@ import Register from './Register';
 import Dashboard from './dashboard/Dashboard';
 import UploadImage from './UploadImage';
 import CompleteUser from './CompleteUser'
-import Dashboard from './Dashboard';
 import RouteBuilder from './RouteBuilder/RouteBuilder';
 import {} from '../stylesheets/reset.scss';
 
