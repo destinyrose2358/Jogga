@@ -100,6 +100,17 @@
           }
         }
 
+        @media screen and (max-width: 1000px) {
+          .week-chart {
+            align-items: center;
+            flex-direction: column-reverse;
+
+            .icon-container {
+              margin-bottom: 10px;
+            }
+          }
+        }
+
         .day-stat {
           display: flex;
           justify-content: space-between;
@@ -134,14 +145,14 @@
             fill: #e6e6eb;
             shape-rendering: crispEdges;
           }
-          
+
           .progress-marker {
             width: 1px;
             height: 15px;
             fill: #2d2d32;
           }
 
-          text {
+          .progress-txt {
             color: #2d2d32;
             font-size: 8px;
             text-anchor: middle;
