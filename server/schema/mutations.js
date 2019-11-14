@@ -72,7 +72,6 @@ const mutation = new GraphQLObjectType({
         const updateObj = {};
         if(args.profile_img) {
           const key = await singleUpload(args.profile_img);
-          console.log(key)
           updateObj.profile_img = key
           return User.findOneAndUpdate(
             { _id: args._id },
@@ -112,7 +111,6 @@ const mutation = new GraphQLObjectType({
         positions: { type: new GraphQLList(PositionInputType) }
       },
       resolve(_, args) {
-        console.log(args);
         return RouteService.createRoute(args);
       }
     }

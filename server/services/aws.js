@@ -21,9 +21,7 @@ const singleUpload = async (file) => {
     Key,
     Body: fileStream
   };
-  console.log(Key);
   const result = await s3.upload(uploadParams).promise();
-  console.log(result);
   // save the name of the file in your bucket as the key in your database to retrieve for later
   return result.Key;
 }
