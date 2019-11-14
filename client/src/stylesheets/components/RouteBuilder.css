@@ -1,9 +1,75 @@
-div.map-marker-menu {
-  position: relative;
-  background: white;
-  z-index: 1000;
-  padding: 20px;
+.route-builder-container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: "controls" "map";
+  position: absolute;
+  top: 0;
 }
-div.map-marker-menu a {
-  padding: 20px;
+.route-builder-map {
+  grid-area: map;
+}
+.route-builder-container > :last-child {
+  grid-area: controls;
+  background: white;
+}
+.route-builder-container > :last-child > :first-child {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "logo . exit" ". travel modal";
+}
+.route-builder-container > :last-child > :first-child .exit {
+  grid-area: exit;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+}
+.travel-mode {
+  grid-area: travel;
+  display: flex;
+  justify-content: flex-end;
+  background: lightgray;
+}
+.travel-mode > :last-child {
+  border-top-right-radius: 5px;
+}
+.travel-mode > :first-child {
+  border-top-left-radius: 5px;
+}
+.travel-mode button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+}
+.travel-mode button svg {
+  width: 30px;
+  height: 30px;
+}
+.travel-mode button.selected {
+  background: gray;
+}
+.route-builder-form {
+  position: absolute;
+  background: white;
+  width: 600px;
+  height: 50%;
+  max-height: 450px;
+  min-height: 375px;
+  transform: translate(-50%);
+  left: 50%;
+  top: 8%;
+  overflow: auto;
+}
+.route-builder-form header {
+  padding: 10px 20px;
+  font-size: 20px;
+  background: #ddd;
+}
+.route-builder-form header h1 {
+  margin: 0px;
 }

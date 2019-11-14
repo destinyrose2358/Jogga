@@ -3,9 +3,13 @@ import {
   withScriptjs,
   withGoogleMap
 } from "react-google-maps";
+import { Link } from "react-router-dom";
 import Map from "./Map";
 import RouteBuilderForm from "./RouteBuilderForm";
+import svgs from "../svgs/svgs";
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
+
+
 
 class MapOverlay extends React.Component {
   constructor(props) {
@@ -16,13 +20,15 @@ class MapOverlay extends React.Component {
       center: { lat: 37.799280, lng: -122.401140 },
       selectedIdx: null,
       directions: {},
-      modalOpen: false
+      modalOpen: false,
+      travelMode: "WALKING"
     };
 
     this.addPosition = this.addPosition.bind(this);
     this.removePosition = this.removePosition.bind(this);
     this.selectPosition = this.selectPosition.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.setTravelMode = this.setTravelMode.bind(this);
   }
 
   findLocation() {
@@ -41,8 +47,17 @@ class MapOverlay extends React.Component {
     this.findLocation();
   }
 
+  setTravelMode(mode) {
+    this.setState({
+      travelMode: mode
+    })
+  }
+
   componentDidUpdate(_, prevState) {
-    if (this.state.positions.length !== prevState.positions.length) {
+    if (
+      (this.state.positions.length !== prevState.positions.length) 
+      || (this.state.travelMode !== prevState.travelMode)
+    ) {
 
       const directionsService = new window.google.maps.DirectionsService();
 
@@ -62,7 +77,7 @@ class MapOverlay extends React.Component {
           origin,
           destination,
           waypoints: waypoints,
-          travelMode: window.google.maps.TravelMode.WALKING
+          travelMode: this.state.travelMode
         },
         (result, status) => {
           if (status === window.google.maps.DirectionsStatus.OK) {
@@ -130,7 +145,6 @@ class MapOverlay extends React.Component {
   }
 
   selectPosition(idx) {
-
     this.setState({
       selectedIdx: idx
     })
@@ -144,8 +158,32 @@ class MapOverlay extends React.Component {
 
   render() {
     return (
-      <div className="route-builder">
-        <nav>
+      <>
+        <div>
+          <aside className="exit">
+            <Link to="/routes/created">Exit Builder</Link>
+          </aside>
+          <aside className="travel-mode">
+            <button
+              className={`walking ${this.state.travelMode === "WALKING" ? "selected" : ""}`}
+              onClick={() => {
+                this.setTravelMode("WALKING");
+              }} 
+            >
+              { svgs.shoe }
+              Run
+            </button>
+            <button
+              className={`biking ${this.state.travelMode === "BICYCLING" ? "selected" : ""}`}
+              onClick={() => {
+                this.setTravelMode("BICYCLING");
+              }}
+            >
+
+              ride
+            </button>
+          </aside>
+          
           <button
             onClick={e => {
               this.setState({
@@ -155,24 +193,24 @@ class MapOverlay extends React.Component {
           >
             Save
           </button>
-          { this.state.modalOpen && (
+
+          {this.state.modalOpen && (
             <>
               <div
-                className="modal"
+                className="modal-background"
                 onClick={e => {
                   this.setState({
                     modalOpen: false
-                  })
+                  });
                 }}
-              >
-              </div>
+              ></div>
               <RouteBuilderForm
-                closeModal={ this.closeModal }
+                closeModal={this.closeModal}
                 positions={this.state.positions}
               />
             </>
           )}
-        </nav>
+        </div>
         <Map
           center={this.state.center}
           positions={this.state.positions}
@@ -182,8 +220,8 @@ class MapOverlay extends React.Component {
           selectPosition={this.selectPosition}
           directions={this.state.directions}
         />
-      </div>
-    )
+      </>
+    );
   }
 }
 
@@ -198,8 +236,9 @@ const RouteBuilderMap = () => {
     <LoadedMap
       googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${googleKey}`}
       loadingElement={<div style={{ height: `100%` }} />}
-      mapElement={<div style={{ height: "100%"}} />}
-      containerElement={<div style={{ height: "100vh", width: "100vw", position: "absolute" }} />}
+      mapElement={<div className="route-builder-map" style={{ height: "100%" }} />}
+      containerElement={<div className="route-builder-container" />}
+      style={{zIndex: 400}}
     />
   )
 };
