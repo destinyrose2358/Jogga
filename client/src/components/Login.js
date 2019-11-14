@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { LOGIN_USER } from '../graphql/mutations';
 import DemoLogin from './DemoLogin';
-import SessionFormStylesheet from '../stylesheets/session_form.scss';
+import {} from '../stylesheets/session_form.scss';
 
 export default props => {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ export default props => {
         cache.writeData({ data: { isLoggedIn: data.login.loggedIn } })
       },
       onCompleted(data) {
-        localStorage.setItem('auth-token', data.login);
+        localStorage.setItem('auth-token', data.login.token);
       }
     });
 

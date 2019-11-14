@@ -9,9 +9,13 @@ export const IS_LOGGED_IN = gql`
 export const CURRENT_USER = gql`
   query currentUser {
     currentUser {
+      _id
       firstName
       lastName 
-      _id
+      email
+      birthDate
+      gender
+      profile_img
     }
   }`;
 
@@ -20,8 +24,9 @@ export const FETCH_USER = gql`
     user(_id: $_id) {
       name
       email
-      gender
       birthDate
+      gender
+      profile_img
     }
   }
 `;

@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { REGISTER_USER } from '../graphql/mutations';
 import DemoLogin from './DemoLogin';
-import SessionFormStylesheet from '../stylesheets/session_form.scss';
 import CompleteUser from "./CompleteUser";
+import {} from '../stylesheets/session_form.scss';
 
 export default props => {
   const[email, setEmail] = useState('');
@@ -12,10 +12,10 @@ export default props => {
   const[registerUser] = useMutation(REGISTER_USER,
     {
       update(cache, { data }) {
-        cache.writeData({ data: { isLoggedIn: data.login.loggedIn } })
+        cache.writeData({ data: { isLoggedIn: data.register.loggedIn } })
       },
       onCompleted(data) {
-        localStorage.setItem('auth-token', data.register);
+        localStorage.setItem('auth-token', data.register.token);
         this.props.history.push("/onboarding")
       }
     });
