@@ -49,16 +49,8 @@ export const VERIFY_USER = gql`
 
 export const UPDATE_USER = gql`
   mutation UpdateUser($_id: ID!,
-    $firstName: String,
-    $lastName: String,
-    $birthDate: String,
-    $gender: String,
     $profile_img: Upload) {
     updateUser(_id: $_id,
-      firstName: $firstName,
-      lastName: $lastName,
-      birthDate: $birthDate,
-      gender: $gender
       profile_img: $profile_img) {
       _id
       firstName

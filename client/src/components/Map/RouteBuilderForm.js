@@ -13,6 +13,7 @@ export default class RouteBuilderForm extends React.Component {
     }
 
     this.togglePrivate = this.togglePrivate.bind(this);
+    
   }
 
   togglePrivate() {
@@ -29,10 +30,17 @@ export default class RouteBuilderForm extends React.Component {
     }
   }
 
+  updateCache(cache, { data }) {
+
+  }
+
   render() {
     const { name, description, isPrivate } = this.state;
     return (
-      <Mutation mutation={CREATE_ROUTE}>
+      <Mutation
+        mutation={ CREATE_ROUTE }
+        update={ this.updateCache }
+      >
         {createRoute => (
           <>
             <form className="route-builder-form">
