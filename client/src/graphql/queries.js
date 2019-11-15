@@ -30,6 +30,7 @@ export const FETCH_USER = gql`
     }
   }
 `;
+
 export const FETCH_ACTIVITY = gql`
   query FetchActivity($_id: ID!) {
     activity(_id: $_id) {
@@ -48,5 +49,24 @@ export const FETCH_ACTIVITY = gql`
       }
     }
   }
-  `;
+`;
 
+export const FETCH_CURRENT_USER_ROUTES = gql`
+  query FetchCurrentUserRoutes {
+    currentUserRoutes {
+      positions {
+        lat
+        lng
+      }
+      author {
+        _id
+      }
+      _id
+      name
+      description
+      isPrivate
+      date
+      travelMode
+    }
+  } 
+`;

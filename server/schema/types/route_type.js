@@ -27,7 +27,8 @@ const RouteType = new GraphQLObjectType({
       }
     },
     positions: { type: GraphQLList(PositionType) },
-    date: { type: GraphQLDate }
+    date: { type: GraphQLDate },
+    travelMode: { type: GraphQLString }
   })
 });
 

@@ -217,6 +217,7 @@ class MapOverlay extends React.Component {
               <RouteBuilderForm
                 closeModal={this.closeModal}
                 positions={this.state.positions}
+                travelMode={this.state.travelMode}
               />
             </>
           )}

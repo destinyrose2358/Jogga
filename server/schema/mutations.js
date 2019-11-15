@@ -112,7 +112,8 @@ const mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         isPrivate: { type: GraphQLBoolean },
         token: { type: GraphQLString },
-        positions: { type: new GraphQLList(PositionInputType) }
+        positions: { type: new GraphQLList(PositionInputType) },
+        travelMode: {type: GraphQLString }
       },
       resolve(_, args) {
         return RouteService.createRoute(args);
