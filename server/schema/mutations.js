@@ -3,7 +3,7 @@ const GraphQLDate = require("graphql-date");
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLFloat,
+  GraphQLInt,
   GraphQLList,
   GraphQLID,
   GraphQLBoolean
@@ -16,10 +16,11 @@ const Route = mongoose.model("route");
 const UserType = require("./types/user_type");
 const RouteType = require("./types/route_type");
 const PositionInputType = require("./types/position_input_type");
-
+const ActivityType = require("./types/activity_type");
 const AuthService = require("../services/auth");
 const { singleUpload } = require('../services/aws');
 const RouteService = require("../services/routes");
+const ActivityServices = require('../services/activities');
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -115,6 +116,24 @@ const mutation = new GraphQLObjectType({
       },
       resolve(_, args) {
         return RouteService.createRoute(args);
+      }
+    }, 
+    createActivity: {
+      type: ActivityType, 
+      args: {
+        distance: { type: GraphQLInt },
+        unit: { type: GraphQLString },
+        duration: { type: GraphQLDate },
+        sport: { type: GraphQLString },
+        title: { type: GraphQLString },
+        runType: { type: GraphQLString },
+        description: { type: GraphQLString },
+        date: { type: GraphQLDate }
+      }, 
+      async resolve(_, args, ctx) {
+        const author = await AuthService.verifyUser(ctx)
+        args.author = author._id
+        return ActivityServices.createActivity(args);
       }
     }
 	}
