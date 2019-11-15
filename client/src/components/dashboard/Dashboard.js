@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { CURRENT_USER } from '../../graphql/queries';
 import UserCard from './UserCard';
 import UserGoals from './UserGoals';
+import ActivityItemTest from '../ActivityItemTest';
 import svgs from '../svgs/svgs';
 import {} from '../../stylesheets/dashboard/dashboard.scss';
 
@@ -18,7 +19,8 @@ export default props => {
       <UserGoals currentUser={currentUser} svgs={svgs} />
     </div>
     <div className='column-middle'>
-      <h3>Nothing here yet!</h3>
+      <h3>Nothing here yet except a broken activity index!</h3>
+      <ActivityItemTest />
     </div>
     <div className='column-side'>
       <h3>Ads go here!</h3>
