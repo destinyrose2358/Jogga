@@ -52,6 +52,9 @@
           min-width: 70px;
           height: 70px;
           min-height: 70px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
         }
         
         &:hover {
@@ -69,9 +72,10 @@
         justify-content: space-between;
   
         .stat-item {
+          position: relative;
           width: 33%;
           text-decoration: none;
-  
+
           [class^=label] {
             color: #606065;
             font-size: 12px;
@@ -92,6 +96,20 @@
             }
           }
         }
+
+        .stat-item:not(:last-child) {
+          &::after {
+            content: '';
+            display: block;
+            border-right: 1px solid #e6e6eb;
+            height: 24px;
+            width: 1px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -12px;
+          }
+        }
       }
 
       @media screen and (max-width: 1000px) {
@@ -109,6 +127,12 @@
 
             .label-3, .count-3 {
               margin-right: 12px;
+            }
+          }
+
+          .stat-item:not(:last-child) {
+            &::after {
+              display: none;
             }
           }
         }
