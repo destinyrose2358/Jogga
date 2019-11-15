@@ -14,6 +14,7 @@ export default withRouter(props => {
 
   const { loading, data: { currentUser } } = useQuery(CURRENT_USER);
   if (loading) return null;
+<<<<<<< HEAD
 
   const userProfile = () => {
     if (!currentUser) return;
@@ -27,6 +28,26 @@ export default withRouter(props => {
             style={{ backgroundImage: `url(${currentUser.profile_img})` }}>
           </div> : svgs.user}
         {svgs.arrowDown}
+=======
+  // if (!currentUser) return null;
+  const userProfile = (<div className='nav-dropdown-container'
+    onMouseEnter={() => setUserProfileHover(true)}
+    onMouseLeave={() => setUserProfileHover(false)}>
+    <Link className='user-profile nav-item' to={`athletes/${currentUser._id}`}>
+      {currentUser.profile_img ?
+        <div className='user-img'
+          style={{ backgroundImage: `url(${currentUser.profile_img})` }}>
+        </div> : svgs.user}
+      {svgs.arrowDown}
+    </Link>
+    <div className='nav-dropdown'
+      hidden={!userProfileHover}>
+      <Link className='option-container' to={`athletes/${currentUser._id}`}>
+        My Profile
+      </Link>
+      <Link className='option-container' to='/settings/profile'>
+        Settings
+>>>>>>> 6bac245... Adds create activity form
       </Link>
       <div className='nav-dropdown'
         hidden={!userProfileHover}>

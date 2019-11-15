@@ -107,3 +107,44 @@ export const CREATE_ROUTE = gql`
     }
   }
 `;
+
+export const CREATE_ACTIVITY = gql`
+  mutation CreateActivity(
+    $sport: String!,
+    $distance: Int!, 
+    $unit: String!, 
+    $duration: Date!, 
+    $title: String!, 
+    $runType: String!, 
+    $description: String!, 
+    $date: Date!,
+  ) {
+    CreateActivity(
+      sport: $sport,
+      distance: $distance, 
+      unit: $unit, 
+      duration: $duration, 
+      title: $title, 
+      runType: $runType, 
+      description: $description, 
+      date: $date
+    ) {
+      _id
+      sport
+      distance
+      unit
+      duration
+      title
+      runType
+      description 
+      date
+      author {
+        _id
+        firstName
+        lastName
+        profile_img
+      }
+    }
+  }
+     
+`
