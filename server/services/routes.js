@@ -42,6 +42,26 @@ const createRoute = async data => {
   } catch (err) {
     throw err;
   }
-}
+};
 
-module.exports = {createRoute};
+const deleteRoute = async data => {
+  const { token, _id } = data;
+
+  const decoded = jwt.verify(token, keys.secretOrKey);
+  const { _id: userId } = decoded;
+
+  const isUser = await User
+    .findById(userId)
+    .then(user => user ? true : false);
+
+  const route = await Route
+    .findById(_id);
+
+  if (!isUser) {
+    throw new Error("You do not own this route");
+  } else if ( route.author === userId ) {
+    return route.remove();
+  }
+};
+
+module.exports = {createRoute, deleteRoute};
