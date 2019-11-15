@@ -30,3 +30,23 @@ export const FETCH_USER = gql`
     }
   }
 `;
+export const FETCH_ACTIVITY = gql`
+  query FetchActivity($_id: ID!) {
+    activity(_id: $_id) {
+      _id
+      distance
+      unit
+      duration
+      sport
+      date
+      runType
+      description
+      author {
+        firstName
+        lastName
+        _id
+      }
+    }
+  }
+  `;
+
