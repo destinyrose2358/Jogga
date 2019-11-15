@@ -11,15 +11,18 @@ export default withRouter(props => {
   const client = useApolloClient();
   const [userProfileHover, setUserProfileHover] = useState(false);
   const [uploadHover, setUploadHover] = useState(false);
-  const { loading, data:{currentUser} } = useQuery(CURRENT_USER);
-  if (loading) {
-    return null
-  }
+
+  const { loading, data: { currentUser } } = useQuery(CURRENT_USER);
+  if (loading) return null;
+
   const userProfile = (<div className='nav-dropdown-container'
     onMouseEnter={() => setUserProfileHover(true)}
     onMouseLeave={() => setUserProfileHover(false)}>
     <Link className='user-profile nav-item' to={`athletes/${currentUser._id}`}>
-      {svgs.user}
+      {currentUser.profile_img ?
+        <div className='user-img'
+          style={{ backgroundImage: `url(${currentUser.profile_img})` }}>
+        </div> : svgs.user}
       {svgs.arrowDown}
     </Link>
     <div className='nav-dropdown'
@@ -51,7 +54,8 @@ export default withRouter(props => {
       </Link>
     <div className='nav-dropdown'
       hidden={!uploadHover}>
-      <Link className='option-container' to='/routes/new'>
+      <Link className='option-container' to='/routes/new'
+        onClick={() => setUploadHover(false)}>
         Create a route
       </Link>
     </div>

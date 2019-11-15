@@ -167,6 +167,15 @@
         border-radius: 50%;
       }
 
+      .user-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
       .upload {
         .svg-plus {
           color: #fc4c02;
