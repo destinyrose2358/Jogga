@@ -1,9 +1,10 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 import { CREATE_ROUTE } from "../../graphql/mutations";
+import { FETCH_CURRENT_USER_ROUTES } from "../../graphql/queries";
+import { withRouter } from "react-router-dom";
 
-
-export default class RouteBuilderForm extends React.Component {
+class RouteBuilderForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,8 +31,21 @@ export default class RouteBuilderForm extends React.Component {
     }
   }
 
-  updateCache(cache, { data }) {
+  updateCache(cache, { data: { createRoute } }) {
+    let routes;
+    try {
+      routes = cache.readQuery({ query: FETCH_CURRENT_USER_ROUTES })
+    } catch (err) {
+      return;
+    }
+    if (routes) {
+      let routesArray = routes.routes;
 
+      cache.writeQuery({
+        query: FETCH_CURRENT_USER_ROUTES,
+        data: { routes: routesArray.concat(createRoute) }
+      })
+    }
   }
 
   render() {
@@ -40,6 +54,7 @@ export default class RouteBuilderForm extends React.Component {
       <Mutation
         mutation={ CREATE_ROUTE }
         update={ this.updateCache }
+        onCompleted={ () => this.props.history.push("/athlete/routes") }
       >
         {createRoute => (
           <>
@@ -88,6 +103,7 @@ export default class RouteBuilderForm extends React.Component {
                         description,
                         isPrivate,
                         positions: this.props.positions,
+                        travelMode: this.props.travelMode,
                         token: localStorage.getItem("auth-token")
                       }
                     });
@@ -105,3 +121,5 @@ export default class RouteBuilderForm extends React.Component {
     );
   }
 }
+
+export default withRouter(RouteBuilderForm);
