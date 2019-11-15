@@ -4,12 +4,12 @@
 Dockerfile
 docker-compose
 config/keys_dev.js
+.env
 
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
 
 .DS_Store
 npm-debug.log
