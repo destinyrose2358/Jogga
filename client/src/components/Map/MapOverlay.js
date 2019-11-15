@@ -162,7 +162,7 @@ class MapOverlay extends React.Component {
       <>
         <div>
           <aside className="exit">
-            <Link to="/routes/created">Exit Builder</Link>
+            <Link to="/athlete/routes">Exit Builder</Link>
           </aside>
           <aside className="logo">
             <div className="branding" />
