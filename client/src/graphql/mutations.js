@@ -81,26 +81,28 @@ export const CREATE_ROUTE = gql`
     $description: String,
     $isPrivate: Boolean!,
     $positions: [PositionInputType!]
+    $travelMode: String
   ) {
     createRoute(
       token: $token,
       name: $name,
       description: $description,
       isPrivate: $isPrivate,
-      positions: $positions
+      positions: $positions,
+      travelMode: $travelMode
     ) {
       _id
       name
       description
       isPrivate
+      date
       positions {
         lat
         lng
       }
+      travelMode
       author {
         _id
-        firstName
-        lastName
       }
     }
   }

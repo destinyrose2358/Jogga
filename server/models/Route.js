@@ -23,6 +23,11 @@ const RouteSchema = new Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  travelMode: {
+    type: String,
+    required: true,
+    enum: ["WALKING", "BICYCLING"]
   }
 });
 
