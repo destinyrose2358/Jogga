@@ -5,6 +5,8 @@ const AuthServices = require("../../services/auth");
 const UserType = require('./user_type');
 const User = mongoose.model('User');
 const Route = mongoose.model("route");
+const jwt = require("jsonwebtoken");
+const keys = require("../../../config/keys");
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -34,6 +36,13 @@ const RootQueryType = new GraphQLObjectType({
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_, args) {
         return Route.findBy({ author: args._id });
+      }
+    },
+    currentUserRoutes: {
+      type: new GraphQLList(require("./route_type")),
+      resolve(_a, _b, ctx) {
+        const { _id } = jwt.verify(ctx.token, keys.secretOrKey);
+        return Route.findBy({ author: _id })
       }
     }
   })
