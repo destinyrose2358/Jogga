@@ -29,7 +29,7 @@ export default props => {
   const demoUser = (
     props.user === 'demo1' ? {
       designation: 'demo-one',
-      email: 'bob@builder.com',
+      email: 'bat@man.com',
       password: 'hunter12'
     } : {
       designation: 'demo-two',
