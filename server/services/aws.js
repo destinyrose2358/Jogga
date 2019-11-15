@@ -1,19 +1,9 @@
 const graphQL = require('graphql');
 const AWS = require('aws-sdk');
 
-
-// Heroku build:
-// if (process.env.NODE_ENV !== "production") {
-//   AWS.config.loadFromPath("./credentials.json");
-// }
-
-// Local Docker build:
-const keys = require('../../config/keys');
-AWS.config.update({
-  secretAccessKey: keys.AWSSecretKey,
-  accessKeyId: keys.AWSAccessKeyId,
-  region: keys.AWSRegion
-});
+if (process.env.NODE_ENV !== "production") {
+  AWS.config.loadFromPath("./credentials.json");
+}
 
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01'

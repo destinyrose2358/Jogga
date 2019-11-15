@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const keys = require('../../config/keys').secretOrKey;
+const keys = require('../../config/keys');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const validateUserInfo = require("../validation/user_info");
@@ -33,7 +33,7 @@ const register = async data => {
 
     user.save();
 
-    const token = jwt.sign({ _id: user._id }, keys);
+    const token = jwt.sign({ _id: user._id }, keys.secretOrKey);
     return { token, loggedIn: true, ...user._doc, password: null };
   } catch (err) {
     throw err;
@@ -56,7 +56,7 @@ const login = async data => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error('wrong username/password combination');
 
-    const token = jwt.sign({ _id: user._id }, keys);
+    const token = jwt.sign({ _id: user._id }, keys.secretOrKey);
     return { token, loggedIn: true, ...user._doc, password: null };
 
   } catch (err) {
@@ -75,7 +75,7 @@ const verifyUser = async data => {
   try {
     const { token } = data;
 
-    const decoded = jwt.verify(token, keys);
+    const decoded = jwt.verify(token, keys.secretOrKey);
     const { _id } = decoded;
 
     const [loggedIn, user] = await User.findById(_id).then(user => {
@@ -113,6 +113,28 @@ const updateUser = async data => {
     throw err;
   }
 };
+    
+// const updateUserData = async data => {
+//   const updateObj = {};
+
+//   const { _id, firstName, lastName, birthDate, gender, profile_img } = data;
+
+//   if (name) updateObj.name = name;
+//   if (birthDate) updateObj.birthDate = new Date(birthDate);
+//   if (gender) updateObj.gender = gender;
+//   if (profile_img) {
+//     const key = await singleUpload(profile_img);
+//     console.log(key)
+//     updateObj.profile_img = key
+//   }
+
+//   return User.findOneAndUpdate(
+//     { _id: _id },
+//     { $set: updateObj },
+//     { new: true },
+//     (err, user) => user
+//   )
+// };
 
 module.exports = {
   register,

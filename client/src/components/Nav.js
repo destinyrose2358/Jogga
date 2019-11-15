@@ -15,40 +15,36 @@ export default withRouter(props => {
   const { loading, data: { currentUser } } = useQuery(CURRENT_USER);
   if (loading) return null;
 
-  const userProfile = () => {
-    if (!currentUser) return;
-    
-    return (<div className='nav-dropdown-container'
-      onMouseEnter={() => setUserProfileHover(true)}
-      onMouseLeave={() => setUserProfileHover(false)}>
-      <Link className='user-profile nav-item' to={`athletes/${currentUser._id}`}>
-        {currentUser.profile_img ?
-          <div className='user-img'
-            style={{ backgroundImage: `url(${currentUser.profile_img})` }}>
-          </div> : svgs.user}
-        {svgs.arrowDown}
+  const userProfile = (<div className='nav-dropdown-container'
+    onMouseEnter={() => setUserProfileHover(true)}
+    onMouseLeave={() => setUserProfileHover(false)}>
+    <Link className='user-profile nav-item' to={`athletes/${currentUser._id}`}>
+      {currentUser.profile_img ?
+        <div className='user-img'
+          style={{ backgroundImage: `url(${currentUser.profile_img})` }}>
+        </div> : svgs.user}
+      {svgs.arrowDown}
+    </Link>
+    <div className='nav-dropdown'
+      hidden={!userProfileHover}>
+      <Link className='option-container' to={`athletes/${currentUser._id}`}>
+        My Profile
       </Link>
-      <div className='nav-dropdown'
-        hidden={!userProfileHover}>
-        <Link className='option-container' to={`athletes/${currentUser._id}`}>
-          My Profile
-        </Link>
-        <Link className='option-container' to='/settings/profile'>
-          Settings
-        </Link>
-        <div className='option-container'
-          onClick={() => {
-            localStorage.removeItem('auth-token');
-            client.writeQuery({ query: CURRENT_USER, data: {}});
-            client.writeData({ data: { isLoggedIn: false } });
-            setUserProfileHover(false);
-            props.history.push('/');
-          }}>
-          Log Out
-        </div>
+      <Link className='option-container' to='/settings/profile'>
+        Settings
+      </Link>
+      <div className='option-container'
+        onClick={() => {
+          localStorage.removeItem('auth-token');
+          client.writeQuery({ query: CURRENT_USER, data: {}});
+          client.writeData({ data: { isLoggedIn: false } });
+          setUserProfileHover(false);
+          props.history.push('/');
+        }}>
+        Log Out
       </div>
-    </div>);
-  }
+    </div>
+  </div>);
 
   const upload = (<div className='nav-dropdown-container'
       onMouseEnter={() => setUploadHover(true)}
@@ -98,7 +94,7 @@ export default withRouter(props => {
           </Link>
         </div>
         <div className='header-right'>
-          {userProfile()}
+          {userProfile}
           {upload}
         </div>
       </div>)
