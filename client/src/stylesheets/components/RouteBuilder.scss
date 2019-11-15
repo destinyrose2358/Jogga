@@ -2,7 +2,6 @@
   display: grid;
   width: 100vw;
   height: 100vh;
-
   grid-template-rows: 100px 1fr;
   grid-template-areas: 
     "controls"
@@ -17,23 +16,48 @@
   
 .route-builder-container > :last-child {
   grid-area: controls;
-  background: white;
+  background: #ddd;
   & > :first-child {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
-      "logo . exit"
+      "logo logo exit"
       ". travel modal";
     & .exit {
       grid-area: exit;
+      background: white;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       padding-right: 10px;
+      border-bottom: 1px solid #bbb;
     }
-    
+    & .logo {
+      grid-area: logo;
+      background: white;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #bbb;
+      & .branding {
+        width: 101px;
+        height: 20px;
+        background-image: url('../../images/Branding.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0px 12px;
+        &.small {
+          width: 50px;
+          height: 10px;
+          align-self: flex-start;
+          margin-top: 10px;
+        }
+      }
+      & h2 {
+        margin: 0;
+      }
+    }
   }
 }
 
@@ -41,7 +65,6 @@
   grid-area: travel;
   display: flex;
   justify-content: flex-end;
-  background: lightgray;
   & > :last-child {
     border-top-right-radius: 5px;
   }
@@ -57,10 +80,37 @@
       width: 30px;
       height: 30px;
     }
+    &:hover {
+      background: #bbb;
+      color: #555;
+    }
     &.selected {
       background: gray;
+      color: #ccc;
     }
   }
+}
+
+button.save, input[type="submit"].save {
+  background: #f35500;
+  width: 75px;
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+  &:hover {
+    background: #E24400;
+  }
+  &:disabled {
+    background: #F79366;
+  }
+
+}
+
+.save-div {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  grid-area: modal;
 }
 
 .route-builder-form {
@@ -74,12 +124,83 @@
   left: 50%;
   top: 8%;
   overflow: auto;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr) 2fr 1fr 0.75fr;
+  grid-gap: 10px;
+  grid-template-areas: 
+  "header"
+  "subtitle"
+  "name"
+  "description"
+  "privacy"
+  "controls";
+  padding-bottom: 20px;
   & header {
     padding: 10px 20px;
     font-size: 20px;
     background: #ddd;
+    grid-area: header;
     & h1 {
       margin: 0px;
+    }
+  }
+  & p {
+    grid-area: subtitle;
+    padding: 0px 20px;
+  }
+  & .route-name {
+    grid-area: name;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    & input {
+      height: 100%;
+      margin-top: 10px;
+    }
+  }
+  & .route-description {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    & textarea {
+      height: 100%;
+      margin-top: 10px;
+    }
+  }
+  & .route-privacy {
+    grid-area: privacy;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+  }
+  & .route-controls {
+    grid-area: controls;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+    & button {
+      padding: 0 20px;
+      height: 100%;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-weight: 700;
+      &.route-cancel {
+        margin-right: 5px;
+        background: white;
+        border: 1px solid #555;
+        border-radius: 5px;
+        &:hover {
+          background: #eee;
+        }
+      }
+      &.route-save {
+        background: #333;
+        color: white;
+        &:hover {
+          background: #45444D;
+        }
+      }
     }
   }
 }
