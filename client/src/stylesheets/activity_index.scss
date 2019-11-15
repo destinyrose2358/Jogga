@@ -1,0 +1,82 @@
+.activity-index-container {
+  .activity-item-container {
+    .header {
+      padding: 16px 24px 0px;
+      margin: 0px 0px 8px;
+
+      .profile-img {
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        min-height: 40px;
+        border-radius: 50%;
+
+        .author-icon, .svg-user {
+          border-radius: 50%;
+          margin-right: 24px;
+          text-decoration: none;
+        }
+  
+        .svg-user {
+          color: #242428;
+          width: 24px;
+          min-width: 24px;
+          height: 24px;
+          min-height: 24px;
+          padding: 8px;
+          background: #dfdfe8;
+          transition: background-color 0.15s ease, color 0.15s ease;
+          will-change: background-color, color;
+  
+          &:hover {
+            color: #fc4c02;
+            background: #f5f5fa;
+          }
+        }
+  
+        .author-icon {
+          width: 40px;
+          min-width: 40px;
+          height: 40px;
+          min-height: 40px;
+        }
+      }
+
+      .info {
+        .author-name {
+          color: #242428;
+          font-weight: 700;
+          text-decoration: none;
+          transition: color 0.15s ease;
+          will-change: color;
+
+          &:hover {
+            color: #005b83;
+          }
+        }
+
+        .activity-timestamp {
+          padding: 16px 24px;
+
+          .parent {
+            display: grid;
+            grid-template-columns: 40px 24px 1fr 64px;
+            grid-template-rows: 40px 8px 28px 8px 1fr 16px 30px;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+          }
+        }
+      }
+    }
+
+    .body {
+      padding: 0px 88px 0px 24px;
+      margin: 8px 0px 16px;
+    }
+
+    .footer {
+      padding: 0px 24px 16px;
+      margin: 8px 0px 0px;
+    }
+  }
+}

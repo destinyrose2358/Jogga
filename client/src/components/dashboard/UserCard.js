@@ -14,10 +14,9 @@ export default props => {
           `${currentUser.firstName} ${currentUser.lastName}` :
           'New Jogga'}
         {currentUser.profile_img ?
-          <img className='user-img'
-            src={currentUser.profile_img}
-            alt={`${currentUser.firstName} + ${currentUser.lastName}'s avatar`} /> :
-          svgs.user}
+          <div className='user-img'
+            style={{backgroundImage: `url(${currentUser.profile_img})`}}>
+          </div> : svgs.user}
       </Link>
       <div className='user-stats'>
         <Link className='stat-item'
