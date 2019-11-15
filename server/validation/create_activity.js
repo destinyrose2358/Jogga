@@ -8,10 +8,6 @@ module.exports = function validateRouteInput(data) {
     messages.sport = "Please choose a sport";
   }
 
-  if (Validator.isEmpty(data.distance)) {
-    message.distance = "Please enter a distance"
-  }
-
   if (data.distance.isNaN) {
     messages.distance = "Please enter a number for distance";
   }

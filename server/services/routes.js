@@ -12,9 +12,7 @@ const createRoute = async data => {
     if (!isValid) {
       throw new Error(messages);
     }
-
     
-
     const { token, name, description, isPrivate, positions } = data;
     const decoded = jwt.verify(token, keys.secretOrKey);
     const { _id } = decoded;
