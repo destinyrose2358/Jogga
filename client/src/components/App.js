@@ -14,6 +14,7 @@ import CompleteUser from './CompleteUser'
 import RouteBuilder from './RouteBuilder/RouteBuilder';
 import Profile from './Profile'
 import {} from '../stylesheets/reset.scss';
+import RouteIndex from './route-index/RouteIndex';
 
 const App = () => (
   <div>
@@ -29,6 +30,7 @@ const App = () => (
         <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
         <AuthRoute path='/dashboard' component={Dashboard} routeType='protected' />
         <AuthRoute path='/' exact component={Landing} routeType='auth' />
+        <AuthRoute path="/athlete/routes" component={RouteIndex} routeType="proc" />
         <Redirect to='/' />
       </Switch>
     </div>
