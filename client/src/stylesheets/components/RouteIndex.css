@@ -1,0 +1,65 @@
+.route-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+}
+.route-index-container h1 {
+  font-size: 32px;
+}
+.route-index-container > a {
+  background: #f35500;
+  color: white;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 7px 20px;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+.route-index-container > a:hover {
+  background: #e24400;
+}
+.route-index-container .route-index-controls {
+  padding: 20px 0;
+  border-top: 1px solid #ccccd1;
+}
+.route-index-container .route-index-controls button {
+  padding: 10px;
+}
+.route-item-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "map map" "stats stats";
+}
+.route-item-container .route-item-map {
+  grid-area: map;
+}
+.route-item-container > :last-child {
+  background: #ddd;
+  grid-area: stats;
+}
+.route-item-container > :last-child h3 {
+  color: #2f7fb6;
+  margin-left: 20px;
+}
+.route-item-container > :last-child p {
+  font-size: 22px;
+  margin: 0;
+}
+.route-item-container > :last-child p > :last-child {
+  font-size: 12px;
+  color: #a1a1a5;
+}
+.route-item-container > :last-child > :last-child {
+  font-size: 12px;
+  color: #888;
+  background: #d5d5d5;
+  padding: 2px 20px;
+}
+.route-item-container > :last-child .stats-inline {
+  display: flex;
+  padding: 15px 20px;
+}
+.route-item-container > :last-child .stats-inline p {
+  padding-right: 10px;
+}

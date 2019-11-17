@@ -1,50 +1,76 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { Query } from "react-apollo";
 import { FETCH_CURRENT_USER_ROUTES } from "../../graphql/queries";
 import { Link } from "react-router-dom";
-import RouteItem from "./RouteItem";
+import RouteItemWithMap from "./RouteItem";
+import "../../stylesheets/components/RouteIndex.scss";
 
-const RouteIndex = props => {
-  const { loading, data } = useQuery(FETCH_CURRENT_USER_ROUTES);
-  const [travelType, setTravelType] = useState("WALKING");
-  if (loading) return null;
+export default class RouteIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      travelMode: "WALKING"
+    };
+  }
 
-  const bikeRoutes = [];
-  const runningRoutes = [];
-
-  data.currentUserRoutes.forEach(route => {
-    route.travelMode === "WALKING" ? runningRoutes.push(route) : bikeRoutes.push(route)
-  });
-
-  return (
-    <div
-      className="route-index-container"
-    >
-      <h1>My Routes</h1>
-      <Link to="/routes/new">Create New Route</Link>
-
-      <button
-        onClick={() => {
-          setTravelType("BICYCLING");
-        }}
-        className={travelType === "BICYCLING" ? "selected" : ""}
+  render() {
+    return (
+      <Query
+        query={FETCH_CURRENT_USER_ROUTES}
       >
-        Cycling
-      </button>
-      <button
-        onClick={() => {
-          setTravelType("WALKING");
-        }}
-        className={travelType === "WALKING" ? "selected" : ""}
-      >
-        Running
-      </button>
+        {({ loading, error, data }) => {
+          if (loading) return "Loading";
+          if (error) return `Error ${error.message}`;
 
-      {/* { currentUserRoutes.map(route => {
-        return <RouteItem route={route} />
-      }) } */}
-    </div>
-  );
+          const { travelMode } = this.state;
+
+          const routes = data.currentUserRoutes.filter(route => route.travelMode === travelMode);
+
+          return (
+            <div
+              className="route-index-container"
+            >
+              <h1>My Routes</h1>
+              <Link to="/routes/new">Create New Route</Link>
+
+              <div
+                className="route-index-controls"
+              >
+                <button
+                  onClick={() => {
+                    this.setState({
+                      travelMode: "BICYCLING"
+                    });
+                  }}
+                  className={ travelMode === "BICYCLING" ? "selected" : ""}
+                >
+                  Cycling
+                </button>
+                <button
+                  onClick={() => {
+                    this.setState({
+                      travelMode: "WALKING"
+                    });
+                  }}
+                  className={travelMode === "WALKING" ? "selected" : ""}
+                >
+                  Running
+                </button>
+              </div>
+              
+              
+              <div
+                className="route-index"
+              >
+                { routes.map(route => {
+                  return <RouteItemWithMap key={route._id} route={route} />
+                }) }
+              </div>
+            </div>
+          )
+        }}
+      </Query>
+      
+    );
+  } 
 }
-
-export default RouteIndex;

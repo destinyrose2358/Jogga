@@ -1,0 +1,72 @@
+.route-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+}
+
+.route-index-container {
+  & h1 {
+    font-size: 32px;
+  }
+  & > a {
+    background: #f35500;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 7px 20px;
+    margin-bottom: 50px;
+    display: inline-block;
+    &:hover {
+      background: #E24400;
+    }
+  }
+  & .route-index-controls {
+    padding: 20px 0;
+    border-top: 1px solid #CCCCD1;
+    & button {
+      padding: 10px;
+    }
+  }
+}
+
+.route-item-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "map map"
+    "stats stats";
+  & .route-item-map {
+    grid-area: map;
+  }
+  & > :last-child {
+    background: #ddd;
+    grid-area: stats;
+    & h3 {
+      color: #2F7FB6;
+      margin-left: 20px;
+    }
+    & p {
+      font-size: 22px;
+      margin: 0;
+      & > :last-child {
+        font-size: 12px;
+        color: #A1A1A5;
+      }
+    }
+    & > :last-child {
+      font-size: 12px;
+      color: #888;
+      background: #d5d5d5;
+      padding: 2px 20px;
+    }
+    & .stats-inline {
+      display: flex;
+      padding: 15px 20px;
+      & p {
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
