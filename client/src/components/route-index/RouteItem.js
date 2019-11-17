@@ -38,7 +38,7 @@ class RouteItem extends React.Component {
         if (status === window.google.maps.DirectionsStatus.OK) {
           this.setState({
             directions: result
-          }, () => console.log(this.state.directions));
+          });
         }
       }
     )
@@ -50,12 +50,17 @@ class RouteItem extends React.Component {
     }
 
     const stats = this.state.directions.routes[0].legs[0];
-    const { positions, _id } = this.props.route;
+    const { positions, _id, date } = this.props.route;
     let duration = stats.duration.value;
 
     const hours = Math.floor(duration / 3600);
     const minutes = Math.floor(duration / 60) - 60 * hours;
     const seconds = duration % 60;
+
+    const dateObj = new Date(date);
+    const month = dateObj.getMonth();
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
     
     return (
       <Mutation
@@ -166,18 +171,18 @@ class RouteItem extends React.Component {
               <h3>{ this.props.route.name }</h3>
               <div className="stats-inline">
                 <p className="distance">
-                  <p>{ stats.distance.text }</p>
-                  <p>Distance</p>
+                  <span>{ stats.distance.text }</span>
+                  <span>Distance</span>
                 </p>
                 <p className="duration">
-                  <p>{duration >= 60 ? `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds}` : `${seconds}s`}</p>
-                  <p>Est. Moving Time</p>
+                  <span>{duration >= 60 ? `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds}` : `${seconds}s`}</span>
+                  <span>Est. Moving Time</span>
                 </p>
               </div>
               
               <p
                 className="date"  
-              >Created on {1}</p>
+              >Created on {month} {day}, {year}</p>
             </> 
           )
         }}

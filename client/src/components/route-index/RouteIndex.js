@@ -24,7 +24,13 @@ export default class RouteIndex extends React.Component {
 
           const { travelMode } = this.state;
 
-          const routes = data.currentUserRoutes.filter(route => route.travelMode === travelMode);
+          const routes = data.currentUserRoutes;
+          const runRouteItems = [];
+          const bikingRouteItems = [];
+          routes.forEach(route => {
+            const newRouteItem = <RouteItemWithMap key={route._id} route={route} />;
+            route.travelMode === "WALKING" ? runRouteItems.push(newRouteItem) : bikingRouteItems.push(newRouteItem)
+          });
 
           return (
             <div
@@ -58,19 +64,22 @@ export default class RouteIndex extends React.Component {
                 </button>
               </div>
               
-              
               <div
-                className="route-index"
+                className={`route-index ${this.state.travelMode === "WALKING" ?
+                "" : "hidden"}`}
               >
-                { routes.map(route => {
-                  return <RouteItemWithMap key={route._id} route={route} />
-                }) }
+                {runRouteItems}
+              </div>
+              <div
+                className={`route-index ${this.state.travelMode === "BICYCLING" ?
+                "" : "hidden"}`}
+              >
+                { bikingRouteItems }
               </div>
             </div>
           )
         }}
       </Query>
-      
     );
   } 
 }

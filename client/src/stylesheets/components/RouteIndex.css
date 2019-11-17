@@ -3,6 +3,9 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 1rem;
 }
+.route-index.hidden {
+  display: none;
+}
 .route-index-container h1 {
   font-size: 32px;
 }
@@ -17,13 +20,28 @@
 }
 .route-index-container > a:hover {
   background: #e24400;
+  text-decoration: none;
 }
 .route-index-container .route-index-controls {
   padding: 20px 0;
   border-top: 1px solid #ccccd1;
 }
 .route-index-container .route-index-controls button {
-  padding: 10px;
+  padding: 10px 20px;
+  border: 1px solid #ccccd1;
+  border-left: 0;
+  font-weight: 700;
+}
+.route-index-container .route-index-controls button.selected {
+  color: white;
+  background: #737373;
+}
+.route-index-container .route-index-controls > :first-child {
+  border-left: 1px solid #ccccd1;
+}
+.route-index-container .route-index-controls > :last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .route-item-container {
   display: grid;
@@ -42,9 +60,14 @@
   color: #2f7fb6;
   margin-left: 20px;
 }
-.route-item-container > :last-child p {
-  font-size: 22px;
+.route-item-container > :last-child span {
+  display: block;
   margin: 0;
+}
+.route-item-container > :last-child p {
+  font-size: 24px;
+  margin: 0;
+  margin-right: 10px;
 }
 .route-item-container > :last-child p > :last-child {
   font-size: 12px;
@@ -55,6 +78,7 @@
   color: #888;
   background: #d5d5d5;
   padding: 2px 20px;
+  margin-right: 0;
 }
 .route-item-container > :last-child .stats-inline {
   display: flex;

@@ -2,6 +2,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 1rem;
+  &.hidden {
+    display: none;
+  }
 }
 
 .route-index-container {
@@ -18,13 +21,28 @@
     display: inline-block;
     &:hover {
       background: #E24400;
+      text-decoration: none;
     }
   }
   & .route-index-controls {
     padding: 20px 0;
     border-top: 1px solid #CCCCD1;
     & button {
-      padding: 10px;
+      padding: 10px 20px;
+      border: 1px solid #CCCCD1;
+      border-left: 0;
+      font-weight: 700;
+      &.selected {
+      color: white;
+      background: #737373;
+    }
+    }
+    & > :first-child {
+      border-left: 1px solid #CCCCD1;
+    }
+    & > :last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
   }
 }
@@ -46,9 +64,14 @@
       color: #2F7FB6;
       margin-left: 20px;
     }
-    & p {
-      font-size: 22px;
+    & span {
+      display: block;
       margin: 0;
+    }
+    & p {
+      font-size: 24px;
+      margin: 0;
+      margin-right: 10px;
       & > :last-child {
         font-size: 12px;
         color: #A1A1A5;
@@ -59,6 +82,7 @@
       color: #888;
       background: #d5d5d5;
       padding: 2px 20px;
+      margin-right: 0;
     }
     & .stats-inline {
       display: flex;
