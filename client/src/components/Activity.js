@@ -86,25 +86,28 @@ render() {
                   onSubmit={ e => this.handleSubmit(e, createActivity, currentUser)}
                   className="activity-form"
                 >
-                  <h2>Manual Entry</h2>
+                  <h1>Manual Entry</h1>
                   <div className="row">
                     <div className="input-grouping">
-                      <label className="actiity-label" for="distance">Distance</label>
+                      <label className="activity-label" for="distance">Distance</label>
+                      <div className="distance">
                       <input
                         required id="distance"
                         type="number"
                         onChange={this.update("distance")}
                         value={this.state.distance} />
-                      <select className="unit" value={this.state.unit} onChange={this.update("unit")} >
-                        <option value ="miles">Miles</option>
+                      <select className="activity-select" value={this.state.unit} onChange={this.update("unit")} >
+                        <option value ="miles">miles</option>
                         <option value="kilometers">kilometers</option>
                         <option value="meters">meters</option>
                         <option value="yards">yards</option>
                       </select>
                     </div>
+                </div>
                   </div>
                     <div className="input-grouping">
                       <label className="activity-label" for="duration">Duration</label>
+                      <div className="duration">
                       <input
                         id="duration"
                         required type="number"
@@ -124,11 +127,12 @@ render() {
                         value={this.state.sec}
                         placeholder="s" />
                     </div>
+                    </div>
                   <div className="row">
                     <div className="sport-date">
                     <div className="input-grouping">
                       <label className="activity-label" for="sport">Sport</label>
-                      <select className="select" value={this.state.sport} onChange={this.update("sport")}>
+                      <select className="activity-select" value={this.state.sport} onChange={this.update("sport")}>
                         <option selected value="run">Run</option>T
                         <option value="bike">Bike</option>
                         <option value="swim">Swim</option>
@@ -139,6 +143,7 @@ render() {
                     </div>
                   <div className="input-grouping">
                     <label className="activity-label" for="date/time">Date and Time</label>
+                    <div className="date-time">
                     <input
                       id="date/time"
                       type="date"
@@ -150,8 +155,10 @@ render() {
                       type="time"
                       onChange={this.update("time")}
                       value={this.state.time} />
+                    </div>
                   </div>
                   </div>
+                  <div className="row">
                     <div className="input-grouping">
                       <label className="activity-label" for="title">Title</label>
                       <input
@@ -159,6 +166,7 @@ render() {
                         type="text"
                         onChange={this.update("title")}
                         value={this.state.title} />
+                    </div>
                     </div>
                   </div>
                   <div className="row">
