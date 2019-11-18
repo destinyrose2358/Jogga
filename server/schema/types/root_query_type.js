@@ -31,6 +31,19 @@ const RootQueryType = new GraphQLObjectType({
         return user;
       }
     },
+    activities: {
+      type: new GraphQLList(require('./activity_type')),
+      resolve() {
+        return Activity.find({});
+      }
+    },
+    userActivities: {
+      type: new GraphQLList(require('./activity_type')),
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, args) {
+        return Activity.find({ author: args._id });
+      }
+    },
     userRoutes: {
       type: new GraphQLList(require("./route_type")),
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },

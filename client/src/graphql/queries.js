@@ -31,6 +31,46 @@ export const FETCH_USER = gql`
   }
 `;
 
+export const FETCH_ACTIVITIES = gql`
+  query FetchActivities {
+    activities {
+      _id
+      distance
+      unit
+      duration
+      sport
+      date
+      runType
+      description
+      author {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
+export const FETCH_USER_ACTIVITIES = gql`
+  query FetchUserActivities($_id: ID!) {
+    userActivities(_id: $_id) {
+      _id
+      distance
+      unit
+      duration
+      sport
+      date
+      runType
+      description
+      author {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+`
+
 export const FETCH_ACTIVITY = gql`
   query FetchActivity($_id: ID!) {
     activity(_id: $_id) {

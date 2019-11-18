@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let uri = 'http://localhost:5000/graphql';
 
   // Heroku build
-  // uri = 'http://jogga.herokuapp.com/graphql'
+  // uri = 'https://jogga.herokuapp.com/graphql'
 
   const uploadLink = createUploadLink({
     uri,

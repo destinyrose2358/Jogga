@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import {} from '../../stylesheets/dashboard/user_card.scss';
 
 export default props => {
-  const { currentUser, svgs } = props;
+  const { currentUser, userActivities, svgs } = props;
+  // const latestActivity = userActivities[userActivities.length - 1];
+  const latestActivity = null;
 
   return (<div className='user-card'>
     <div className='card-main'>
@@ -43,14 +45,30 @@ export default props => {
             Activities
           </div>
           <div className='count-3'>
-            0
+            {userActivities ? userActivities.length : '0'}
           </div>
         </Link>
       </div>
     </div>
     <div className='card-footer'>
+      {latestActivity ? <div className='latest-activity'>
+        <div className='label'>
+          Latest Activity
+        </div>
+        <Link className='info'
+          to={`/activities/${latestActivity._id}`}>
+          <div className='title'>
+            {latestActivity.title}
+          </div>
+          {` • `}
+          <div className='timestamp'>
+            {latestActivity.date}
+          </div>
+        </Link>
+      </div> : ''}
+      {latestActivity ? <div className='divider'></div> : ''}
       <Link className='upload-link'
-        to='/upload'>
+        to='/activity/new'>
         <div className='upload-text'>
           Add an Activity.
         </div>
