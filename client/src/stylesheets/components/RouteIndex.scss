@@ -33,9 +33,9 @@
       border-left: 0;
       font-weight: 700;
       &.selected {
-      color: white;
-      background: #737373;
-    }
+        color: white;
+        background: #737373;
+      }
     }
     & > :first-child {
       border-left: 1px solid #CCCCD1;
@@ -51,15 +51,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: 
-    "map map"
-    "stats stats";
+  grid-template-areas:
+    "map map map"
+    "stats stats stats";
   & .route-item-map {
     grid-area: map;
   }
   & > :last-child {
     background: #ddd;
     grid-area: stats;
+    position: relative;
     & h3 {
       color: #2F7FB6;
       margin-left: 20px;
@@ -75,6 +76,22 @@
       & > :last-child {
         font-size: 12px;
         color: #A1A1A5;
+      }
+    }
+    & button {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      right: 0;
+      top: -150px;
+      background: #ddd;
+      padding: 5px;
+      & svg {
+        width: 100%;
+        height: 100%;
+      }
+      &:hover {
+        color: #555;
       }
     }
     & > :last-child {

@@ -50,16 +50,12 @@ const deleteRoute = async data => {
   const decoded = jwt.verify(token, keys.secretOrKey);
   const { _id: userId } = decoded;
 
-  const isUser = await User
-    .findById(userId)
-    .then(user => user ? true : false);
-
   const route = await Route
-    .findById(_id);
-
-  if (!isUser) {
+    .findOne({_id, author: userId});
+  
+  if (!route) {
     throw new Error("You do not own this route");
-  } else if ( route.author === userId ) {
+  } else {
     return route.remove();
   }
 };

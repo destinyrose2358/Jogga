@@ -3,6 +3,8 @@ import { Mutation } from "react-apollo"
 import { DELETE_ROUTE } from "../../graphql/mutations";
 import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer, Marker } from "react-google-maps";
 import { Link } from "react-router-dom";
+import { FETCH_CURRENT_USER_ROUTES } from "../../graphql/queries";
+import svgs from "../svgs/svgs";
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
 class RouteItem extends React.Component {
@@ -10,10 +12,16 @@ class RouteItem extends React.Component {
     super(props);
     this.state = {
       directions: {},
+      map: null
     };
+    this.fitBounds = this.fitBounds.bind(this);
   }
 
   componentDidMount() {
+    this.requestDirections();
+  }
+
+  async requestDirections() {
     const directionsService = new window.google.maps.DirectionsService();
 
     const { positions, travelMode } = this.props.route;
@@ -39,9 +47,19 @@ class RouteItem extends React.Component {
           this.setState({
             directions: result
           });
+        } else if (status === window.google.maps.DirectionsStatus.OVER_QUERY_LIMIT) {
+          this.requestDirections();
         }
       }
     )
+  }
+
+  fitBounds() {
+    const bounds = new window.google.maps.LatLngBounds();
+    this.props.route.positions.forEach(position => {
+      bounds.extend(position)
+    });
+    this.state.map.fitBounds(bounds);
   }
 
   render() {
@@ -65,11 +83,28 @@ class RouteItem extends React.Component {
     return (
       <Mutation
         mutation={DELETE_ROUTE}
+        refetchQueries={() => {
+          return [
+            {
+              query: FETCH_CURRENT_USER_ROUTES
+            }
+          ]
+        }}
       >
         {(deleteRoute, { data }) => {
           return (
             <>
               <GoogleMap
+                onTilesLoaded={this.fitBounds}
+                ref={map => {
+                  if (!this.state.map) {
+                    this.setState({
+                    map
+                  });
+                  }
+                }}
+                center={(this.state.map && this.state.map.getCenter().toJSON()) || { lat: 0, lng: 0}}
+                zoom={(this.state.map && this.state.map.getZoom()) || 13}
                 options={{
                   disableDefaultUI: true,
                   draggable: false,
@@ -179,7 +214,11 @@ class RouteItem extends React.Component {
                   <span>Est. Moving Time</span>
                 </p>
               </div>
-              
+              <button
+                onClick={() => deleteRoute({ variables: { _id: this.props.route._id } })}
+              >
+                {svgs.trashCan}
+              </button>
               <p
                 className="date"  
               >Created on {month} {day}, {year}</p>

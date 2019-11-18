@@ -28,7 +28,13 @@ export default class RouteIndex extends React.Component {
           const runRouteItems = [];
           const bikingRouteItems = [];
           routes.forEach(route => {
-            const newRouteItem = <RouteItemWithMap key={route._id} route={route} />;
+
+            const newRouteItem = <RouteItemWithMap
+              key={route._id}
+              route={route}
+              hidden={this.state.travelMode !== route.travelMode}
+            />;
+
             route.travelMode === "WALKING" ? runRouteItems.push(newRouteItem) : bikingRouteItems.push(newRouteItem)
           });
 
