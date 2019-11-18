@@ -5,7 +5,10 @@ import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer, Marker } fr
 import { Link } from "react-router-dom";
 import { FETCH_CURRENT_USER_ROUTES } from "../../graphql/queries";
 import svgs from "../svgs/svgs";
+import startIconImage from "../../images/start_icon.png";
+import endIconImage from "../../images/end_icon.png";
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
+
 
 class RouteItem extends React.Component {
   constructor(props) {
@@ -79,6 +82,22 @@ class RouteItem extends React.Component {
     const month = dateObj.getMonth();
     const day = dateObj.getDate();
     const year = dateObj.getFullYear();
+
+    const startIcon = new window.google.maps.MarkerImage(
+      startIconImage,
+      null,
+      null,
+      new window.google.maps.Point(8, 8),
+      new window.google.maps.Size(16, 16)
+    );
+
+    const endIcon = new window.google.maps.MarkerImage(
+      endIconImage,
+      null,
+      null,
+      new window.google.maps.Point(8, 8),
+      new window.google.maps.Size(16, 16)
+    );
     
     return (
       <Mutation
@@ -198,9 +217,11 @@ class RouteItem extends React.Component {
                 />
                   <Marker
                     position={positions[0]}
+                    icon={startIcon}
                   />
                   <Marker
                     position={positions[positions.length - 1]}
+                    icon={endIcon}
                   />
               </GoogleMap>
               <h3>{ this.props.route.name }</h3>

@@ -108,6 +108,10 @@ class MapOverlay extends React.Component {
               });
             }
             
+          } else if (status === window.google.maps.DirectionsStatus.ZERO_RESULTS) {
+            this.setState(prevState => ({
+              positions: prevState.positions.slice(0, prevState.positions.length - 1)
+            }), () => alert("Sorry, the route you requested doesn't exist"));
           } else {
             console.error(`error fetching directions`, result);
           }
@@ -128,6 +132,7 @@ class MapOverlay extends React.Component {
         this.setState({
           message: "You have used the max number of positions"
         })
+        alert("You have too many waypoints")
       }
     }
   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useQuery, useApolloClient } from '@apollo/react-hooks';
 
-import { IS_LOGGED_IN, CURRENT_USER } from '../graphql/queries';
+import { IS_LOGGED_IN, CURRENT_USER, FETCH_CURRENT_USER_ROUTES } from '../graphql/queries';
 import svgs from './svgs/svgs';
 import {} from '../stylesheets/nav.scss';
 
@@ -43,6 +43,7 @@ export default withRouter(props => {
             client.writeData({ data: { isLoggedIn: false } });
             setUserProfileHover(false);
             props.history.push('/');
+            window.location.reload();
           }}>
           Log Out
         </div>
