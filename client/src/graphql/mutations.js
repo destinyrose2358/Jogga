@@ -107,3 +107,11 @@ export const CREATE_ROUTE = gql`
     }
   }
 `;
+
+export const DELETE_ROUTE = gql`
+  mutation DeleteRoute($_id: ID!) {
+    deleteRoute(_id: $_id) {
+      _id
+    }
+  }
+`;

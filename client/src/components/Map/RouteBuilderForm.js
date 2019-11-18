@@ -14,7 +14,6 @@ class RouteBuilderForm extends React.Component {
     }
 
     this.togglePrivate = this.togglePrivate.bind(this);
-    
   }
 
   togglePrivate() {
@@ -38,12 +37,13 @@ class RouteBuilderForm extends React.Component {
     } catch (err) {
       return;
     }
+    console.log(routes);
     if (routes) {
-      let routesArray = routes.routes;
+      let routesArray = routes.currentUserRoutes;
 
       cache.writeQuery({
         query: FETCH_CURRENT_USER_ROUTES,
-        data: { routes: routesArray.concat(createRoute) }
+        data: { currentUserRoutes: routesArray.concat(createRoute) }
       })
     }
   }
@@ -53,7 +53,7 @@ class RouteBuilderForm extends React.Component {
     return (
       <Mutation
         mutation={ CREATE_ROUTE }
-        update={ this.updateCache }
+        update={ (cache, data) => this.updateCache(cache, data) }
         onCompleted={ () => this.props.history.push("/athlete/routes") }
       >
         {createRoute => (

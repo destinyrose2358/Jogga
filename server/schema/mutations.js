@@ -118,7 +118,16 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return RouteService.createRoute(args);
       }
-    }, 
+    },
+    deleteRoute: {
+      type: RouteType,
+      args: {
+        _id: { type: GraphQLID }
+      },
+      resolve(_, args, ctx) {
+        return RouteService.deleteRoute({ _id: args._id, token: ctx.token });
+      }
+    },
     createActivity: {
       type: ActivityType, 
       args: {

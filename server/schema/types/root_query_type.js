@@ -35,14 +35,14 @@ const RootQueryType = new GraphQLObjectType({
       type: new GraphQLList(require("./route_type")),
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_, args) {
-        return Route.findBy({ author: args._id });
+        return Route.find({ author: args._id });
       }
     },
     currentUserRoutes: {
       type: new GraphQLList(require("./route_type")),
       resolve(_a, _b, ctx) {
         const { _id } = jwt.verify(ctx.token, keys.secretOrKey);
-        return Route.findBy({ author: _id })
+        return Route.find({ author: _id })
       }
     }
   })

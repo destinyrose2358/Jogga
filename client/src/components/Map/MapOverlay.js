@@ -76,7 +76,7 @@ class MapOverlay extends React.Component {
         {
           origin,
           destination,
-          waypoints: waypoints,
+          waypoints,
           travelMode: this.state.travelMode
         },
         (result, status) => {
@@ -162,7 +162,7 @@ class MapOverlay extends React.Component {
       <>
         <div>
           <aside className="exit">
-            <Link to="/routes/created">Exit Builder</Link>
+            <Link to="/athlete/routes">Exit Builder</Link>
           </aside>
           <aside className="logo">
             <div className="branding" />
@@ -237,9 +237,9 @@ class MapOverlay extends React.Component {
 }
 
 const LoadedMap = withScriptjs(
-    withGoogleMap(props => (
-      <MapOverlay />
-    ))
+  withGoogleMap(props => (
+    <MapOverlay />
+  ))
 );
 
 const RouteBuilderMap = () => {

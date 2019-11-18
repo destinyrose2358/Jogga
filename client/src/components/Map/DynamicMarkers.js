@@ -49,7 +49,6 @@ class DynamicMarker extends React.Component {
       
     )
   }
-
 }
 
 const DynamicMarkers = ({ positions, removePosition, selectPosition, selectedIdx }) => {
