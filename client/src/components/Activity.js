@@ -39,7 +39,7 @@ class Activity extends React.Component {
   createDuration() {
     let duration; 
     duration = (this.state.hours * 60 * 60) + (this.state.mins * 60) + this.state.sec;
-    return duration;
+    return parseInt(duration);
   }
 
   createDate() {
@@ -58,7 +58,7 @@ class Activity extends React.Component {
         variables: {
         
           sport: this.state.sport,
-          distance: this.state.distance,
+          distance: parseInt(this.state.distance),
           unit: this.state.unit,
           duration: this.createDuration(),
           title: this.state.title,
@@ -168,7 +168,8 @@ render() {
                         id="title"
                         type="text"
                         onChange={this.update("title")}
-                        value={this.state.title} />
+                        value={this.state.title}
+                        placeholder="Morning Run" />
                     </div>
                     </div>
                   <hr></hr>
