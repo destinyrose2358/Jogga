@@ -133,15 +133,17 @@ const mutation = new GraphQLObjectType({
       args: {
         distance: { type: GraphQLInt },
         unit: { type: GraphQLString },
-        duration: { type: GraphQLDate },
+        duration: { type: GraphQLInt },
         sport: { type: GraphQLString },
         title: { type: GraphQLString },
         runType: { type: GraphQLString },
         description: { type: GraphQLString },
-        date: { type: GraphQLDate }
+        date: { type: GraphQLDate }, 
       }, 
       async resolve(_, args, ctx) {
-        const author = await AuthService.verifyUser(ctx)
+        debugger;
+        const author = await AuthService.verifyUser(ctx);
+        console.log(author);
         args.author = author._id
         return ActivityServices.createActivity(args);
       }

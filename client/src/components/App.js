@@ -15,6 +15,7 @@ import RouteBuilder from './RouteBuilder/RouteBuilder';
 import Profile from './Profile'
 import {} from '../stylesheets/reset.scss';
 import RouteIndex from './route-index/RouteIndex';
+import Activity from './Activity';
 
 const App = () => (
   <div>
@@ -25,6 +26,7 @@ const App = () => (
         <AuthRoute exact path="/routes/new" component={() => null} routeType="prot" />
         <AuthRoute path='/athletes/:id' component={Profile} routeType="protected" />
         <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
+        <AuthRoute path='/activity/new' component={Activity} routeType="protected" />
         <AuthRoute path='/register' component={Register} routeType='auth' />
         <AuthRoute path='/login' component={Login} routeType='auth' />
         <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>

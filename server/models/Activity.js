@@ -7,27 +7,27 @@ const ActivitySchema = new Schema({
     required: true
   },
   unit: {
-    type: String, 
-  }, 
+    type: String,
+  },
   duration: {
-    type: Date, 
-  }, 
+    type: Number,
+  },
   sport: {
-    type: String, 
+    type: String,
     required: true,
   },
   date: {
     type: Date
-  }, 
+  },
   title: {
     type: String
-  }, 
+  },
   runType: {
     type: String
-  }, 
+  },
   description: {
     type: String
-  }, 
+  },
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"
