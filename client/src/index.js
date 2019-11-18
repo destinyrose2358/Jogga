@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Docker build
-  let uri = 'http://localhost:5000/graphql';
+  // let uri = 'http://localhost:5000/graphql';
 
   // Heroku build
-  // uri = 'https://jogga.herokuapp.com/graphql'
+  let uri = 'https://jogga.herokuapp.com/graphql';
 
   const uploadLink = createUploadLink({
     uri,

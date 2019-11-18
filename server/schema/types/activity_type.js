@@ -25,6 +25,14 @@ const ActivityType = new GraphQLObjectType({
       }
     },
   })
+    //   type: require("./user_type"),
+    //   resolve(parentValue) {
+    //     return User.findById(parentValue.author)
+    //       .then(user => user)
+    //       .catch(err => null);
+    //   }
+    // },
+  // })
 });
 
 module.exports = ActivityType;
