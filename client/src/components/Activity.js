@@ -19,7 +19,7 @@ class Activity extends React.Component {
       unit: "miles",
       duration: 0,
       title: "", 
-      runType: "",
+      runType: "workout",
       description: "",
       date: today, 
       time: time, 
@@ -104,7 +104,7 @@ render() {
                       </select>
                     </div>
                 </div>
-                  </div>
+                  
                     <div className="input-grouping">
                       <label className="activity-label" for="duration">Duration</label>
                       <div className="duration">
@@ -128,6 +128,8 @@ render() {
                         placeholder="s" />
                     </div>
                     </div>
+              </div>
+              <hr></hr>
                   <div className="row">
                     <div className="sport-date">
                     <div className="input-grouping">
@@ -158,6 +160,7 @@ render() {
                     </div>
                   </div>
                   </div>
+              </div>
                   <div className="row">
                     <div className="input-grouping">
                       <label className="activity-label" for="title">Title</label>
@@ -168,28 +171,33 @@ render() {
                         value={this.state.title} />
                     </div>
                     </div>
-                  </div>
+                  <hr></hr>
                   <div className="row">
                     <div className="input-grouping">
                       <label className="activity-label" for="runType">Run Type</label>
-                      <select className="runType" value={this.state.runType} onChange={this.update("runType")}>
-                        <option disabled></option>
+                      <select className="activity-select" value={this.state.runType} onChange={this.update("runType")}>
+                        
                         <option value="race">Race</option>
                         <option value="long run">Long Run</option>
                         <option value="workout">Workout</option>
                       </select>
                     </div>
+              </div>
+              <div className="row">
                     <div className="input-grouping">
                       <label className="activity-label" for="description">Description</label>
                       <textarea id="description" onChange={this.update("description")} value={this.state.desciption} placeholder="
                       How did it go? Were you tired or rested? How was the weather?">
                       </textarea>
                     </div>
-                  </div>
-                  <div className="button">
-                    <input className="continue" type="submit" value="Create" />
-                  </div>
+              </div>
+              <div className="buttons">
+                <div className="activity-button">
+                  <input className="continue" type="submit" value="Create" />
+                </div>
                   <button onClick={()=> this.props.history.push(`/athletes/${currentUser._id}`)}>Cancel</button>
+             
+              </div>
                 </form>}
             </Mutation>
         
