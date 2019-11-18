@@ -15,4 +15,36 @@
   .column-middle {
     width: 50%;
   }
+
+  .github-banner {
+    display: flex;
+    align-items: center;
+    color: #242428;
+    width: 100%;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    margin: 8px 0px;
+    text-decoration: none;
+
+    .svg-github {
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      min-height: 32px;
+    }
+
+    .name {
+      margin-left: 8px;
+    }
+
+    &:hover {
+      color: #fc4c02;
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .github-banner:first-child {
+    margin-top: 32px;
+  }
 }
