@@ -1,0 +1,108 @@
+.row {
+  display: flex;
+  // flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.activity-form {
+margin: auto 0;
+}
+
+
+
+.input-grouping {
+  display: flex;
+  flex-direction: column;
+}
+
+.duration {
+  display: flex;
+}
+
+.sport-date {
+  display: flex;
+}
+
+.distance {
+  display: flex;
+ 
+}
+
+.date-time {
+  display: flex;
+}
+
+.activity-form input {
+  border-radius: 4px;
+  border: 1px solid #ccccd1;
+  color: #666;
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 34px;
+  padding-left: 5px;
+}
+
+.activity-label {
+  color: #2d2d32;
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.activity-form h1 {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 41px;
+  margin-top: 0;
+
+}
+
+.activity-select {
+    border-radius: 0 4px 4px 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-right: 50px;
+    height: 35px;
+
+}
+
+#duration {
+  width: 10%;
+}
+
+.buttons {
+  display: flex;
+}
+
+.activity-button {
+  width: 15%;
+  
+}
+
+.activity-button:hover {
+  cursor: pointer;
+}
+
+#description {
+ min-width: 500px;
+    height: 125px;
+    resize: vertical;
+    overflow: auto;
+    vertical-align: top;
+    font-weight: 200;
+}
+
+.activity-form button {
+  color: blue;
+}
+
+  hr {
+width: 500px;
+margin-left: -50px;
+margin-right: auto;
+// height: 100px;
+background-color:#666;
+opacity: 0.5;
+margin-bottom: 50px;
+  
+}

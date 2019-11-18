@@ -6,10 +6,12 @@ const mongoose = require("mongoose");
 const Activity = mongoose.model("activity");
 
 const createActivity = async data => {
+  console.log("activity services");
   try {
     const { messages, isValid } = validateActivityInput(data);
 
     if (!isValid) {
+      console.log("bad", messages);
       throw new Error(messages);
     }
 
