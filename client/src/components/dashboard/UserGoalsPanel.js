@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default props => {
-  const { currentUser, svgs, tab } = props;
+  const { activities, svgs, tab } = props;
 
   const svgIcon = () => {
     switch (tab) {
@@ -24,33 +24,49 @@ export default props => {
   const dayInWeek = now.getDay();
   const dayClass = day => ('day ' + (dayInWeek === day ? ' today' : ''))
 
+  // const weekActivities = activities.slice(
+  //   activities.length - (dayInWeek === 0 ? 7 : dayInWeek)
+  // );
+
+  // const weekTotalDistance = weekActivities.reduce(
+  //   (total, activity) => (total + activity.distance), 0
+  // );
+
+  // Debug Mode
+  const weekActivities = null;
+  const weekTotalDistance = 0;
+
+  const barCalc = day => (
+    weekTotalDistance ? weekActivities[day] / weekTotalDistance : 2
+  );
+
   const weekTracker = (<div className='week-tracker'>
     <div className={dayClass(1)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(0)}></div>
       <div className='label'>M</div>
     </div>
     <div className={dayClass(2)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(1)}></div>
       <div className='label'>T</div>
     </div>
     <div className={dayClass(3)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(2)}></div>
       <div className='label'>W</div>
     </div>
     <div className={dayClass(4)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(3)}></div>
       <div className='label'>T</div>
     </div>
     <div className={dayClass(5)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(4)}></div>
       <div className='label'>F</div>
     </div>
     <div className={dayClass(6)}>
-      <div className='bar'></div>
+      <div className='bar' height={barCalc(5)}></div>
       <div className='label'>S</div>
     </div>
-    <div className={dayClass(7)}>
-      <div className='bar'></div>
+    <div className={dayClass(0)}>
+      <div className='bar' height={barCalc(6)}></div>
       <div className='label'>S</div>
     </div>
   </div>);
@@ -74,7 +90,7 @@ export default props => {
         THIS WEEK
       </div>
       <div className='week-stat'>
-        0 {tab === 3 ? 'yd' : 'mi'}
+        {weekTotalDistance ? weekTotalDistance : '0'} {tab === 3 ? 'yd' : 'mi'}
       </div>
       <div className='week-chart'>
         {weekTracker}

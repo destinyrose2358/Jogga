@@ -59,6 +59,10 @@ export default withRouter(props => {
       </Link>
     <div className='nav-dropdown'
       hidden={!uploadHover}>
+      <Link className='option-container' to='/activity/new'
+        onClick={() => setUploadHover(false)}>
+        Upload activity
+      </Link>
       <Link className='option-container' to='/routes/new'
         onClick={() => setUploadHover(false)}>
         Create a route
@@ -88,13 +92,20 @@ export default withRouter(props => {
 
   const header = () => {
     if (data.isLoggedIn) {
+      const dashboardClass = 'nav-item' + (
+        props.location.pathname === '/dashboard' ? ' selected' : ''
+      )
+      const myRoutesClass = 'nav-item' + (
+        props.location.pathname === '/athlete/routes' ? ' selected' : ''
+      )
+
       return (<div className='header'>
         <div className='header-left'>
           <Link className='branding' to='/'></Link>
-          <Link className='dashboard nav-item' to='/dashboard'>
+          <Link className={dashboardClass} to='/dashboard'>
             Dashboard
           </Link>
-          <Link className='my-routes nav-item' to='/athlete/routes'>
+          <Link className={myRoutesClass} to='/athlete/routes'>
             My Routes
           </Link>
         </div>

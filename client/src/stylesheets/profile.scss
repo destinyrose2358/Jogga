@@ -1,0 +1,139 @@
+.profile-background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: white;
+  padding: 86px;
+  z-index: -1;
+}
+
+.profile-container {
+  .column-middle {
+    width: 50%;
+    margin: 0 auto;
+
+    .title {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 41px;
+      margin-bottom: 9px;
+    }
+
+    .profile-img {
+      position: relative;
+      width: fit-content;
+      border-radius: 50%;
+
+      .svg-plus-thick {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        background: #ebebe6;
+        border: 1px solid #dedede;
+        border-radius: 50%;
+        opacity: 0.75;
+      }
+
+      &:hover {
+        .svg-plus-thick {
+          opacity: 1;
+        }
+      }
+
+      .input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 124px;
+        min-width: 124px;
+        height: 124px;
+        min-height: 124px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+    }
+
+    .new-profile-img {
+      margin-left: 20px;
+
+      .image-btn-container {
+        display: flex;
+
+        .image-btn {
+          color: white;
+          font-size: 12px;
+          font-weight: 700;
+          padding: 6px 16px;
+          background: #fc4c02;
+          border: 1px solid #fc4c02;
+          border-radius: 4px;
+          margin: 10px 10px 0px 0px;
+          cursor: pointer;
+          transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+          will-change: background-color, color, border-color;
+          
+          &:hover {
+            background: #e34402;
+            border-color: #e34402;
+          }
+        }
+      }
+    }
+
+
+    .svg-user, .user-img {
+      border-radius: 50%;
+      box-shadow: 0px 8px 24px rgba(13,13,18,0.16);
+    }
+    
+    .svg-user {
+      color: #242428;
+      width: 92px;
+      min-width: 92px;
+      height: 92px;
+      min-height: 92px;
+      padding: 18px;
+      background: #dfdfe8;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      will-change: background-color, color;
+    }
+
+    .user-img {
+      width: 124px;
+      min-width: 124px;
+      height: 124px;
+      min-height: 124px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .profile-item {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+
+      .label {
+        color: #606065;
+        text-align: right;
+        width: 140px;
+        min-width: 120px;
+        padding-right: 16px;
+      }
+
+      .value {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        flex: 1 1 auto;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 .app-container {
   max-width: 1248px;
-  padding-bottom: 0px 16px 24px;
-  margin: 30px auto 80px;
+  padding: 0px 16px 24px;
+  margin: 32px auto 80px;
 }
 
 body {
@@ -22,6 +22,10 @@ a {
   &:hover {
     color: #005b83;
     text-decoration: underline;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
@@ -56,5 +60,9 @@ button, input[type="submit"] {
 
   &:focus {
     outline: none;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 }
