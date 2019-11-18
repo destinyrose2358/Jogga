@@ -27,7 +27,27 @@ export default props => {
       {/* <ActivityIndex /> */}
     </div>
     <div className='column-side'>
-      <h3>Ads go here!</h3>
+      <a className='github-banner'
+        href='https://github.com/alexcrisel4'>
+        {svgs.github}
+        <div className='name'>
+          Alex
+        </div>
+      </a>
+      <a className='github-banner'
+        href='https://github.com/destinyrose2358'>
+        {svgs.github}
+        <div className='name'>
+          Destiny
+        </div>
+      </a>
+      <a className='github-banner'
+        href='https://github.com/ray-leun1'>
+        {svgs.github}
+        <div className='name'>
+          Raymond
+        </div>
+      </a>
     </div>
   </div>);
 }
