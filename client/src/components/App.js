@@ -1,9 +1,7 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-
 import '../App.css';
 import AuthRoute from '../util/route_util';
-
 import Nav from './Nav';
 import Landing from './Landing';
 import Login from './Login';
@@ -20,19 +18,19 @@ import Activity from './Activity';
 const App = () => (
   <div>
     <Nav />      
-    <AuthRoute exact path="/routes/new" component={RouteBuilder} routeType="prot" />
+    <AuthRoute exact path="/routes/new" component={RouteBuilder} routeType="protected" />
     <div className='app-container'>
       <Switch>
-        <AuthRoute exact path="/routes/new" component={() => null} routeType="prot" />
+        <AuthRoute exact path="/routes/new" component={() => null} routeType="protected" />
         <AuthRoute path='/athletes/:id' component={Profile} routeType="protected" />
-        <AuthRoute path='/onboarding' component={CompleteUser} routeType="protected" />
+        <AuthRoute path='/onboarding' component={CompleteUser} routeType="onboarding" />
         <AuthRoute path='/activity/new' component={Activity} routeType="protected" />
         <AuthRoute path='/register' component={Register} routeType='auth' />
         <AuthRoute path='/login' component={Login} routeType='auth' />
         <AuthRoute path='/upload' component={UploadImage} routeType="protected"/>
         <AuthRoute path='/dashboard' component={Dashboard} routeType='protected' />
         <AuthRoute path='/' exact component={Landing} routeType='auth' />
-        <AuthRoute path="/athlete/routes" component={RouteIndex} routeType="proc" />
+        <AuthRoute path="/athlete/routes" component={RouteIndex} routeType="protected" />
         <Redirect to='/' />
       </Switch>
     </div>

@@ -9,8 +9,10 @@ const AuthRoute = ({
   exact,
   routeType,
   ...rest
-}) => (
-    <Query query={IS_LOGGED_IN}>
+}) => {
+  
+    
+    return <Query query={IS_LOGGED_IN}>
       {({ data }) => {
         if (routeType === 'auth') {
           return (
@@ -22,24 +24,46 @@ const AuthRoute = ({
               }
             />
           );
-        } else {
+        } else if(routeType === "protected") {
+            return (
+              <Route
+                exact={exact}
+                path={path}
+                {...rest}
+                render={props => {
+                  if(data.isLoggedIn && data.currentUser.firstName) {
+                return <Component {...props} />
+                  } else if (data.isLoggedIn) {
+                  return  <Redirect to="/onboarding"></Redirect>
+                  } else {
+                   return <Redirect to='/login' />
+                  }
+                }
+              }
+              />
+            )
+          } else {
           return (
             <Route
               exact={exact}
               path={path}
               {...rest}
-              render={props =>
-                data.isLoggedIn ? (
-                  <Component {...props} />
-                ) : (
-                    <Redirect to='/login' />
-                  )
+              render={props => {
+                if (data.isLoggedIn && !data.currentUser.firstName) {
+                  return <Component {...props} />
+                } else if (data.isLoggedIn) {
+                  return <Redirect to="/dashboard"></Redirect>
+                } else {
+                 return  <Redirect to="/login"></Redirect>
+                }
+              }
               }
             />
-          );
+          )
+          }
         }
-      }}
+      }
     </Query>
-  );
+};
 
 export default AuthRoute;
