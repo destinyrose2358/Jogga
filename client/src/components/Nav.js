@@ -54,7 +54,7 @@ export default withRouter(props => {
   const upload = (<div className='nav-dropdown-container'
       onMouseEnter={() => setUploadHover(true)}
       onMouseLeave={() => setUploadHover(false)}>
-      <Link className='upload nav-item' to='/upload'>
+      <Link className='upload nav-item' to='/activity/new'>
         {svgs.plus}
       </Link>
     <div className='nav-dropdown'
