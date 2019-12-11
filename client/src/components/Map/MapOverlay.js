@@ -3,10 +3,11 @@ import {
   withScriptjs,
   withGoogleMap
 } from "react-google-maps";
-import { Link } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import Map from "./Map";
 import RouteBuilderForm from "./RouteBuilderForm";
 import svgs from "../svgs/svgs";
+
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
 
@@ -167,7 +168,10 @@ class MapOverlay extends React.Component {
       <>
         <div>
           <aside className="exit">
-            <Link to="/athlete/routes">Exit Builder</Link>
+            <a onClick={(e) => {
+              e.preventDefault();
+              this.props.history.goBack();
+            }}>Exit Builder</a>
           </aside>
           <aside className="logo">
             <div className="branding" />
@@ -240,10 +244,10 @@ class MapOverlay extends React.Component {
     );
   }
 }
-
+const MapOverlayWithRouter = withRouter(MapOverlay);
 const LoadedMap = withScriptjs(
   withGoogleMap(props => (
-    <MapOverlay />
+    <MapOverlayWithRouter />
   ))
 );
 
