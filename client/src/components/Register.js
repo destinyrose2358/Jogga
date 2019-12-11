@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { REGISTER_USER } from '../graphql/mutations';
 import DemoLogin from './DemoLogin';
-import CompleteUser from "./CompleteUser";
 import {} from '../stylesheets/session_form.scss';
 
 export default props => {
