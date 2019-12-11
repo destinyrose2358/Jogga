@@ -11,7 +11,7 @@ class Activity extends React.Component {
     super(props)
     let date = new Date;
     let time = date.getHours().toString() + ":" + date.getMinutes().toString()
-    let today = (date.getFullYear().toString() + "-" + date.getMonth().toString() + "-" +
+    let today = (date.getFullYear().toString() + "-" + (date.getMonth() + 1).toString() + "-" +
                 date.getDate().toString());
     this.state = {
       sport: "run",
@@ -77,7 +77,7 @@ render() {
       return (
             <Mutation
               onCompleted={() => {
-                this.props.history.push(`/athletes/${currentUser._id}`)
+                this.props.history.push(`/dashboard`)
               }}
               mutation={CREATE_ACTIVITY}
             >
@@ -196,7 +196,9 @@ render() {
                 <div className="activity-button">
                   <input className="continue" type="submit" value="Create" />
                 </div>
-                  <button onClick={()=> this.props.history.push(`/athletes/${currentUser._id}`)}>Cancel</button>
+                  <button onClick={(e)=> {
+                    e.preventDefault();
+                    this.props.history.goBack()}}>Cancel</button>
              
               </div>
                 </form>}

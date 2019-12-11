@@ -57,6 +57,7 @@ button, input[type="submit"] {
   color: inherit;
   font: inherit;
   padding: 0;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -66,3 +67,8 @@ button, input[type="submit"] {
     border: 0;
   }
 }
+
+input, textarea {
+  padding: 10px;
+}
+

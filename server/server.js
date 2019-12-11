@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const expressGraphQL = require('express-graphql');
 const { graphqlUploadExpress } = require('graphql-upload')
 const cors = require('cors');
+const path = require("path");
 
 const db = require('../config/keys').mongoURI;
 require('./models/index');
@@ -41,6 +42,10 @@ app.use(
     },
     graphiql: true
   }))
+
 )
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+
 
 module.exports = app;
