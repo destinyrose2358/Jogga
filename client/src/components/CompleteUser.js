@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mutation, Query } from 'react-apollo';
-import CompleteUserStylesheets from '../stylesheets/complete_user.scss';
+import {} from '../stylesheets/complete_user.scss';
 import { COMPLETE_USER } from '../graphql/mutations';
 import { CURRENT_USER } from '../graphql/queries';
 

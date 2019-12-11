@@ -1,15 +1,13 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { Link } from 'react-router-dom';
 import { CURRENT_USER } from '../graphql/queries';
 import { Mutation, Query } from 'react-apollo';
 import { CREATE_ACTIVITY } from '../graphql/mutations';
-import ActivityStyleSheet from '../stylesheets/activity.scss';
+import {} from '../stylesheets/activity.scss';
 
 class Activity extends React.Component {
   constructor(props) {
     super(props)
-    let date = new Date;
+    let date = new Date();
     let time = date.getHours().toString() + ":" + date.getMinutes().toString()
     let today = (date.getFullYear().toString() + "-" + (date.getMonth() + 1).toString() + "-" +
                 date.getDate().toString());
@@ -89,7 +87,7 @@ render() {
                   <h1>Manual Entry</h1>
                   <div className="row">
                     <div className="input-grouping">
-                      <label className="activity-label" for="distance">Distance</label>
+                      <label className="activity-label" htmlFor="distance">Distance</label>
                       <div className="distance">
                       <input
                         required id="distance"
@@ -106,7 +104,7 @@ render() {
                 </div>
                   
                     <div className="input-grouping">
-                      <label className="activity-label" for="duration">Duration</label>
+                      <label className="activity-label" htmlFor="duration">Duration</label>
                       <div className="duration">
                       <input
                         id="duration"
@@ -133,9 +131,9 @@ render() {
                   <div className="row">
                     <div className="sport-date">
                     <div className="input-grouping">
-                      <label className="activity-label" for="sport">Sport</label>
+                      <label className="activity-label" htmlFor="sport">Sport</label>
                       <select className="activity-select" value={this.state.sport} onChange={this.update("sport")}>
-                        <option selected value="run">Run</option>T
+                        <option value="run">Run</option>
                         <option value="bike">Bike</option>
                         <option value="swim">Swim</option>
                         <option value="hike">Hike</option>
@@ -144,7 +142,7 @@ render() {
                       </select>
                     </div>
                   <div className="input-grouping">
-                    <label className="activity-label" for="date/time">Date and Time</label>
+                    <label className="activity-label" htmlFor="date/time">Date and Time</label>
                     <div className="date-time">
                     <input
                       id="date/time"
@@ -163,7 +161,7 @@ render() {
               </div>
                   <div className="row">
                     <div className="input-grouping">
-                      <label className="activity-label" for="title">Title</label>
+                      <label className="activity-label" htmlFor="title">Title</label>
                       <input
                         id="title"
                         type="text"
@@ -175,7 +173,7 @@ render() {
                   <hr></hr>
                   <div className="row">
                     <div className="input-grouping">
-                      <label className="activity-label" for="runType">Run Type</label>
+                      <label className="activity-label" htmlFor="runType">Run Type</label>
                       <select className="activity-select" value={this.state.runType} onChange={this.update("runType")}>
                         
                         <option value="race">Race</option>
@@ -186,7 +184,7 @@ render() {
               </div>
               <div className="row">
                     <div className="input-grouping">
-                      <label className="activity-label" for="description">Description</label>
+                      <label className="activity-label" htmlFor="description">Description</label>
                       <textarea id="description" onChange={this.update("description")} value={this.state.desciption} placeholder="
                       How did it go? Were you tired or rested? How was the weather?">
                       </textarea>
