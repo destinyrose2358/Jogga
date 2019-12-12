@@ -7,6 +7,7 @@ import { withRouter} from "react-router-dom";
 import Map from "./Map";
 import RouteBuilderForm from "./RouteBuilderForm";
 import svgs from "../svgs/svgs";
+import History from "../../util/route_history_util";
 
 const googleKey = process.env.REACT_APP_GOOGLE_KEY;
 
@@ -18,9 +19,10 @@ class MapOverlay extends React.Component {
 
     this.state = {
       positions: [],
+      history: new History(),
       center: { lat: 37.799280, lng: -122.401140 },
       selectedIdx: null,
-      directions: {},
+      directions: null,
       modalOpen: false,
       travelMode: "WALKING"
     };
@@ -60,65 +62,73 @@ class MapOverlay extends React.Component {
       || (this.state.travelMode !== prevState.travelMode)
     ) {
 
-      const directionsService = new window.google.maps.DirectionsService();
+      if (!this.state.positions.length){
+        this.setState({
+          directions: null
+        });
+      } else {
+        const directionsService = new window.google.maps.DirectionsService();
 
-      const { positions } = this.state;
+        const { positions } = this.state;
 
-      const origin = positions[0];
-      const destination = positions[positions.length - 1];
-      const waypoints = positions.slice(1, positions.length - 1).map(position => {
-        return {
-          location: position,
-          stopover: false
-        };
-      })
+        const origin = positions[0];
+        const destination = positions[positions.length - 1];
+        const waypoints = positions.slice(1, positions.length - 1).map(position => {
+          return {
+            location: position,
+            stopover: false
+          };
+        })
 
-      directionsService.route(
-        {
-          origin,
-          destination,
-          waypoints,
-          travelMode: this.state.travelMode
-        },
-        (result, status) => {
-          if (status === window.google.maps.DirectionsStatus.OK) {
-            const positionsData = result.routes[0].legs[0];
-            const startPoint = {
-              lat: positionsData.start_location.lat(),
-              lng: positionsData.start_location.lng()
-            };
-            const newWayPoints = positionsData.via_waypoints.map(newWayPoint => {
-              return {
-                lat: newWayPoint.lat(),
-                lng: newWayPoint.lng()
+        directionsService.route(
+          {
+            origin,
+            destination,
+            waypoints,
+            travelMode: this.state.travelMode
+          },
+          (result, status) => {
+            if (status === window.google.maps.DirectionsStatus.OK) {
+              const positionsData = result.routes[0].legs[0];
+              const startPoint = {
+                lat: positionsData.start_location.lat(),
+                lng: positionsData.start_location.lng()
               };
-            });
-            const endPoint = {
-              lat: positionsData.end_location.lat(),
-              lng: positionsData.end_location.lng()
-            };
-            if ((startPoint.lat !== endPoint.lat) || (startPoint.lng !== endPoint.lng)) {
-              this.setState({
-                directions: result,
-                positions: [startPoint, ...newWayPoints, endPoint]
+              const newWayPoints = positionsData.via_waypoints.map(newWayPoint => {
+                return {
+                  lat: newWayPoint.lat(),
+                  lng: newWayPoint.lng()
+                };
               });
+              const endPoint = {
+                lat: positionsData.end_location.lat(),
+                lng: positionsData.end_location.lng()
+              };
+              if ((startPoint.lat !== endPoint.lat) || (startPoint.lng !== endPoint.lng)) {
+                this.setState({
+                  directions: result,
+                  positions: [startPoint, ...newWayPoints, endPoint]
+                });
+              } else {
+                this.setState({
+                  directions: result,
+                  positions: [startPoint, ...newWayPoints]
+                });
+              }
+              
+            } else if (status === window.google.maps.DirectionsStatus.ZERO_RESULTS) {
+              this.setState(prevState => ({
+                positions: prevState.positions.slice(0, prevState.positions.length - 1)
+              }), () => alert("Sorry, the route you requested doesn't exist"));
             } else {
-              this.setState({
-                directions: result,
-                positions: [startPoint, ...newWayPoints]
-              });
+              console.error(`error fetching directions`, result);
             }
-            
-          } else if (status === window.google.maps.DirectionsStatus.ZERO_RESULTS) {
-            this.setState(prevState => ({
-              positions: prevState.positions.slice(0, prevState.positions.length - 1)
-            }), () => alert("Sorry, the route you requested doesn't exist"));
-          } else {
-            console.error(`error fetching directions`, result);
           }
-        }
-      );
+        );
+      }
     }
+
+      
   }
 
   addPosition() {
@@ -128,7 +138,8 @@ class MapOverlay extends React.Component {
         this.setState(prevState => ({
           positions: [...prevState.positions, newPosition],
           selectedIdx: null
-        }));
+        }),
+        () => this.state.history.save(this.state.positions));
       } else {
         this.setState({
           message: "You have used the max number of positions"
@@ -136,6 +147,28 @@ class MapOverlay extends React.Component {
         alert("You have too many waypoints")
       }
     }
+  }
+
+  undo() {
+    console.log(this.state.history);
+    this.state.history.undo();
+    this.setState({
+      positions: this.state.history.currentNode.positions
+    });
+  }
+
+  redo() {
+    this.state.history.redo();
+    this.setState({
+      positions: this.state.history.currentNode.positions
+    });
+  }
+
+  clear() {
+    this.setState({
+      positions: []
+    },
+    () => this.state.history.save(this.state.positions));
   }
 
   removePosition(index) {
@@ -147,7 +180,8 @@ class MapOverlay extends React.Component {
         selectedIdx: null,
         message: newPositions.length < 26 ? "" : "You have used the max number of positions"
       }
-    });
+    },
+    () => this.state.history.save(this.state.positions));
   }
 
   selectPosition(idx) {
@@ -177,6 +211,26 @@ class MapOverlay extends React.Component {
             <div className="branding" />
             <h2>ROUTE BUILDER</h2>
             <div className="branding small" />
+          </aside>
+          <aside className="history-controls">
+            <button
+              className="undo"
+              onClick={() => this.undo()}
+            >
+              Undo
+            </button>
+            <button
+              className="redo"
+              onClick={() => this.redo()}
+            >
+              Redo
+            </button>
+            <button
+              className="undo"
+              onClick={() => this.clear()}
+            >
+              Clear
+            </button>
           </aside>
           <aside className="travel-mode">
             <button
@@ -244,7 +298,9 @@ class MapOverlay extends React.Component {
     );
   }
 }
+
 const MapOverlayWithRouter = withRouter(MapOverlay);
+
 const LoadedMap = withScriptjs(
   withGoogleMap(props => (
     <MapOverlayWithRouter />

@@ -19,7 +19,7 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: "logo logo exit" ". travel modal";
+  grid-template-areas: "logo logo exit" "history travel modal";
 }
 .route-builder-container > :last-child > :first-child .exit {
   grid-area: exit;
@@ -53,6 +53,36 @@
 }
 .route-builder-container > :last-child > :first-child .logo h2 {
   margin: 0;
+}
+.history-controls {
+  grid-area: history;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+}
+.history-controls > :last-child {
+  border-top-right-radius: 5px;
+}
+.history-controls > :first-child {
+  border-top-left-radius: 5px;
+}
+.history-controls button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+}
+.history-controls button svg {
+  width: 30px;
+  height: 30px;
+}
+.history-controls button:hover {
+  background: #bbb;
+  color: #555;
+}
+.history-controls button.selected {
+  background: gray;
+  color: #ccc;
 }
 .travel-mode {
   grid-area: travel;
@@ -110,8 +140,8 @@ input[type="submit"].save:disabled {
   background: white;
   width: 600px;
   height: 50%;
-  max-height: 450px;
-  min-height: 375px;
+  max-height: 475px;
+  min-height: 400px;
   transform: translate(-50%);
   left: 50%;
   top: 8%;

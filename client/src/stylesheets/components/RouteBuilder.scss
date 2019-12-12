@@ -24,7 +24,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
       "logo logo exit"
-      ". travel modal";
+      "history travel modal";
     & .exit {
       grid-area: exit;
       background: white;
@@ -57,6 +57,37 @@
       & h2 {
         margin: 0;
       }
+    }
+  }
+}
+
+.history-controls {
+  grid-area: history;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+  & > :last-child {
+    border-top-right-radius: 5px;
+  }
+  & > :first-child {
+    border-top-left-radius: 5px;
+  }
+  & button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+    & svg {
+      width: 30px;
+      height: 30px;
+    }
+    &:hover {
+      background: #bbb;
+      color: #555;
+    }
+    &.selected {
+      background: gray;
+      color: #ccc;
     }
   }
 }
