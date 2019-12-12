@@ -217,18 +217,21 @@ class MapOverlay extends React.Component {
               className="undo"
               onClick={() => this.undo()}
             >
+              {svgs.undo}
               Undo
             </button>
             <button
               className="redo"
               onClick={() => this.redo()}
             >
+              {svgs.redo}
               Redo
             </button>
             <button
               className="undo"
               onClick={() => this.clear()}
             >
+              {svgs.x}
               Clear
             </button>
           </aside>
