@@ -74,8 +74,9 @@ class RouteItem extends React.Component {
     const { positions, _id, date } = this.props.route;
     let duration = stats.duration.value;
 
-    const hours = Math.floor(duration / 3600);
-    const minutes = Math.floor(duration / 60) - 60 * hours;
+    const days = Math.floor(duration / 86400);
+    const hours = Math.floor(duration / 3600) - 24 * days;
+    const minutes = Math.floor(duration / 60) - 60 * (hours + 24 * days);
     const seconds = duration % 60;
 
     const dateObj = new Date(date);
@@ -231,7 +232,12 @@ class RouteItem extends React.Component {
                   <span>Distance</span>
                 </p>
                 <p className="duration">
-                  <span>{duration >= 60 ? `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds}` : `${seconds}s`}</span>
+                  <span>
+                    {days ? <abbr title="days">{days}d</abbr> : ""}
+                    {hours ? <abbr title="hours">{hours}h</abbr> : ""}
+                    {minutes ? <abbr title="minutes">{minutes}m</abbr> : ""}
+                    {seconds ? <abbr title="seconds">{seconds}s</abbr> : ""}
+                  </span>
                   <span>Est. Moving Time</span>
                 </p>
               </div>
