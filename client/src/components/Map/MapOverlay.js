@@ -3,7 +3,7 @@ import {
   withScriptjs,
   withGoogleMap
 } from "react-google-maps";
-import { withRouter} from "react-router-dom";
+import { Link, withRouter} from "react-router-dom";
 import Map from "./Map";
 import RouteBuilderForm from "./RouteBuilderForm";
 import svgs from "../svgs/svgs";
@@ -208,7 +208,7 @@ class MapOverlay extends React.Component {
             }}>Exit Builder</a>
           </aside>
           <aside className="logo">
-            <div className="branding" />
+            <Link to="/dashboard"><div className="branding" /></Link>
             <h2>ROUTE BUILDER</h2>
             <div className="branding small" />
           </aside>

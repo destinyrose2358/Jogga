@@ -1,7 +1,7 @@
 .app-container {
   max-width: 1248px;
-  padding-bottom: 0px 16px 24px;
-  margin: 30px auto 80px;
+  padding: 0px 16px 24px;
+  margin: 32px auto 80px;
 }
 body {
   color: #2d2d32;
@@ -18,10 +18,14 @@ a {
   color: #007fb6;
   text-decoration: none;
   background: transparent;
+  cursor: pointer;
 }
 a:hover {
   color: #005b83;
   text-decoration: underline;
+}
+a:focus {
+  outline: none;
 }
 li {
   list-style: none;
@@ -48,8 +52,20 @@ input[type="submit"] {
   color: inherit;
   font: inherit;
   padding: 0;
+  cursor: pointer;
 }
 button:focus,
 input[type="submit"]:focus {
   outline: none;
+}
+button::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner {
+  border: 0;
+}
+input,
+textarea {
+  padding: 10px;
+}
+abbr {
+  text-decoration: none;
 }
