@@ -16,7 +16,7 @@ class Activity extends React.Component {
       distance: 0,
       unit: "miles",
       duration: 0,
-      title: "", 
+      title: "Morning Run", 
       runType: "workout",
       description: "",
       date: today, 
@@ -52,18 +52,21 @@ class Activity extends React.Component {
       e.preventDefault();
     //  debugger;
      
+    let consoleVariables = {
+
+      sport: this.state.sport,
+      distance: parseInt(this.state.distance),
+      unit: this.state.unit,
+      duration: this.createDuration(),
+      title: this.state.title,
+      runType: this.state.runType,
+      description: this.state.description,
+      date: this.createDate()
+    }
+    console.log(consoleVariables)
       createActivity({
-        variables: {
         
-          sport: this.state.sport,
-          distance: parseInt(this.state.distance),
-          unit: this.state.unit,
-          duration: this.createDuration(),
-          title: this.state.title,
-          runType: this.state.runType,
-          description: this.state.description,
-          date: this.createDate()
-        }
+        variables: consoleVariables
       });
   }
 render() {
@@ -106,24 +109,33 @@ render() {
                     <div className="input-grouping">
                       <label className="activity-label" htmlFor="duration">Duration</label>
                       <div className="duration">
-                      <input
-                        id="duration"
-                        required type="number"
-                        onChange={this.update("hours")}
-                        value={this.state.hours}
-                        placeholder="hr" />
-                      <input
-                        id="duration"
-                        required type="number"
-                        onChange={this.update("mins")}
-                        value={this.state.mins} 
-                        placeholder="min"/>
-                      <input
-                        id="duration"
-                         type="number"
-                        onChange={this.update("sec")}
-                        value={this.state.sec}
-                        placeholder="s" />
+                        <div className="duration-input-label"> 
+                          <input
+                            id="duration"
+                            required type="number"
+                            onChange={this.update("hours")}
+                            value={this.state.hours}
+                          />
+                            <div>hr</div>
+                        </div>
+                        <div className="duration-input-label"> 
+                          <input
+                            id="duration"
+                            required type="number"
+                            onChange={this.update("mins")}
+                            value={this.state.mins} 
+                          />
+                            <div>mins</div>
+                        </div>
+                        <div className="duration-input-label"> 
+                          <input
+                            id="duration"
+                            type="number"
+                            onChange={this.update("sec")}
+                            value={this.state.sec}
+                          />
+                            <div>s</div>
+                        </div>
                     </div>
                     </div>
               </div>
@@ -167,7 +179,8 @@ render() {
                         type="text"
                         onChange={this.update("title")}
                         value={this.state.title}
-                        placeholder="Morning Run" />
+                        default="Morning Run"
+                         />
                     </div>
                     </div>
                   <hr></hr>

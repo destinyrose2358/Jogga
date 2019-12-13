@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const GraphQLDate = require('graphql-date');
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLInt } = graphql;
 const User = mongoose.model("User");
+const Activity = mongoose.model("Activity");
 
 const ActivityType = new GraphQLObjectType({
-  name: 'ActivtyType',
+  name: 'ActivityType',
   fields: () => ({
     _id: { type: GraphQLID },
     distance: { type: GraphQLInt },

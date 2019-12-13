@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import { FETCH_ACTIVITIES } from '../graphql/queries';
+import { FETCH_ACTIVITIES} from '../graphql/queries';
 import svgs from './svgs/svgs';
 import {} from '../stylesheets/activity_index.scss';
 
 export default props => {
-  const { loading, data: { activities }} = useQuery(FETCH_ACTIVITIES);
+  const { loading, error, data } = useQuery(FETCH_ACTIVITIES);
   if (loading) return null;
+  if (error) console.log(error);
 
   const activityItem = activity => {
     const { author } = activity;
@@ -83,6 +84,6 @@ export default props => {
   }
 
   return (<div className='activity-index-container'>
-    {activities.reverse().map(activity => activityItem(activity))}
+   {data ? data.activities.reverse().map(activity => activityItem(activity)) : "nope"}
   </div>);
 }

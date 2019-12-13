@@ -24,7 +24,7 @@ export default props => {
         svgs={svgs} />
     </div>
     <div className='column-middle'>
-      {/* <ActivityIndex /> */}
+      <ActivityIndex />
     </div>
     <div className='column-side'>
       <a className='github-banner'
