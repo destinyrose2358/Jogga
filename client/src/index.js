@@ -16,17 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const cache = new InMemoryCache({
     dataIdFromObject: object => object._id || null
   });
-let uri;
-  // Docker build
-  if(process.env.NODE_ENV === "production") {
-     uri = 'https://jogga.herokuapp.com/graphql';
-  } else {
-     uri = 'http://localhost:5000/graphql';
-  }
+
+  let uri;
   
-
-  // Heroku build
-
+  if(process.env.NODE_ENV === "production") {
+    uri = 'https://jogga.herokuapp.com/graphql';
+  } else {
+    uri = 'http://localhost:5000/graphql';
+  }
 
   const uploadLink = createUploadLink({
     uri,

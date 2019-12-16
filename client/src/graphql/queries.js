@@ -38,6 +38,7 @@ export const FETCH_ACTIVITIES = gql`
   query FetchActivities {
     activities {
       _id
+      title
       distance
       unit
       duration
@@ -49,6 +50,7 @@ export const FETCH_ACTIVITIES = gql`
         _id
         firstName
         lastName
+        profile_img
       }
     }
   }

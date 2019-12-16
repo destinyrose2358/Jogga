@@ -1,9 +1,8 @@
 const graphql = require('graphql');
 const mongoose = require('mongoose');
 const GraphQLDate = require('graphql-date');
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLBoolean, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
 const User = mongoose.model("User");
-const Activity = mongoose.model("Activity");
 
 const ActivityType = new GraphQLObjectType({
   name: 'ActivityType',

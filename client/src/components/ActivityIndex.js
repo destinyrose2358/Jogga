@@ -11,12 +11,16 @@ export default props => {
   if (loading) return null;
   if (error) console.log(error);
 
+  const { activities } = data
+
   const activityItem = activity => {
     const { author } = activity;
 
     const sportIcon = () => {
       switch (activity.sport) {
         case 'bike':
+          return svgs.bike;
+        case 'e-bike':
           return svgs.bike;
         case 'swim':
           return svgs.water;
@@ -25,12 +29,47 @@ export default props => {
       }
     };
 
+    const convertDuration = duration => {
+      let sec_num = parseInt(duration, 10);
+      let hours = Math.floor(sec_num / 3600);
+      let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+      let seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+      return { hours, minutes, seconds }
+    }
+
+    const durationToPace = (duration, distance, unit) => {
+      let { hours, minutes, seconds } = convertDuration(duration / distance);
+
+      if (hours >= 1 && minutes < 10) minutes = '0' + minutes;
+      if (minutes >= 1 && seconds < 10) seconds = '0' + seconds;
+
+      if (unit === 'miles') unit = 'mi';
+
+      if (hours >= 1) {
+        return hours + ':' + minutes + ':' + seconds + ` /${unit}`;
+      } else if (minutes >= 1) {
+        return minutes + ':' + seconds + ` /${unit}`;
+      } else if (seconds >= 1) {
+        return seconds + `s /${unit}`;
+      } else {
+        return '';
+      }
+
+      return hours + ':' + minutes + ':' + seconds + ` /${unit}`;
+    }
+
+    const durationToTime = duration => {
+      const { hours, minutes, seconds } = convertDuration(duration);
+      return (hours >= 1) ? (hours + 'h ' + minutes + 'm') : (minutes + 'm ' + seconds + 's');
+    }
+
     return (<div className='activity-item-container'
       key={`activity-${activity._id}`}>
       <Link className='profile-img'
         to={`/athletes/${author._id}`}>
         {author.profile_img ?
-          <div className='user-img'
+          <div className='author-icon'
             style={{ backgroundImage: `url(${author.profile_img})` }}>
           </div> : svgs.user}
       </Link>
@@ -48,42 +87,44 @@ export default props => {
       <div className='sport-icon'>
         {sportIcon()}
       </div>
-      <Link className='title' to={`/activities/${activity._id}`}>
+      <div className='title' to={`/activities/${activity._id}`}>
         {activity.title}
-      </Link>
+      </div>
       <div className='activity-info'>
-        <Link className='description' to={`/activities/${activity._id}`}>
+        <div className='description' to={`/activities/${activity._id}`}>
           {activity.description}
-        </Link>
+        </div>
         <div className='stats'>
           <div className='stat-item'>
             <div className='label'>Distance</div>
             <div className='value'>
-              {activity.distance} {activity.unit}
+              {activity.distance} {activity.unit === 'miles' ? 'mi' : activity.unit}
             </div>
           </div>
+          {activity.duration && activity.distance ?
           <div className='stat-item'>
             <div className='label'>Pace</div>
             <div className='value'>
-              {activity.duration / activity.distance} /{activity.unit}
+              {durationToPace(activity.duration, activity.distance, activity.unit)}
             </div>
           </div>
+          : ''}
           <div className='stat-item'>
             <div className='label'>Time</div>
             <div className='value'>
-              {activity.duration}
+              {durationToTime(activity.duration)}
             </div>
           </div>
         </div>
       </div>
-      <div className='btn-container'>
+      {/* <div className='btn-container'>
         <div className='btn'>{svgs.kudos}</div>
         <div className='btn'>{svgs.comment}</div>
-      </div>
+      </div> */}
     </div>);
   }
 
   return (<div className='activity-index-container'>
-   {data ? data.activities.reverse().map(activity => activityItem(activity)) : "nope"}
+   {activities.reverse().map(activity => activityItem(activity))}
   </div>);
 }
