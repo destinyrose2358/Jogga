@@ -8,7 +8,6 @@ const Route = mongoose.model("route");
 const Activity = mongoose.model("Activity");
 const jwt = require("jsonwebtoken");
 const keys = require("../../../config/keys");
-const ActivityType = require("./activity_type");
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -36,7 +35,6 @@ const RootQueryType = new GraphQLObjectType({
     activities: {
       type: new GraphQLList(require('./activity_type')),
       resolve() {
-        console.log("made it to root-query")
         return Activity.find({});
       }
     },

@@ -1,18 +1,21 @@
 .activity-index-container {
+  margin-top: 32px;
+  
   .activity-item-container {
     display: grid;
-    grid-template-columns: 40px 24px 1fr 64px;
-    grid-template-rows: 40px 8px 28px 8px 1fr 16px 43px;
+    grid-template-columns: 40px 24px 1fr; // 64px
+    grid-template-rows: 40px 8px 28px 8px 1fr 16px; // 43px
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     grid-template-areas: 
-      ' profile-img        .           info            .      '
-      '      .             .             .             .      '
-      ' sport-icon         .           title           .      '
-      '      .             .             .             .      '
-      '      .             .       activity-info       .      '
-      '      .             .             .             .      '
-      'btn-container btn-container btn-container btn-container';
+      ' profile-img        .           info      '
+      '      .             .             .       '
+      ' sport-icon         .           title     '
+      '      .             .             .       '
+      '      .             .       activity-info ';
+      // '      .             .             .       ';
+      // 'btn-container btn-container btn-container btn-container';
+    min-width: 372px;
     padding: 16px 24px;
     margin: 12px 0px;
     background: white;
@@ -50,6 +53,9 @@
         min-width: 40px;
         height: 40px;
         min-height: 40px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
       }
     }
 
@@ -91,15 +97,17 @@
       font-size: 22px;
       font-weight: 700;
       line-height: 28px;
-      word-break: break-word;
       text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       transition: color 0.15s ease;
       will-change: color;
       grid-area: title;
 
-      &:hover {
-        color: #005b83;
-      }
+      // &:hover {
+      //   color: #005b83;
+      // }
     }
 
     .activity-info {
@@ -108,6 +116,9 @@
       .description {
         color: #242428;
         text-decoration: none;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        word-break: break-all;
 
         &:hover {
           color: #005b83;
@@ -149,6 +160,7 @@
             font-size: 20px;
             font-weight: 400;
             line-height: 1;
+            width: 100%;
           }
         }
       }

@@ -1,7 +1,4 @@
-
 const validateActivityInput = require("../validation/create_activity");
-const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
 const mongoose = require("mongoose");
 const Activity = mongoose.model("Activity");
 

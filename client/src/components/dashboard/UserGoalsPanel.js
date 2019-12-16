@@ -114,14 +114,5 @@ export default props => {
       </div>
       {yearTracker}
     </div>
-    <div className='goals-footer'>
-      <Link className='goals-link'
-        to='/athlete/goals'>
-        <div className='goals-text'>
-          Manage Your Goals
-        </div>
-        {svgs.arrowRight}
-      </Link>
-    </div>
   </div>);
 }
