@@ -4,11 +4,11 @@ import { useQuery } from '@apollo/react-hooks';
 import { CURRENT_USER, FETCH_USER_ACTIVITIES } from '../../graphql/queries';
 import UserCard from './UserCard';
 import UserGoals from './UserGoals';
-import ActivityIndex from '../ActivityIndex';
+import ActivityIndex from './ActivityIndex';
 import svgs from '../svgs/svgs';
 import {} from '../../stylesheets/dashboard/dashboard.scss';
 
-export default props => {
+export default () => {
   const { loading, data: { currentUser } } = useQuery(CURRENT_USER);
   if (loading) return null;
 
