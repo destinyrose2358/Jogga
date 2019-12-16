@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { FETCH_ACTIVITIES} from '../graphql/queries';
-import svgs from './svgs/svgs';
-import {} from '../stylesheets/activity_index.scss';
+import { FETCH_ACTIVITIES} from '../../graphql/queries';
+import svgs from '../svgs/svgs';
+import {} from '../../stylesheets/activity_index.scss';
 
-export default props => {
+export default () => {
+  const [listLength, setListLength] = useState(10);
+  const [hasMore, setHasMore] = useState(true);
   const { loading, error, data } = useQuery(FETCH_ACTIVITIES);
   if (loading) return null;
   if (error) console.log(error);
@@ -55,8 +58,6 @@ export default props => {
       } else {
         return '';
       }
-
-      return hours + ':' + minutes + ':' + seconds + ` /${unit}`;
     }
 
     const durationToTime = duration => {
@@ -124,7 +125,25 @@ export default props => {
     </div>);
   }
 
+  let activitiesIndex = activities.map(activity => activityItem(activity));
+  activitiesIndex = activitiesIndex.reverse();
+
+  const handleNext = () => {
+    if (activitiesIndex.length - listLength > 5) {
+      setListLength(listLength + 10);
+    } else {
+      setHasMore(false);
+      setListLength(activitiesIndex.length);
+    }
+  }
+
   return (<div className='activity-index-container'>
-   {activities.reverse().map(activity => activityItem(activity))}
+    <InfiniteScroll
+      dataLength={listLength}
+      next={handleNext}
+      hasMore={hasMore}
+      loader={<h4>Loading...</h4>}>
+      {activitiesIndex.slice(0, listLength)}
+    </InfiniteScroll>
   </div>);
 }
