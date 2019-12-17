@@ -65,6 +65,30 @@ export default () => {
       return (hours >= 1) ? (hours + 'h ' + minutes + 'm') : (minutes + 'm ' + seconds + 's');
     }
 
+    const dateParser = date => {
+      const today = new Date();
+      const dateObject = new Date(date);
+      let dateString = dateObject.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+      let timeString = dateObject.toLocaleTimeString('en-US', {
+        hour: 'numeric', minute: 'numeric'
+      });
+      
+      if (today.getFullYear() === dateObject.getFullYear()
+        && today.getMonth() === dateObject.getMonth()
+        && today.getDate() - dateObject.getDate() <= 1) 
+      {
+        if (today.getDate() === dateObject.getDate()) return 'Today at ' + timeString;
+        if (today.getDate() - dateObject.getDate() === 1) return 'Yesterday at ' + timeString;
+      } else {
+        let dateString = dateObject.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        return dateString + ' at ' + timeString;
+      }
+    }
+
     return (<div className='activity-item-container'
       key={`activity-${activity._id}`}>
       <Link className='profile-img'
@@ -82,7 +106,7 @@ export default () => {
             'New Jogga'}
         </Link>
         <div className='activity-timestamp'>
-          {activity.date}
+          {dateParser(activity.date)}
         </div>
       </div>
       <div className='sport-icon'>
