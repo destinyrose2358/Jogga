@@ -73,13 +73,14 @@ export default props => {
 
   const yearTracker = (<svg className='svg-year-tracker'>
     <g transform='translate(0, 14)'>
-      <rect className='progress-bar' />
+      <rect className='progress-bar' 
+        x='7.5%' />
       <rect className='progress-marker'
-        x={`${(dayInYear / 366) * 100}%`} />
+        x={`${7.5 + (dayInYear / 366) * 85}%`} />
     </g>
     <text className='progress-txt'
-      x={`${(dayInYear / 366) * 100}%`}
-      y='42'>
+      x={`${7.5 + (dayInYear / 366) * 85}%`}
+      y='42px' >
       TODAY
     </text>
   </svg>);

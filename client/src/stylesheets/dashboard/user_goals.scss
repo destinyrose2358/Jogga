@@ -121,7 +121,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        padding: 16px;
+        padding: 16px 0px;
         border-top: 1px solid #e6e6eb;
 
         .svg-year-tracker {
@@ -129,7 +129,7 @@
           height: 50px;
 
           .progress-bar {
-            width: 100%;
+            width: 85%;
             height: 10px;
             fill: #e6e6eb;
             shape-rendering: crispEdges;
