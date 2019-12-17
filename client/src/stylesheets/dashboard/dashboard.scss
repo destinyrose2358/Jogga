@@ -9,7 +9,7 @@
 
   .column-side {
     width: 25%;
-    min-width: 232px;
+    min-width: 260px;
   }
 
   .column-middle {
@@ -60,15 +60,13 @@
     justify-content: flex-start;
 
     .column-side {
-      width: 30%;
-
       &:nth-child(3) {
         display: none;
       }
     }
 
     .column-middle {
-      width: 60%;
+      width: 80%;
     }
 
     .github-container:nth-child(3) {

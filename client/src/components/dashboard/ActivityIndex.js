@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { FETCH_ACTIVITIES} from '../../graphql/queries';
 import svgs from '../svgs/svgs';
-import {} from '../../stylesheets/activity_index.scss';
+import {} from '../../stylesheets/dashboard/activity_index.scss';
 
 export default () => {
   const [listLength, setListLength] = useState(10);

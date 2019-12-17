@@ -111,32 +111,6 @@
           }
         }
       }
-
-      @media screen and (max-width: 1000px) {
-        .user-stats {
-          align-items: center;
-          flex-direction: column;
-
-          .stat-item {
-            display: flex;
-            align-items: center;
-
-            .label-1, .label-2 {
-              margin-right: 7px;
-            }
-
-            .label-3, .count-3 {
-              margin-right: 12px;
-            }
-          }
-
-          .stat-item:not(:last-child) {
-            &::after {
-              display: none;
-            }
-          }
-        }
-      }
     }
   
     .card-footer {
@@ -149,13 +123,13 @@
         .info {
           color: #242428;
           text-decoration: none;
-          white-space: pre-wrap;
-          overflow-wrap: break-word;
-          word-break: break-all;
-
+          
           .title {
             display: inline;
             font-weight: 700;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-break: break-all;
           }
 
           .timestamp {

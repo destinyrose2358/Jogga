@@ -100,17 +100,6 @@
           }
         }
 
-        @media screen and (max-width: 1000px) {
-          .week-chart {
-            align-items: center;
-            flex-direction: column-reverse;
-
-            .icon-container {
-              margin-bottom: 10px;
-            }
-          }
-        }
-
         .day-stat {
           display: flex;
           justify-content: space-between;
