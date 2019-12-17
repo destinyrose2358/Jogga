@@ -149,14 +149,17 @@
         .info {
           color: #242428;
           text-decoration: none;
+          white-space: pre-wrap;
+          overflow-wrap: break-word;
+          word-break: break-all;
 
           .title {
-            display: inline-block;
+            display: inline;
             font-weight: 700;
           }
 
           .timestamp {
-            display: inline-block;
+            display: inline;
           }
         }
       }
@@ -165,7 +168,7 @@
         width: 100%;
         height: 1px;
         min-height: 1px;
-        padding: 16px 0px;
+        margin: 16px 0px;
         background: #e6e6eb;
       }
       

@@ -60,6 +60,7 @@ export const FETCH_USER_ACTIVITIES = gql`
   query FetchUserActivities($_id: ID!) {
     userActivities(_id: $_id) {
       _id
+      title
       distance
       unit
       duration
@@ -67,14 +68,9 @@ export const FETCH_USER_ACTIVITIES = gql`
       date
       runType
       description
-      author {
-        _id
-        firstName
-        lastName
-      }
     }
   }
-`
+`;
 
 export const FETCH_ACTIVITY = gql`
   query FetchActivity($_id: ID!) {

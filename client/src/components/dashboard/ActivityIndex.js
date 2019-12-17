@@ -68,9 +68,6 @@ export default () => {
     const dateParser = date => {
       const today = new Date();
       const dateObject = new Date(date);
-      let dateString = dateObject.toLocaleDateString('en-US', {
-        year: 'numeric', month: 'long', day: 'numeric'
-      });
       let timeString = dateObject.toLocaleTimeString('en-US', {
         hour: 'numeric', minute: 'numeric'
       });
