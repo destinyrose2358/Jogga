@@ -11,11 +11,11 @@ export default props => {
   const activities = () => {
     switch (currentTab) {
       case 2:
-        return userActivities.filter(activity => activity.sport === 'bike' || activity.sport === 'e-bike');
+        return userActivities.filter(activity => activity.sport === 'bike' || activity.sport === 'e-bike').reverse();
       case 3:
-        return userActivities.filter(activity => activity.sport === 'swim');
+        return userActivities.filter(activity => activity.sport === 'swim').reverse();
       default:
-        return userActivities.filter(activity => activity.sport === 'run' || activity.sport === 'hike' || activity.sport === 'walk');
+        return userActivities.filter(activity => activity.sport === 'run' || activity.sport === 'hike' || activity.sport === 'walk').reverse();
     }
   }
 

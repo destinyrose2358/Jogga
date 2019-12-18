@@ -59,6 +59,7 @@
           .week-tracker {
             display: flex;
             justify-content: space-between;
+            align-items: flex-end;
             width: 114px;
             min-width: 114px;
     
@@ -105,7 +106,7 @@
           justify-content: space-between;
           margin-top: 16px;
 
-          .time, .distance {
+          .time, .elevation {
             margin: 0px 16px;
           }
 

@@ -16,57 +16,94 @@ export default props => {
   }
 
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const day = now.getDate();
+  const dayInWeek = now.getDay() === 0 ? 6 : now.getDay() - 1;
+
+  const start = new Date(year, 0, 0);
   const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
   const oneDay = 1000 * 60 * 60 * 24;
   const dayInYear = Math.floor(diff / oneDay);
 
-  const dayInWeek = now.getDay();
-  const dayClass = day => ('day ' + (dayInWeek === day ? ' today' : ''))
+  const dayClass = dayNum => ('day ' + (dayInWeek === dayNum ? ' today' : ''))
 
-  // const weekActivities = activities.slice(
-  //   activities.length - (dayInWeek === 0 ? 7 : dayInWeek)
-  // );
+  const weekActivities = [];
+  const weekDistances = new Array(dayInWeek + 1).fill(0);
+  const weekDurations = new Array(dayInWeek + 1).fill(0);
 
-  // const weekTotalDistance = weekActivities.reduce(
-  //   (total, activity) => (total + activity.distance), 0
-  // );
+  for (let i = 0; i < activities.length; i++) {
+    let activity = activities[i];
+    let activityDate = new Date(activity.date);
+    let activityYear = activityDate.getFullYear();
+    let activityMonth = activityDate.getMonth();
+    let activityDay = activityDate.getDate();
+    let activityDayInWeek = activityDate.getDay() === 0 ? 6 : activityDate.getDay() - 1;
 
-  // Debug Mode
-  const weekActivities = null;
-  const weekTotalDistance = 0;
+    if (year === activityYear && month === activityMonth && (day - activityDay) <= 7) {
+      if (activityDayInWeek <= dayInWeek) {
+        weekActivities.push(activity);
+        weekDistances[activityDayInWeek] += activity.distance;
+        weekDurations[activityDayInWeek] += activity.duration;
+      } else break;
+    } else {
+      break;
+    }
+  }
 
-  const barCalc = day => (
-    weekTotalDistance ? weekActivities[day] / weekTotalDistance : 2
-  );
+  const weekTotalDistance = weekDistances.reduce((total, distance) => (total + distance), 0);
+  const weekMaxDistance = Math.max(...weekDistances);
+  const weekTotalDuration = weekDurations.reduce((total, duration) => (total + duration), 0);
+
+  const barCalc = day => {
+    if (weekTotalDistance && weekDistances[day]) {
+      return Math.max(48 * (weekDistances[day] / weekMaxDistance), 2);
+    } else {
+      return 2;
+    }
+  };
+
+  const convertDuration = duration => {
+    let sec_num = parseInt(duration, 10);
+    let hours = Math.floor(sec_num / 3600);
+    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    let seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    return { hours, minutes, seconds }
+  }
+
+  const durationToTime = duration => {
+    const { hours, minutes, seconds } = convertDuration(duration);
+    return (hours >= 1) ? (hours + 'h ' + minutes + 'm') : (minutes + 'm ' + seconds + 's');
+  }
 
   const weekTracker = (<div className='week-tracker'>
-    <div className={dayClass(1)}>
-      <div className='bar' height={barCalc(0)}></div>
+    <div className={dayClass(0)}>
+      <div className='bar' style={{height: `${barCalc(0)}px`}}></div>
       <div className='label'>M</div>
     </div>
-    <div className={dayClass(2)}>
-      <div className='bar' height={barCalc(1)}></div>
+    <div className={dayClass(1)}>
+      <div className='bar' style={{height: `${barCalc(1)}px`}}></div>
       <div className='label'>T</div>
     </div>
-    <div className={dayClass(3)}>
-      <div className='bar' height={barCalc(2)}></div>
+    <div className={dayClass(2)}>
+      <div className='bar' style={{height: `${barCalc(2)}px`}}></div>
       <div className='label'>W</div>
     </div>
-    <div className={dayClass(4)}>
-      <div className='bar' height={barCalc(3)}></div>
+    <div className={dayClass(3)}>
+      <div className='bar' style={{height: `${barCalc(3)}px`}}></div>
       <div className='label'>T</div>
     </div>
-    <div className={dayClass(5)}>
-      <div className='bar' height={barCalc(4)}></div>
+    <div className={dayClass(4)}>
+      <div className='bar' style={{height: `${barCalc(4)}px`}}></div>
       <div className='label'>F</div>
     </div>
-    <div className={dayClass(6)}>
-      <div className='bar' height={barCalc(5)}></div>
+    <div className={dayClass(5)}>
+      <div className='bar' style={{height: `${barCalc(5)}px`}}></div>
       <div className='label'>S</div>
     </div>
-    <div className={dayClass(0)}>
-      <div className='bar' height={barCalc(6)}></div>
+    <div className={dayClass(6)}>
+      <div className='bar' style={{height: `${barCalc(6)}px`}}></div>
       <div className='label'>S</div>
     </div>
   </div>);
@@ -101,12 +138,12 @@ export default props => {
       </div>
       <div className='day-stat'>
         <div className='time'>
-          0h0m
+          {durationToTime(weekTotalDuration)}
         </div>
-        <div className='divider'></div>
-        <div className='distance'>
+        {/* <div className='divider'></div>
+        <div className='elevation'>
           0 ft
-        </div>
+        </div> */}
       </div>
     </div>
     <div className='yearly-goals'>
