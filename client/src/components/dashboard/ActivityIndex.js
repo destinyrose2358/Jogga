@@ -32,6 +32,14 @@ export default () => {
       }
     };
 
+    const convertUnit = unit => {
+      if (unit === 'miles') return 'mi';
+      else if (unit === 'kilometers') return 'km';
+      else if (unit === 'meters') return 'm';
+      else if (unit === 'yards') return 'yd';
+      else return unit;
+    }
+
     const convertDuration = duration => {
       let sec_num = parseInt(duration, 10);
       let hours = Math.floor(sec_num / 3600);
@@ -47,7 +55,7 @@ export default () => {
       if (hours >= 1 && minutes < 10) minutes = '0' + minutes;
       if (minutes >= 1 && seconds < 10) seconds = '0' + seconds;
 
-      if (unit === 'miles') unit = 'mi';
+      unit = convertUnit(unit);
 
       if (hours >= 1) {
         return hours + ':' + minutes + ':' + seconds + ` /${unit}`;
@@ -120,7 +128,7 @@ export default () => {
           <div className='stat-item'>
             <div className='label'>Distance</div>
             <div className='value'>
-              {activity.distance} {activity.unit === 'miles' ? 'mi' : activity.unit}
+              {activity.distance} {convertUnit(activity.unit)}
             </div>
           </div>
           {activity.duration && activity.distance ?
