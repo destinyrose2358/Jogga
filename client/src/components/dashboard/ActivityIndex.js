@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { FETCH_ACTIVITIES} from '../../graphql/queries';
 import svgs from '../svgs/svgs';
-import {} from '../../stylesheets/activity_index.scss';
+import {} from '../../stylesheets/dashboard/activity_index.scss';
 
 export default () => {
   const [listLength, setListLength] = useState(10);
@@ -32,6 +32,14 @@ export default () => {
       }
     };
 
+    const convertUnit = unit => {
+      if (unit === 'miles') return 'mi';
+      else if (unit === 'kilometers') return 'km';
+      else if (unit === 'meters') return 'm';
+      else if (unit === 'yards') return 'yd';
+      else return unit;
+    }
+
     const convertDuration = duration => {
       let sec_num = parseInt(duration, 10);
       let hours = Math.floor(sec_num / 3600);
@@ -47,7 +55,7 @@ export default () => {
       if (hours >= 1 && minutes < 10) minutes = '0' + minutes;
       if (minutes >= 1 && seconds < 10) seconds = '0' + seconds;
 
-      if (unit === 'miles') unit = 'mi';
+      unit = convertUnit(unit);
 
       if (hours >= 1) {
         return hours + ':' + minutes + ':' + seconds + ` /${unit}`;
@@ -63,6 +71,27 @@ export default () => {
     const durationToTime = duration => {
       const { hours, minutes, seconds } = convertDuration(duration);
       return (hours >= 1) ? (hours + 'h ' + minutes + 'm') : (minutes + 'm ' + seconds + 's');
+    }
+
+    const dateParser = date => {
+      const today = new Date();
+      const dateObject = new Date(date);
+      let timeString = dateObject.toLocaleTimeString('en-US', {
+        hour: 'numeric', minute: 'numeric'
+      });
+      
+      if (today.getFullYear() === dateObject.getFullYear()
+        && today.getMonth() === dateObject.getMonth()
+        && today.getDate() - dateObject.getDate() <= 1) 
+      {
+        if (today.getDate() === dateObject.getDate()) return 'Today at ' + timeString;
+        if (today.getDate() - dateObject.getDate() === 1) return 'Yesterday at ' + timeString;
+      } else {
+        let dateString = dateObject.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        return dateString + ' at ' + timeString;
+      }
     }
 
     return (<div className='activity-item-container'
@@ -82,7 +111,7 @@ export default () => {
             'New Jogga'}
         </Link>
         <div className='activity-timestamp'>
-          {activity.date}
+          {dateParser(activity.date)}
         </div>
       </div>
       <div className='sport-icon'>
@@ -99,7 +128,7 @@ export default () => {
           <div className='stat-item'>
             <div className='label'>Distance</div>
             <div className='value'>
-              {activity.distance} {activity.unit === 'miles' ? 'mi' : activity.unit}
+              {activity.distance} {convertUnit(activity.unit)}
             </div>
           </div>
           {activity.duration && activity.distance ?

@@ -59,6 +59,7 @@
           .week-tracker {
             display: flex;
             justify-content: space-between;
+            align-items: flex-end;
             width: 114px;
             min-width: 114px;
     
@@ -100,23 +101,12 @@
           }
         }
 
-        @media screen and (max-width: 1000px) {
-          .week-chart {
-            align-items: center;
-            flex-direction: column-reverse;
-
-            .icon-container {
-              margin-bottom: 10px;
-            }
-          }
-        }
-
         .day-stat {
           display: flex;
           justify-content: space-between;
           margin-top: 16px;
 
-          .time, .distance {
+          .time, .elevation {
             margin: 0px 16px;
           }
 
@@ -132,7 +122,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        padding: 16px;
+        padding: 16px 0px;
         border-top: 1px solid #e6e6eb;
 
         .svg-year-tracker {
@@ -140,7 +130,7 @@
           height: 50px;
 
           .progress-bar {
-            width: 100%;
+            width: 85%;
             height: 10px;
             fill: #e6e6eb;
             shape-rendering: crispEdges;

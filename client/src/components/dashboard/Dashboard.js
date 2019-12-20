@@ -9,18 +9,20 @@ import svgs from '../svgs/svgs';
 import {} from '../../stylesheets/dashboard/dashboard.scss';
 
 export default () => {
-  const { loading, data: { currentUser } } = useQuery(CURRENT_USER);
-  if (loading) return null;
+  const queryCurrentUser = useQuery(CURRENT_USER);
+  const { currentUser } = queryCurrentUser.data;
 
-  // const { data: { userActivities } } = useQuery(FETCH_USER_ACTIVITIES);
+  const queryUserActivities = useQuery(FETCH_USER_ACTIVITIES, {variables: { _id: currentUser._id }});
+  if (queryCurrentUser.loading || queryUserActivities.loading) return null;
+  const { userActivities } = queryUserActivities.data;
 
   return (<div className='dashboard-container'>
     <div className='column-side'>
       <UserCard currentUser={currentUser}
-        // userActivities={userActivities}
+        userActivities={userActivities}
         svgs={svgs} />
       <UserGoals 
-        // userActivities={userActivities}
+        userActivities={userActivities}
         svgs={svgs} />
       <div className='github-container'>
         <a className='github-banner'
